@@ -20,7 +20,8 @@ def HistBoxInfoNormal(Title, Data, **kwargs):
     # 12 - Adding bin control - 22nd Apr 2021
     # 13 - Adjusting positions of labels - Jul 22th, 2021
     # 14 - Adjusting Barplot (color and edges) - Aug 27th, 2021
-    # 15 - 
+    # 15 - Changing position of BoxPlot - Sep 01st, 2021
+    # 16 - 
     
 
     # List of Variable and kwargs --------------------------------------
@@ -51,7 +52,8 @@ def HistBoxInfoNormal(Title, Data, **kwargs):
     DataPureNumbers = Data[np.logical_not(np.isnan(Data))]
 
     DataSize = DataPureNumbers.size
-    No_Bins = int((DataSize ** (1/2))+ 0.5)
+    No_Bins = int((DataSize**(1/2))+ 0.5)
+
 
     # Number of bins always as a ODD number = histogram is symetrical
 
@@ -86,19 +88,24 @@ def HistBoxInfoNormal(Title, Data, **kwargs):
 
         
     fig = plt.figure(figsize=(x_size, y_size)) 
-    gs = gridspec.GridSpec(nrows= 1, ncols= 3, width_ratios=[3, 1, 2])
+    gs = gridspec.GridSpec(nrows= 2, ncols= 2,
+                           width_ratios= [7, 3], height_ratios= [8, 2]) 
+
+    ax0 = plt.subplot(gs[0, 0])                 # Main = Histogram
+    ax1 = plt.subplot(gs[1, 0], sharex= ax0)    # Boxplot
+    ax2 = plt.subplot(gs[:, 1])                 # Text (Information)
+
 
     fig.suptitle(Title, fontsize= 16)
-
-
-    # 1 - Histogram
-    ax0 = plt.subplot(gs[0])
-    n, bins, patches = ax0.hist(x= DataPureNumbers, bins= No_Bins, color= "royalblue", edgecolor= "white")
+    
+    # 1 - Histogram (ax0)
+    
+    n, bins, patches = ax0.hist(x= DataPureNumbers, bins= No_Bins,
+                                color= "navy", edgecolor= "white")
 
     # bins = Central Value of the bin
     # n = Quantity of items inside the bin
     # patches = Color information (Internal Variable)
-
 
     Mean = round(np.mean(DataPureNumbers), 4)
     StdDev = round(np.std(DataPureNumbers), 4)
@@ -112,29 +119,31 @@ def HistBoxInfoNormal(Title, Data, **kwargs):
     ax0.grid(color= "lightgrey", linestyle= "--", linewidth= 0.5)
     ax0.set_axisbelow(True)
 
-    plt.axvline(x= Mean, color= "green", linewidth= 1)
-    plt.axvline(x= Median, color= "orange", linewidth= 1)
+    ax0.axvline(x= Mean, color= "green", linewidth= 1)
+    ax0.axvline(x= Median, color= "orange", linewidth= 1)
 
     # *** Coincidir as linhas de grade com os steps de StdDev ***
 
 
     # 2 - Box Plot
-    ax1 = plt.subplot(gs[1])
-
-    Red_Bullet = dict(markerfacecolor="r")
-    ax1.boxplot(x= DataPureNumbers, widths= 0.5 ,showmeans= True, meanline= True, flierprops= Red_Bullet)
-    ax1.yaxis.grid(color= "lightgrey", linestyle= "--", linewidth= 0.5)
-    ax1.set_axisbelow(True)
-    ax1.set_xticks([])
- 
     
+    Red_Bullet = dict(markerfacecolor= "r")
+
+    ax1.boxplot(x= DataPureNumbers, vert= False, widths= 0.5,
+                showmeans= True, meanline= True, flierprops= Red_Bullet)
+    ax1.xaxis.grid(color= "lightgrey", linestyle= "--", linewidth= 0.5)
+
+    ax1.set_axisbelow(True)
+    ax1.set_yticks([])
+
+
     # 3 - Info
-    # 3.1 - Information Calculation
 
     roundsize = kwargs.get("roundsize")
 
     if(roundsize == None):
         roundsize = 4
+
 
     No_Items = Data.size
     No_Items_String = f"No. Items = {str(No_Items)}"
@@ -197,38 +206,36 @@ def HistBoxInfoNormal(Title, Data, **kwargs):
    
     # 3.2 - Information Plotting
 
-    ax2 = plt.subplot(gs[2])
     ax2.axis(False)
 
-    # x position: 0.00 = Left Border
-    #             0.10 = Tab
+    # X Position
+    X_Left = 0.05
+    X_Tab_One = 0.150
 
-    # y position: 0.050 = Line space
-    #             0.075 = Line space with New Section
+    # Y Position
     
-    plt.text(x= 0.00, y= 0.950, s= No_Items_String)
-    plt.text(x= 0.10, y= 0.900, s= NaN_String)
+    plt.text(x= X_Left, y= 0.980, s= No_Items_String)
+    plt.text(x= X_Tab_One, y= 0.950, s= NaN_String)
 
-    plt.text(x= 0.00, y= 0.825, s= Mean_String)
-    plt.text(x= 0.00, y= 0.775, s= Median_String)
-    plt.text(x= 0.00, y= 0.725, s= StdDev_String)
-    plt.text(x= 0.00, y= 0.675, s= Min_String)
-    plt.text(x= 0.00, y= 0.625, s= Max_String)
-    plt.text(x= 0.00, y= 0.575, s= Range_String)
+    plt.text(x= X_Left, y= 0.905, s= Mean_String)
+    plt.text(x= X_Left, y= 0.875, s= Median_String)
+    plt.text(x= X_Left, y= 0.845, s= StdDev_String)
+    plt.text(x= X_Left, y= 0.815, s= Min_String)
+    plt.text(x= X_Left, y= 0.785, s= Max_String)
+    plt.text(x= X_Left, y= 0.755, s= Range_String)
     
-    plt.text(x= 0.00, y= 0.500, s= Lower_Limit_String)
-    plt.text(x= 0.00, y= 0.450, s= Upper_Limit_String)
+    plt.text(x= X_Left, y= 0.710, s= Lower_Limit_String)
+    plt.text(x= X_Left, y= 0.680, s= Upper_Limit_String)
 
-    plt.text(x= 0.00, y= 0.375, s= Inside_String)
-    plt.text(x= 0.00, y= 0.325, s= Outside_String)
-    plt.text(x= 0.10, y= 0.275, s= Outside_Lower_String)
-    plt.text(x= 0.10, y= 0.225, s= Outside_Upper_String)
+    plt.text(x= X_Left, y= 0.635, s= Inside_String)
+    plt.text(x= X_Left, y= 0.605, s= Outside_String)
+    plt.text(x= X_Tab_One, y= 0.575, s= Outside_Lower_String)
+    plt.text(x= X_Tab_One, y= 0.545, s= Outside_Upper_String)
 
 
     # 4 - Plotting
 
     plt.tight_layout()
-
 
     savefig = kwargs.get("savefig")
 
@@ -240,6 +247,4 @@ def HistBoxInfoNormal(Title, Data, **kwargs):
 
     if(show != False):
         plt.show()
-
-
 
