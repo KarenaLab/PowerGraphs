@@ -21,7 +21,8 @@ def HistBoxInfoNormal(Title, Data, **kwargs):
     # 13 - Adjusting positions of labels - Jul 22th, 2021
     # 14 - Adjusting Barplot (color and edges) - Aug 27th, 2021
     # 15 - Changing position of BoxPlot - Sep 01st, 2021
-    # 16 - 
+    # 16 - Adjusting linestyle of Mean - Sep 19th, 2021
+    # 17 - 
     
 
     # List of Variable and kwargs --------------------------------------
@@ -119,7 +120,7 @@ def HistBoxInfoNormal(Title, Data, **kwargs):
     ax0.grid(color= "lightgrey", linestyle= "--", linewidth= 0.5)
     ax0.set_axisbelow(True)
 
-    ax0.axvline(x= Mean, color= "green", linewidth= 1)
+    ax0.axvline(x= Mean, color= "green", linestyle= "--", linewidth= 1)
     ax0.axvline(x= Median, color= "orange", linewidth= 1)
 
     # *** Coincidir as linhas de grade com os steps de StdDev ***
