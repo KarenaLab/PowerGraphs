@@ -11,7 +11,7 @@ def BHorCategories(Title, Data, **kwargs):
 
     # Versions ---------------------------------------------------------
 
-    # 01 - 07th JJune 2021 - Starter
+    # 01 - June 07th, 2021 - Starter
     # 02 -
 
 
@@ -25,7 +25,7 @@ def BHorCategories(Title, Data, **kwargs):
     # * cmap = Blues*
     # * colsmax = 10* or any integer
     # * features to do (planned)
-    
+    #    
 
 
     # Program ----------------------------------------------------------
