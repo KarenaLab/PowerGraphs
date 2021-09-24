@@ -11,8 +11,10 @@ def BHorCategories(Title, Data, **kwargs):
 
     # Versions ---------------------------------------------------------
 
-    # 01 - June 07th, 2021 - Starter
-    # 02 -
+    # 01 - Jun 07th, 2021 - Starter
+    # 02 - Jun 14th, 2021 - Adding **kwargs (savefig, cmap and colsmax)
+    # 03 - Sep 23rd, 2021 - Adjusting Window Size and lines
+    # 04 - 
 
 
     # List of Variables and kwargs -------------------------------------
@@ -22,10 +24,9 @@ def BHorCategories(Title, Data, **kwargs):
 
     # figratio = A4*, Wide or Square
     # savefig = False* or True
-    # * cmap = Blues*
-    # * colsmax = 10* or any integer
-    # * features to do (planned)
-    #    
+    # cmap = Blues*
+    # colsmax = 10* or any integer
+    #
 
 
     # Program ----------------------------------------------------------
@@ -70,17 +71,17 @@ def BHorCategories(Title, Data, **kwargs):
         
     # Info
 
-    size = Data.count()
+    size = Data.size
     values = Data.unique()
-    unique = Data.nunique()
+    unique = values.size
 
     if(values.dtype == "int64" or values.dtype == "float64"):
-
         values = np.sort(values)
         
 
     Index_List = []
     Counter_List = []
+
 
     for item in values:
 
@@ -90,16 +91,17 @@ def BHorCategories(Title, Data, **kwargs):
         Counter_List.append(Counter)
 
 
-    # ColsMax
+    Index_List = np.array(Index_List)
+    Counter_List = np.array(Counter_List)
 
 
     # Plotting
 
     fig = plt.figure(figsize= (x_size, y_size))
-    gs = fig.add_gridspec(ncols= 2, nrows= 1, width_ratios= (3, 1))
+    gs = fig.add_gridspec(ncols= 2, nrows= 1, width_ratios= [8, 2])
 
-    ax0 = fig.add_subplot(gs[0,0])
-    ax1 = fig.add_subplot(gs[0,1])
+    ax0 = fig.add_subplot(gs[0, 0])         # Horizontal Bar
+    ax1 = fig.add_subplot(gs[0, 1])         # Annotations
 
     fig.suptitle(Title, fontsize= 16)
 
@@ -111,11 +113,9 @@ def BHorCategories(Title, Data, **kwargs):
     ax0.barh(y_positions, Counter_List, tick_label= Index_List, color= "navy")
     ax0.invert_yaxis()
 
-    ax0.set_xlabel("count")
-    ax0.set_ylabel("categories")
-
+    ax0.set_xlabel("Count")
     
-    ax0.xaxis.grid()
+    ax0.xaxis.grid(color= "lightgrey", linestyle= "--", linewidth= 0.5)
     ax0.set_axisbelow(True)
 
 
@@ -131,16 +131,4 @@ def BHorCategories(Title, Data, **kwargs):
 
 
     plt.show()
-    
-    
-        
 
-    
-
-    
-
-    
-    
-    
-    
-    
