@@ -14,7 +14,8 @@ def HeatMapSquare(Title, Data, **kwargs):
     # 04 - 16th Feb 2021 - Adding **kwargs
     # 05 - 21th Apr 2021 - Simplifying Data entry for just Data, removing
     #                      Columns (Labels) info
-    # 06 - 
+    # 06 - 01st Sep 2021 - Adjusting (small corrections)
+    # 07 - 
 
 
     # List of Variables and kwargs --------------------------------------
@@ -23,7 +24,7 @@ def HeatMapSquare(Title, Data, **kwargs):
 
     # figratio = wide* or A4
     # savefig = False* or True
-    # cmap = coolwarm (using Matplotlib color standards)
+    # cmap = Blues (using Matplotlib color standards)
     # aspect = Relation Axis X / Axis Y. Standard = 0.625
     
 
@@ -34,13 +35,12 @@ def HeatMapSquare(Title, Data, **kwargs):
 
     Columns = Data.columns
     Data = np.around(Data.corr().values, decimals= 2)
+    Data = np.abs(Data)
+    
+    Ticks = len(Columns)
     
 
-    Text = f"{Title} - Correlation HeatMap"
-    Ticks = len(Columns)
-
-
-    # Removing Duplicated Data
+    # Removing Duplicated Data (Right Triangle)
     
     for i in range(len(Columns)):
 
@@ -76,7 +76,12 @@ def HeatMapSquare(Title, Data, **kwargs):
     colormap = kwargs.get("cmap")
 
     if(colormap == None):
-        colormap = "coolwarm"
+        colormap = "Blues"
+
+    # Suggestions: Blues*, Greys, Greens, Oranges, Reds, binary,
+
+    # Source:
+    # https://matplotlib.org/stable/tutorials/colors/colormaps.html
         
 
     aspect = kwargs.get("aspect")
@@ -87,7 +92,7 @@ def HeatMapSquare(Title, Data, **kwargs):
 
     im = ax.imshow(Data, cmap= colormap, aspect= aspect)
 
-    fig.suptitle(Text, fontsize= 16)
+    fig.suptitle(Title, fontsize= 16)
 
     ax.set_xticks(np.arange(start= 0, stop= Ticks))
     ax.set_yticks(np.arange(start= 0, stop= Ticks))
@@ -104,9 +109,18 @@ def HeatMapSquare(Title, Data, **kwargs):
 
             if(i >= j):
 
-                text = ax.text(j, i, Data[i, j],
-                               ha= "center", va= "center", color= "white",
-                               fontsize= 10)
+                value = Data[i, j]
+                
+                if(value >= 0.6):
+                    Info_Color = "white"
+
+                else:
+                    Info_Color = "black"
+
+
+                text = ax.text(j, i, value,
+                               ha= "center", va= "center",
+                               color= Info_Color, fontsize= 10)
 
 
     # Printing
@@ -116,15 +130,9 @@ def HeatMapSquare(Title, Data, **kwargs):
     savefig = kwargs.get("savefig")
 
     if (savefig == True):
-        plt.savefig(Text, dpi= 240)
+        plt.savefig(Title, dpi= 240)
 
 
     plt.show()
-    
-            
-
-    
-
-
 
 
