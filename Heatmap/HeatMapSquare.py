@@ -1,10 +1,37 @@
-# HeatMap for Correlation
+# HeatMap for Correlation -----------------------------------------------
 
-def HeatMapSquare(Title, Data, **kwargs):
+def HeatMapSquare(title, data, decimals=2, method="pearson", **kwargs):
+    """
+    Prints a Triangular Heatmap for Correlations between variables,
+    using Pearson or Spearman methods.
+
+    * title = Title for plot AND its filename if asked to save it,
+    * data = Pandas dataframe format,
+
+    * decimals = Number of decimals to display (default=2)
+    * method = Method for Correlation: pearson*, spearman or kendall,
+      https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html
+
+    kwargs:
+    * figratio = wide* or A4,
+    * cmap = Blues* (using Matplotlib color standards),
+             Sugestions: Blues*, Greys, Greens, Oranges, Reds, binary,
+      https://matplotlib.org/stable/tutorials/colors/colormaps.html
+    * aspect = Relation between x and y axis. (default=0.625),
+    * fontsize = Size of font (default=9)
+    * savefig = Saving figure (False* or True),
+    * showfig = Showing figure created (True* or False),
+    
+    """
+
+    # Libraries ---------------------------------------------------------
 
     import numpy as np
     import pandas as pd
+    
     import matplotlib.pyplot as plt
+    import matplotlib.gridspec as gridspec
+
 
     # Versions ----------------------------------------------------------
 
@@ -15,124 +42,103 @@ def HeatMapSquare(Title, Data, **kwargs):
     # 05 - 21th Apr 2021 - Simplifying Data entry for just Data, removing
     #                      Columns (Labels) info
     # 06 - 01st Sep 2021 - Adjusting (small corrections)
-    # 07 - 
+    # 07 - 21st Apr 2022 - Adding Spearman and adjusting kwargs
+    #                      Added correlation method to the title/filename
+    # 08 - 
 
+    # Insights:
 
-    # List of Variables and kwargs --------------------------------------
-    # Title = string
-    # Data = Array (Numpy Format)
-
-    # figratio = wide* or A4
-    # savefig = False* or True
-    # cmap = Blues (using Matplotlib color standards)
-    # aspect = Relation Axis X / Axis Y. Standard = 0.625
-    
-
+    # Add rotation to x_axis labels (need to check anchor),
+    # 
 
     # Program -----------------------------------------------------------
 
-    # Data Processing
-
-    Columns = Data.columns
-    Data = np.around(Data.corr().values, decimals= 2)
-    Data = np.abs(Data)
+    # kwargs information gathering
+    x_size, y_size = 8, 4.5
+    colormap = "Blues"
+    fsize = 9
     
-    Ticks = len(Columns)
-    
-
-    # Removing Duplicated Data (Right Triangle)
-    
-    for i in range(len(Columns)):
-
-        for j in range(len(Columns)):
-
-            if(i < j):
-                Data[i, j] = 0
-    
-
-    # Crating Figure
-
-    y_size = 8
-    ratio = 1.4095
     
     figratio = kwargs.get("figratio")
-    
     if figratio:
+        if(figratio == "A4"): ratio = 1.4095
+        if(figratio == "wide"): ratio = 1.7778
 
-        if(figratio == "A4"):
-            ratio = 1.4095
-
-        if(figratio == "wide"):
-            ratio = 1.7778
+        x_size = np.round((y_size * ratio), decimals=2)
 
 
-    x_size = round(y_size*ratio, ndigits= 2)
-            
+    cmap = kwargs.get("cmap")
+    if cmap:
+        colormap = cmap
 
-    fig = plt.figure(figsize= (x_size, y_size))
-    ax = fig.add_subplot()
-
-
-    colormap = kwargs.get("cmap")
-
-    if(colormap == None):
-        colormap = "Blues"
-
-    # Suggestions: Blues*, Greys, Greens, Oranges, Reds, binary,
-
-    # Source:
-    # https://matplotlib.org/stable/tutorials/colors/colormaps.html
-        
 
     aspect = kwargs.get("aspect")
-
     if(aspect == None):
-        aspect = 0.625        
+        aspect = 0.625
 
 
-    im = ax.imshow(Data, cmap= colormap, aspect= aspect)
+    fontsize = kwargs.get("fontsize")
+    if fontsize:
+        fsize = fontsize
+        
 
-    fig.suptitle(Title, fontsize= 16)
+    savefig = kwargs.get("savefig")
+    showfig = kwargs.get("showfig")   
+    
 
-    ax.set_xticks(np.arange(start= 0, stop= Ticks))
-    ax.set_yticks(np.arange(start= 0, stop= Ticks))
+    # Data Processing
+    title = title + "_" + method
 
-    ax.set_xticklabels(Columns, rotation= 90)
-    ax.set_yticklabels(Columns, rotation= 0)
+    corr = data.corr(method=method).values
+    corr = np.abs(np.round(corr, decimals=decimals))
+
+    columns = data.columns
+    ticks = len(columns)
+  
+    # Removing Duplicated Data (Right Triangle Figure)
+    for i in range(0, len(columns)):
+        for j in range(0, len(columns)):
+            if(i < j):
+                corr[i, j] = 0
+    
+
+    # Plotting
+    fig = plt.figure(figsize=(x_size, y_size))
+    ax = fig.add_subplot()
+       
+    im = ax.imshow(corr, cmap=colormap, aspect=aspect)
+
+    fig.suptitle(title, fontsize=fsize+3)
+    ax.set_xticks(np.arange(start=0, stop=ticks))
+    ax.set_yticks(np.arange(start=0, stop=ticks))
+
+    ax.set_xticklabels(columns, rotation=90, fontsize=fsize)
+    ax.set_yticklabels(columns, rotation=0, fontsize=fsize)
 
 
-    # Loop over data dimensions to create text annotations
-
-    for i in range(len(Columns)):
-
-        for j in range(len(Columns)):
-
+    # Creating Text Annotations
+    for i in range(0, len(columns)):
+        for j in range(0, len(columns)):
             if(i >= j):
-
-                value = Data[i, j]
+                value = corr[i, j]
                 
-                if(value >= 0.6):
-                    Info_Color = "white"
+                if(value >= 0.6): text_color = "white"
+                else: text_color = "black"
 
-                else:
-                    Info_Color = "black"
-
-
-                text = ax.text(j, i, value,
-                               ha= "center", va= "center",
-                               color= Info_Color, fontsize= 10)
+                text = ax.text(j, i, value, ha="center", va="center",
+                               color=text_color, fontsize=fsize-1)
 
 
     # Printing
-
     fig.tight_layout()
 
-    savefig = kwargs.get("savefig")
+    if(savefig == True):
+        plt.savefig(title, dpi=240)
+        print(f" > saving figure: {title}.png")
 
-    if (savefig == True):
-        plt.savefig(Title, dpi= 240)
+    if(showfig == False):
+        plt.close()
 
-
-    plt.show()
-
-
+    else:
+        plt.show()
+   
