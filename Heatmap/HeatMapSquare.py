@@ -5,14 +5,13 @@ def HeatMapSquare(title, data, decimals=2, method="pearson", **kwargs):
     Prints a Triangular Heatmap for Correlations between variables,
     using Pearson or Spearman methods.
 
-    * title = Title for plot AND its filename if asked to save it,
-    * data = Pandas dataframe format,
-
     * decimals = Number of decimals to display (default=2)
     * method = Method for Correlation: pearson*, spearman or kendall,
       https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html
 
     kwargs:
+    * title = Title for plot AND its filename if asked to save it,
+    * data = Pandas dataframe format,
     * figratio = wide* or A4,
     * cmap = Blues* (using Matplotlib color standards),
              Sugestions: Blues*, Greys, Greens, Oranges, Reds, binary,
@@ -57,8 +56,8 @@ def HeatMapSquare(title, data, decimals=2, method="pearson", **kwargs):
     x_size, y_size = 8, 4.5
     colormap = "Blues"
     fsize = 9
-    
-    
+
+        
     figratio = kwargs.get("figratio")
     if figratio:
         if(figratio == "A4"): ratio = 1.4095
@@ -87,7 +86,7 @@ def HeatMapSquare(title, data, decimals=2, method="pearson", **kwargs):
     
 
     # Data Processing
-    title = title + "_" + method
+    title = f"{title}_{method}"
 
     corr = data.corr(method=method).values
     corr = np.abs(np.round(corr, decimals=decimals))
@@ -103,7 +102,7 @@ def HeatMapSquare(title, data, decimals=2, method="pearson", **kwargs):
     
 
     # Plotting
-    fig = plt.figure(figsize=(x_size, y_size))
+    fig = plt.figure(figsize=[x_size, y_size])
     ax = fig.add_subplot()
        
     im = ax.imshow(corr, cmap=colormap, aspect=aspect)
@@ -122,8 +121,10 @@ def HeatMapSquare(title, data, decimals=2, method="pearson", **kwargs):
             if(i >= j):
                 value = corr[i, j]
                 
-                if(value >= 0.6): text_color = "white"
-                else: text_color = "black"
+                if(value >= 0.6):
+                    text_color = "white"
+                else:
+                    text_color = "black"
 
                 text = ax.text(j, i, value, ha="center", va="center",
                                color=text_color, fontsize=fsize-1)
