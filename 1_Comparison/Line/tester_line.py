@@ -22,12 +22,8 @@ data = {"leads": leads,
         "sales": sales}
 
 df = pd.DataFrame(data=data, index=period)
-
-plot_line(df)
-
+plot_line(df, title="plot_line_v01", savefig=True)
 
 df["period"] = period
-plot_line(df, index="period", columns="leads", marker=True)
-plot_line(df, index="period", columns=["leads"])
-plot_line(df, index="period", columns="prospects", grid_axis="y")
+plot_line(df, index="period", columns=["leads", "sales"])
 
