@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 
 def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
-              columns="all", legend_loc="best", grid_axis="both",
+              columns="all", legend=True, legend_loc="best", grid_axis="both",
               marker=False, savefig=False, verbose=True):
 
     """
@@ -20,13 +20,18 @@ def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
     * index = None or the name of the column to be the index. If None will
       be used the index of DataFrame,
     * columns = "all" or a list of items to be plot,
+    * legend = True* or False,
     * legend_loc = "best"*, "upper left", "upper right", "lower left" or "lower right",
     * grid_axis = "both"*, "x" or "y",
-    * marker = True* or False
-    * savefig = True or False*
-    * verbose = True* or False
+    * marker = True* or False,
+    * savefig = True or False*,
+    * verbose = True* or False.
 
     """
+
+    # Versions ---------------------------------------------------------
+    # 01 - Jan 21st, 2023 - Starter
+    # 02 - 
 
     data = DataFrame.copy()
 
@@ -35,15 +40,7 @@ def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
     if(title == None):
         title = "Line plot"
 
-
-    # Axis labels (xlabel and ylabel)
-    if(xlabel == None):
-        xlabel = ""
-
-    if(ylabel == None):
-        ylabel = ""
         
-
     # Index
     if(index == None):
         _index = np.array(data.index)
@@ -51,12 +48,12 @@ def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
     else:
         _index = np.array(data[index])
         data = data.drop(columns=[index])
-        
 
+        
     # Columns
     if(columns != "all"):
         if(isinstance(columns, str) == True):
-            columns = columns.split()
+            columns = columns.split(",")
             
         data = data[columns]
 
@@ -69,6 +66,7 @@ def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
               "cornflowerblue", "indianred", "yellowgreen", "bisque"]
            
     nlines = data.shape[1]
+
     
     # Plot
     fig = plt.figure(figsize=[8, 4.5])
@@ -84,11 +82,16 @@ def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
         _zorder = _zorder + 1
 
     plt.grid(axis=grid_axis, color="lightgrey", linestyle="--", linewidth=0.5, zorder=1)   
-    plt.ylabel(ylabel, loc="top")
-    plt.xlabel(xlabel, loc="right")
 
-    if(len(columns) > 1):
+    if(ylabel != None):
+        plt.ylabel(ylabel, loc="top")
+
+    if(xlabel != None):
+        plt.xlabel(xlabel, loc="right")
+
+    if(len(columns) > 1 and legend=True):
         plt.legend(loc=legend_loc, framealpha=1)    
+
 
     plt.tight_layout()
 
@@ -100,6 +103,6 @@ def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
         plt.show()
 
     plt.close(fig)
-
     
     return None
+
