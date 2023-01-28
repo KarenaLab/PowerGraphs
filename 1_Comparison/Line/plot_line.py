@@ -23,23 +23,26 @@ def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
     * legend = True* or False,
     * legend_loc = "best"*, "upper left", "upper right", "lower left" or "lower right",
     * grid_axis = "both"*, "x" or "y",
-    * marker = True* or False,
-    * savefig = True or False*,
-    * verbose = True* or False.
+    * marker = True* or False for a marker in data points,
+    * savefig = True or False for saving the plot as a figure using title as name,
+    * verbose = True* or False for messages.
 
     """
 
     # Versions ---------------------------------------------------------
     # 01 - Jan 21st, 2023 - Starter
-    # 02 - 
+    # 02 -
 
+    # Insights:
+    #
+
+    # Program ----------------------------------------------------------
     data = DataFrame.copy()
 
     # Data Preparation
     # Title
     if(title == None):
         title = "Line plot"
-
         
     # Index
     if(index == None):
@@ -48,7 +51,6 @@ def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
     else:
         _index = np.array(data[index])
         data = data.drop(columns=[index])
-
         
     # Columns
     if(columns != "all"):
@@ -89,20 +91,21 @@ def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
     if(xlabel != None):
         plt.xlabel(xlabel, loc="right")
 
-    if(len(columns) > 1 and legend=True):
+    if(len(columns) > 1 and legend == True):
         plt.legend(loc=legend_loc, framealpha=1)    
 
 
+    # Printing
     plt.tight_layout()
 
     if(savefig == True):
         plt.savefig(title, dpi=240)
-        print(f" > plotting {title}")
+        if(verbose == True):
+            print(f" > saving figure: {title}.png")
 
     else:
         plt.show()
 
-    plt.close(fig)
-    
+    plt.close(fig)   
     return None
 
