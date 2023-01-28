@@ -3,17 +3,16 @@
 import numpy as np
 import pandas as pd
 
-from plot_heatmapsquare_v08 import *
+from plot_heatmap_v08 import *
 
 
 # Program
-DF = pd.read_csv("winequality-red.csv", sep=";")
+filename = "winequality-red.csv"
+title = "plot_heatmap_v08"
+df = pd.read_csv(filename, sep=";", encoding="utf-8")
 
-HeatMapSquare("HeatMapSquare_v07", DF)
-HeatMapSquare("HeatMapSquare_v07", DF, decimals=3, fontsize=6)
-HeatMapSquare("HeatMapSquare_v07", DF, aspect=0.5, fontsize=12)
-HeatMapSquare("HeatMapSquare_v07", DF, figratio="A4", method="spearman")
-HeatMapSquare("HeatMapSquare_v07", DF, cmap="Greys", method="kendall")
-HeatMapSquare("HeatMapSquare_v07", DF, method="spearman")
-
+plot_heatmap(df, title)
+plot_heatmap(df, title, savefig=True)
+plot_heatmap(df, title, decimals=3, colormap="Reds", fontsize=8, method="spearman")
+plot_heatmap(df, title, colormap="Greys", method="kendall")
 
