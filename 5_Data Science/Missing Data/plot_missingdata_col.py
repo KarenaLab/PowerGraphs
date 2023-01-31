@@ -1,5 +1,6 @@
 
-def plot_missingdata_col(DataFrame, title=None, del_threshold=100, pct_lines=True, savefig=False, verbose=True):
+def plot_missingdata_col(DataFrame, title=None, del_threshold=100,
+                         pct_lines=True, savefig=False, verbose=True):
     """
     Plots the missing data of a **DataFrame** by columns.
 
