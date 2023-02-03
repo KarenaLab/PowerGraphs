@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
               columns="all", legend=True, legend_loc="best", grid_axis="both",
-              marker=False, savefig=False, verbose=True):
+              marker=False, remove_axis=False, savefig=False, verbose=True):
 
     """
     Plots a graph with lines.
@@ -68,12 +68,12 @@ def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
               "cornflowerblue", "indianred", "yellowgreen", "bisque"]
            
     nlines = data.shape[1]
-
     
     # Plot
     fig = plt.figure(figsize=[8, 4.5])
     fig.suptitle(title, fontsize=10, fontweight="bold")
 
+    ax = plt.axes()   
     _zorder=2   
     for y, color in list(zip(columns, colors[0:nlines])):
         plt.plot(_index, data[y], color=color, label=y, zorder=_zorder)
@@ -85,6 +85,12 @@ def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
 
     plt.grid(axis=grid_axis, color="lightgrey", linestyle="--", linewidth=0.5, zorder=1)   
 
+    if(remove_axis == True):
+        plt.tick_params(length=0,labelleft="on", labelbottom="on")
+        ax.spines.right.set_visible(False)
+        ax.spines.top.set_visible(False)
+        ax.spines.left.set_visible(False)
+        
     if(ylabel != None):
         plt.ylabel(ylabel, loc="top")
 
