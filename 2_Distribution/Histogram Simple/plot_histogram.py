@@ -33,28 +33,26 @@ def binning(size, method="square", **kwargs):
         # Equation = log(n,2) + 1
         bins = int((np.log2(size)+1) + 0.5)
 
-    if(method == "freedman" or method == "freedman-diaconis" or
-        method == "freedmandiaconis" or method == "freedman_diaconis"):
+    if(method == "freedman" or method == "freedman-diaconis"):
         # https://en.wikipedia.org/wiki/Freedman-Diaconis_rule
         #
         #                     IQR(x)
         # Equation = 2 * --------------- 
         #                 root(size, 3)
 
-        IQR = kwargs.get("IQR")
-        if(IQR == None):
+        iqr = kwargs.get("iqr")
+        if(iqr == None):
             print(" >> Warning: Missing IQR Value")
             bins = None
 
         else:
-            bins = int((2*(IQR/np.cbrt(size) + 0.5)))          
-
+            bins = int((2*(iqr/np.cbrt(size))) + 0.5)         
 
     return bins
 
 
-def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True, density=False,
-                   meanline=True, medianline=True, iqr=None, grid_axis="y",
+def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
+                   meanline=True, medianline=True, grid_axis="y",
                    savefig=False, verbose=True):
     """
     Plots the histogram of a given **DataFrame** with selected **columns**.
@@ -65,10 +63,8 @@ def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True, densi
     * xlabel:
     * bins:
     * kde:
-    * density:
     * meanline:
     * medianline:
-    * iqr:
     * grid_axis:
     * savefig: True or False. If True will save a report with the title
                name and do not show the plot. If False will not save the
@@ -95,26 +91,41 @@ def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True, densi
         xlabel = ""
 
     # Colors
-    colors = {"blue": "darkblue",
+    colors = {"blue": "navy",
               "red": "darkred",
               "orange": "orange",
               "green": "darkgreen"}
 
     # Bins
     if(isinstance(bins, str) == True):
-        no_bins = binning(data.shape[0], method=bins)
+        if(bins == "freedman" or bins == "freedman-diaconis"):
+            data_q1 = data.quantile(q=0.25)
+            data_q3 = data.quantile(q=0.75)
+            iqr = data_q3 - data_q1
 
-    else:
+        else:
+            iqr = None
+
+        no_bins = binning(data.shape[0], method=bins, iqr=iqr)
+
+    elif(isinstance(bins, int) == True):
         no_bins = bins
 
+    else:
+        no_bins = None
+        print(f" > Error: bins is not valid")
+
     bins_alpha = 1
-    bins_edge = "darkgrey"
+    bins_edge = "dimgrey"
+    density = False
+    ylabel = "frequency"
 
     # KDE: Kernel-density estimate for gaussian distribution
     if(kde == True):
-        density = True
         bins_alpha = 0.7
         bins_edge = colors["blue"]
+        density = True
+        ylabel = "density"
 
         kde_space = np.linspace(start=data.min(), stop=data.max(), num=(5*no_bins))
         kde_line = gaussian_kde(data, weights=None)(kde_space)
@@ -139,10 +150,11 @@ def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True, densi
 
     plt.grid(axis=grid_axis, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
     plt.xlabel(xlabel, loc="right")
-    plt.ylabel("frequency", loc="top")
+    plt.ylabel(ylabel, loc="top")
 
     if(kde == True or meanline == True or medianline == True):
         plt.legend(fontsize=9, loc="upper right", framealpha=1)
+
 
     plt.tight_layout()
 
