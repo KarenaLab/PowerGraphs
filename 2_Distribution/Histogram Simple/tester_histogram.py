@@ -11,5 +11,7 @@ df = pd.read_csv(filename, sep=",", encoding="utf-8")
 cols_hist = ["LOAN", "MORTDUE", "VALUE", "YOJ", "DEROG",
              "DELINQ", "CLAGE", "NINQ", "CLNO", "DEBTINC"]
 
-for col in cols_hist:
-    plot_histogram(df[col])
+
+plot_histogram(df["LOAN"], bins="sqrt")
+plot_histogram(df["MORTDUE"], bins="sqrt", kde=False)
+plot_histogram(df["CLAGE"], bins="freedman", grid_axis="both")
