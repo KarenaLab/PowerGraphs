@@ -2,7 +2,7 @@
 import numpy as np
 import pandas as pd
 
-from plot_histogram_v01 import *
+from plot_histogram_v02 import *
 
 
 filename = "hmeq.csv"
