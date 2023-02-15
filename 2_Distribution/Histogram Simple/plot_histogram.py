@@ -1,4 +1,6 @@
 
+# Libraries
+import sys
 import numpy as np
 import pandas as pd
 
@@ -8,75 +10,43 @@ import matplotlib.gridspec as gridspec
 from scipy.stats import gaussian_kde
 
 
-def binning(size, method="square", **kwargs):
-    """
-    Calculates the optimal (or best) binning size for histogram.
-    Methods available: sqrt*, rice, sturges and freedman-diaconis. 
-
-    """
-    method = method.lower()
-
-    if(method == "square" or method == "sqrt"):
-        # Equation = sqrt(size)
-        bins = int(np.sqrt(size) + 0.5)       
-        if(size >= 500):          
-            # if size > 500, bins are always odd.
-            if(bins % 2 == 0):
-                bins = bins+1
-
-    if(method == "rice" or method == "ricerule"):
-        # Equation = 2* root(size, 3)
-        bins = int((2 * np.cbrt(size)) + 0.5)
-       
-    if(method == "sturges" or method == "sturge"):
-        # https://www.statology.org/sturges-rule/
-        # Equation = log(n,2) + 1
-        bins = int((np.log2(size)+1) + 0.5)
-
-    if(method == "freedman" or method == "freedman-diaconis"):
-        # https://en.wikipedia.org/wiki/Freedman-Diaconis_rule
-        #
-        #                     IQR(x)
-        # Equation = 2 * --------------- 
-        #                 root(size, 3)
-
-        iqr = kwargs.get("iqr")
-        if(iqr == None):
-            print(" >> Warning: Missing IQR Value")
-            bins = None
-
-        else:
-            bins = int((2*(iqr/np.cbrt(size))) + 0.5)         
-
-    return bins
+# Personal modules
+sys.path.append(r"C:\python_modules")
+from binning import *
 
 
 def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
-                   meanline=True, medianline=True, grid_axis="y",
+                   meanline=True, medianline=True, grid_axis="y", linebehind=True,
                    savefig=False, verbose=True):
     """
-    Plots the histogram of a given **DataFrame** with selected **columns**.
+    Plots the histogram of a given *DataFrame* with selected *columns*.
 
     Variables:
-    * DataFrame: DataFrame as Pandas,
+    * Series: Pandas series with data.
     * title: Title for the plot (default="Histogram - {column name}"),
-    * xlabel:
-    * bins:
-    * kde:
-    * meanline:
-    * medianline:
-    * grid_axis:
-    * savefig: True or False. If True will save a report with the title
+    * xlabel: Label for x_axis (default=None).
+    * bins: Number of bins for plot (default="sqrt"). Check *binning*
+            module for more details.
+    * kde: Plot the Kernel-Gaussian density estimation line,
+    * meanline: Plot a green line showing the mean,
+    * medianline: Plot an orange line showing the median,
+    * grid_axis: Plot axis (dafault=y)
+    * linebehind = Plots mean and median line behind the plot.
+    * savefig: True or False*. If True will save a report with the title
                name and do not show the plot. If False will not save the
-               report but will show the plot in the screen (default=False),
-    * verbose: True or False (quiet mode). If True will print some infor-
-               mation about the data analysis and plot (default=True).
+               report but will show in the screen.(default=False),
+    * verbose: True* or False (quiet mode). If True will print some in-
+               formation about the data analysis and plot (default=True)
      
     """
-
     # Versions ----------------------------------------------------------
     # 01 - Jan 31st, 2023 - starter
-    # 02 -
+    # 02 - Feb 14th, 2023 - using python_modules source
+    #                       added linebehind option
+
+    # Insights ----------------------------------------------------------
+    # Extend kde line up to zero (left and right margins),
+    #
 
     # Program -----------------------------------------------------------
     data = Series.copy()
@@ -89,6 +59,8 @@ def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
 
     if(xlabel == None):
         xlabel = ""
+
+    
 
     # Colors
     colors = {"blue": "navy",
@@ -141,11 +113,18 @@ def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
     if(kde == True):
         plt.plot(kde_space, kde_line, color=colors["red"], linewidth=1.5, label="kde", zorder=23)
 
+    if(linebehind == True):
+        zorder = 11
+
+    else:
+        zorder = 21
+    
+
     if(meanline == True):
-        plt.axvline(x=data.mean(), color=colors["green"], linewidth=1.0, label="mean", zorder=21)
+        plt.axvline(x=data.mean(), color=colors["green"], linewidth=1.0, label="mean", zorder=zorder)
 
     if(medianline == True):
-        plt.axvline(x=data.median(), color=colors["orange"], linewidth=1.0, label="median", zorder=22)
+        plt.axvline(x=data.median(), color=colors["orange"], linewidth=1.0, label="median", zorder=zorder)
 
 
     plt.grid(axis=grid_axis, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
