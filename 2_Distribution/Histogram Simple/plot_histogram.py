@@ -60,9 +60,8 @@ def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
     if(xlabel == None):
         xlabel = ""
 
-    
 
-    # Colors
+   # Colors
     colors = {"blue": "navy",
               "red": "darkred",
               "orange": "orange",
@@ -87,6 +86,8 @@ def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
         no_bins = None
         print(f" > Error: bins is not valid")
 
+
+    # Histogram settings 
     bins_alpha = 1
     bins_edge = "dimgrey"
     density = False
