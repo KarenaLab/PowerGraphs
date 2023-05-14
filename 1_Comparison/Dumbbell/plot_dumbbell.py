@@ -17,7 +17,7 @@ import matplotlib.gridspec as gridspec
 
 
 def plot_dumbbell(labels, minimum, maximum, title=None,
-                  markersize=10, xlabel=None, savefig=False, verbose=True):
+                  markersize=10, xlabel=None, left_border=0.2, savefig=False, verbose=True):
     """
         
     
@@ -28,9 +28,21 @@ def plot_dumbbell(labels, minimum, maximum, title=None,
     minimum = np.array(minimum)
     maximum = np.array(maximum)
 
+    if(left_border > 0 and left_border <= 0.5):
+        left = left_border * 10
+        right = (1 - left_border) * 10
+
+    else:
+        left = 2
+        right = 8
+
+        if(verbose == True):
+            print(f" >>> Error: Invalid value for right_border (0 < x <= 0.5)")
+            
+
     # Plot
     fig = plt.figure(figsize=[8, 4.5])
-    grd = fig.add_gridspec(ncols=2, width_ratios=[2, 8])
+    grd = fig.add_gridspec(ncols=2, width_ratios=[left, right])
 
     ax0 = fig.add_sublot(grd[0, 1])
 
