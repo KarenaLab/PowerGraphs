@@ -12,7 +12,7 @@ from scipy.stats import gaussian_kde
 
 # Personal modules
 sys.path.append(r"C:\python_modules")
-from binning import *
+
 
 
 def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
@@ -140,8 +140,9 @@ def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
 
     if(savefig == True):
         plt.savefig(title, dpi=240)
+
         if(verbose == True):
-            print(f" > saving file: {title}.png")
+            print(f' > saved plot as "{title}.png"')
 
     else:
         plt.show()
