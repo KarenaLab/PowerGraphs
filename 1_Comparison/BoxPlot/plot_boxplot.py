@@ -45,7 +45,7 @@ def plot_boxplot(DataFrame, columns=None, title=None,
     whiskerprops = dict(linestyle="-", linewidth=1.5, color="black")
     capprops = dict(linestyle="-", linewidth=1.5, color="black")
     medianprops = dict(linestyle="-", linewidth=1.5, color="orange")
-    flierprops = dict(marker="o", markerfacecolor="darkred", markeredgecolor="darkred", markersize=6)
+    flierprops = dict(marker="o", markerfacecolor="darkred", markeredgecolor="black", markersize=6)
     
 
     # Plot
@@ -57,14 +57,13 @@ def plot_boxplot(DataFrame, columns=None, title=None,
 
     plt.grid(axis="y", color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
 
-
     plt.tight_layout()
 
     if(savefig == True):
         plt.savefig(title, dpi=240)
 
         if (verbose == True):
-            print(f" > saving file: {title}.png")
+            print(f' > saved plot as "{title}.png"')
 
     else:
         plt.show()
@@ -73,4 +72,6 @@ def plot_boxplot(DataFrame, columns=None, title=None,
     plt.close(fig)
 
     return None
-    
+
+# end
+
