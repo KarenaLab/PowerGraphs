@@ -105,12 +105,14 @@ def plot_missingdata_row(DataFrame, title, pct_lines=True, savefig=False, verbos
 
     if(savefig == True):
         plt.savefig(title, dpi=240)
-        print(f" > plotting {title}")
+        print(f' > saved plot as "{title}.png"')
 
     else:
         plt.show()
 
-    plt.close()
+    plt.close(fig)
+
+    return None
 
     # end ---------------------------------------------------------------
 
