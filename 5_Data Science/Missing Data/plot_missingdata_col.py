@@ -112,12 +112,14 @@ def plot_missingdata_col(DataFrame, title=None, del_threshold=100,
 
     if(savefig == True):
         plt.savefig(title, dpi=240)
-        print(f" > plotting {title}")
+        print(f' > saved plot as "{title}.png"')
 
     else:
         plt.show()
 
-    plt.close()
+    plt.close(fig)
+
+    return None
 
     # end ---------------------------------------------------------------
 
