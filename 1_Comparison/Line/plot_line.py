@@ -107,11 +107,12 @@ def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
     if(savefig == True):
         plt.savefig(title, dpi=240)
         if(verbose == True):
-            print(f" > saving figure: {title}.png")
+            print(f' > saved plot as "{title}.png"')
 
     else:
         plt.show()
 
     plt.close(fig)   
+
     return None
 
