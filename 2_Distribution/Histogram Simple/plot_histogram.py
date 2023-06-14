@@ -16,7 +16,7 @@ sys.path.append(r"C:\python_modules")
 
 
 def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
-                   meanline=True, medianline=True, grid_axis="y", linebehind=True,
+                   meanline=True, medianline=True, grid_axes="y", linebehind=True,
                    savefig=False, verbose=True):
     """
     Plots the histogram of a given *DataFrame* with selected *columns*.
@@ -43,50 +43,49 @@ def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
     # 01 - Jan 31st, 2023 - starter
     # 02 - Feb 14th, 2023 - using python_modules source
     #                       added linebehind option
+    # 03 - Jun 07th, 2023 - Remove binning function and using a numpy func.
+    # 04 - 
 
     # Insights ----------------------------------------------------------
     # Extend kde line up to zero (left and right margins),
     #
 
     # Program -----------------------------------------------------------
-    data = Series.copy()
-    data = data.dropna()
+    data = np.array(Series)
+    data = data[~(np.isnan(data))]
+    
 
     # Data preparation
     # Title
-    if(title == None):
-        title = f"Histogram - {data.name.replace('_', ' ')}"
+    if(title == None): title = "Histogram"
 
-    if(xlabel == None):
-        xlabel = ""
-
-
-   # Colors
+    
+    # Colors
     colors = {"blue": "navy",
               "red": "darkred",
               "orange": "orange",
               "green": "darkgreen"}
 
     # Bins
-    if(isinstance(bins, str) == True):
-        if(bins == "freedman" or bins == "freedman-diaconis"):
-            data_q1 = data.quantile(q=0.25)
-            data_q3 = data.quantile(q=0.75)
-            iqr = data_q3 - data_q1
+    # more info: https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html
+    bins_list = ["fd", "doane", "scott", "stone", "rice", "sturges", "sqrt"]
 
-        else:
-            iqr = None
-
-        no_bins = binning(data.shape[0], method=bins, iqr=iqr)
-
-    elif(isinstance(bins, int) == True):
+    if(isinstance(bins, int) == True):
         no_bins = bins
 
+    elif(bins_list.count(bins) == 1):
+        no_bins = np.histogram_bin_edges(data, bins=bins).size
+
     else:
-        no_bins = None
-        print(f" > Error: bins is not valid")
+        print(f' >>> Error: "bins" option not valid. Using "sqrt" as forced option')
+        no_bins = np.histogram_bin_edges(data, bins="sqrt").size
 
-
+    # Grid Axis
+    grid_list = ["x", "y", "both"]
+    if(grid_list.count(grid_axes) == 0):
+        print(f' >>> Error: "grid_axis" oprtion not valid. Using "y" as forced option.')
+        grid_axes = "y"
+    
     # Histogram settings 
     bins_alpha = 1
     bins_edge = "dimgrey"
@@ -100,7 +99,7 @@ def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
         density = True
         ylabel = "density"
 
-        kde_space = np.linspace(start=data.min(), stop=data.max(), num=(5*no_bins))
+        kde_space = np.linspace(start=data.min(), stop=data.max(), num=(10 * no_bins))
         kde_line = gaussian_kde(data, weights=None)(kde_space)
 
 
@@ -122,13 +121,13 @@ def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
     
 
     if(meanline == True):
-        plt.axvline(x=data.mean(), color=colors["green"], linewidth=1.0, label="mean", zorder=zorder)
+        plt.axvline(x=np.mean(data), color=colors["green"], linewidth=1.0, label="mean", zorder=zorder)
 
     if(medianline == True):
-        plt.axvline(x=data.median(), color=colors["orange"], linewidth=1.0, label="median", zorder=zorder)
+        plt.axvline(x=np.median(data), color=colors["orange"], linewidth=1.0, label="median", zorder=zorder)
 
 
-    plt.grid(axis=grid_axis, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
+    plt.grid(axis=grid_axes, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
     plt.xlabel(xlabel, loc="right")
     plt.ylabel(ylabel, loc="top")
 
