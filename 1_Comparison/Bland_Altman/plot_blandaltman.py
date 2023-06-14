@@ -86,39 +86,19 @@ def plot_blandaltman(ground_truth, comparison, title=None, label1="ground_truth"
     ax1.set_xlabel("count", loc="center")
     ax1.grid(axis="both", color="grey", linestyle="--", linewidth=0.5)
 
-
     plt.tight_layout()
 
     if(savefig == True):
         plt.savefig(title, dpi=240)
 
         if(verbose == True):
-            print(f' > Saving plot as "{title}.png"')
+            print(f' > saved plot as "{title}.png"')
 
     else:
         plt.show()
-
 
     plt.close(fig)
 
     return None
 
-    
-    
-    
-
-
-
-
-
-
-
-
-
-
-    
-    
-    
-
-
-      
+# end
