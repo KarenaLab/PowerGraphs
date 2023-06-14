@@ -66,7 +66,7 @@ def plot_dumbbell(labels, minimum, maximum, title=None,
         plt.savefig(title, dpi=240)
 
         if(verbose == True):
-            print(f' >>> saving plot as "{title}.png"') 
+            print(f' > saved plot as "{title}.png"')
 
     else:
         plt.show()
