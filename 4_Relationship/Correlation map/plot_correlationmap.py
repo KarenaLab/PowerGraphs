@@ -103,7 +103,7 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
     # Using left column (first) as a space for long labels ;)
     # Do not use plt.tight_layout(), will remove this restriction.
     
-    fig.suptitle(title, fontsize=fontsize+1, fontweight="bold")
+    fig.suptitle(title, fontsize=10, fontweight="bold")
 
     ax0.barh(corr_high["tag"], corr_high["corr"], color=color, edgecolor="black", zorder=10)
     ax0.set_xlim(left=0, right=1)
@@ -112,7 +112,7 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
     ax0.axvline(x=0.9, color="red", linestyle="--", linewidth=0.5, zorder=3)
 
     for x, y in list(zip(corr_high["corr"], corr_high["tag"])):
-        ax0.text((space + x), y, str(x), fontsize=fontsize-2, ha="left", va="center")
+        ax0.text((space + x), y, str(x), fontsize=9, ha="left", va="center")
     
     ax1.barh(corr_low["tag"], corr_low["corr"], color=color, edgecolor="black", zorder=10)    
     ax1.set_xlim(left=0, right=1)
@@ -121,14 +121,15 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
     ax1.axvline(x=0.9, color="red", linestyle="--", linewidth=0.5, zorder=3)
 
     for x, y in list(zip(corr_low["corr"], corr_low["tag"])):
-        ax1.text((space + x), y, str(x), fontsize=fontsize-2, ha="left", va="center")
+        ax1.text((space + x), y, str(x), fontsize=9, ha="left", va="center")
 
 
     # Printing
     if(savefig == True):
         plt.savefig(title, dpi=240)
+
         if(verbose == True):
-            print(f" > saving figure: {title}.png")
+            print(f' > saved plot as "{title}.png"')
 
     else:
         plt.show()
@@ -136,3 +137,5 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
     plt.close(fig)
     
     return None
+
+# end
