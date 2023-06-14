@@ -1,8 +1,20 @@
+# Plot Line 
 
+# Versions -------------------------------------------------------------
+# 01 - Jan 21st, 2023 - Starter
+# 02 - Jun 12th, 2023 - Adjust params
+
+
+# Insights
+#
+
+
+# Libraries
 import numpy as np
 import pandas as pd
 
 import matplotlib.pyplot as plt
+
 
 
 def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
@@ -28,15 +40,6 @@ def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
     * verbose = True* or False for messages.
 
     """
-
-    # Versions ---------------------------------------------------------
-    # 01 - Jan 21st, 2023 - Starter
-    # 02 -
-
-    # Insights:
-    #
-
-    # Program ----------------------------------------------------------
     data = DataFrame.copy()
 
     # Data Preparation
@@ -71,7 +74,7 @@ def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
     
     # Plot
     fig = plt.figure(figsize=[8, 4.5])
-    fig.suptitle(title, fontsize=10, fontweight="bold")
+    fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
     ax = plt.axes()   
     _zorder=2   
