@@ -1,4 +1,19 @@
 
+# Histogram Simple -----------------------------------------------------
+
+# Versions
+# 01 - Jan 31st, 2023 - starter
+# 02 - Feb 14th, 2023 - using python_modules source
+#                       added linebehind option
+# 03 - Jun 07th, 2023 - Remove binning function and using a numpy func.
+# 04 - 
+
+
+# Insights
+# Extend kde line up to zero (left and right margins),
+#
+
+
 # Libraries
 import sys
 import numpy as np
@@ -12,7 +27,6 @@ from scipy.stats import gaussian_kde
 
 # Personal modules
 sys.path.append(r"C:\python_modules")
-
 
 
 def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
@@ -39,16 +53,7 @@ def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
                formation about the data analysis and plot (default=True)
      
     """
-    # Versions ----------------------------------------------------------
-    # 01 - Jan 31st, 2023 - starter
-    # 02 - Feb 14th, 2023 - using python_modules source
-    #                       added linebehind option
-    # 03 - Jun 07th, 2023 - Remove binning function and using a numpy func.
-    # 04 - 
 
-    # Insights ----------------------------------------------------------
-    # Extend kde line up to zero (left and right margins),
-    #
 
     # Program -----------------------------------------------------------
     data = np.array(Series)
@@ -57,7 +62,8 @@ def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
 
     # Data preparation
     # Title
-    if(title == None): title = "Histogram"
+    if(title == None):
+        title = "Histogram"
 
     
     # Colors
@@ -80,11 +86,13 @@ def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
         print(f' >>> Error: "bins" option not valid. Using "sqrt" as forced option')
         no_bins = np.histogram_bin_edges(data, bins="sqrt").size
 
+
     # Grid Axis
     grid_list = ["x", "y", "both"]
     if(grid_list.count(grid_axes) == 0):
         print(f' >>> Error: "grid_axis" oprtion not valid. Using "y" as forced option.')
         grid_axes = "y"
+
     
     # Histogram settings 
     bins_alpha = 1
@@ -105,7 +113,7 @@ def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
 
     # Plot
     fig = plt.figure(figsize=[8, 4.5])
-    fig.suptitle(title, fontsize=10, fontweight="bold")
+    fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
     plt.hist(data, bins=no_bins, density=density, color=colors["blue"],
              alpha=bins_alpha, edgecolor=bins_edge, zorder=20)
