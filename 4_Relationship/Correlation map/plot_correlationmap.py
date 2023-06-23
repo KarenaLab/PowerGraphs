@@ -67,7 +67,16 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
     # Data Processing
     no_rows = len(columns)
     corr = data.corr(method=method).values
-    corr = np.abs(np.round(corr, decimals=decimals))   
+    corr = np.abs(np.round(corr, decimals=decimals))
+
+
+    # RC Params
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["figure.dpi"] = 180
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+
   
     # Removing Duplicated Data (Right Triangle Figure)
     for i in range(0, no_rows):
