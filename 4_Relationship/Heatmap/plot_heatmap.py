@@ -95,8 +95,8 @@ def plot_heatmap(DataFrame, title=None, columns="all", decimals=2,
     plt.rcParams["font.family"] = "Helvetica"
     plt.rcParams["figure.dpi"] = 180
     plt.rcParams["ps.papersize"] = "A4"
-    plt.rcParams["xtick.direction"]: "inout"
-    plt.rcParams["ytick.direction"]: "inout"
+    plt.rcParams["xtick.major.size"] = 0
+    plt.rcParams["ytick.major.size"] = 0
    
     # Plot
     fig = plt.figure(figsize=[8, 4.5])
