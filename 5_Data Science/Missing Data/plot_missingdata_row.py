@@ -70,11 +70,12 @@ def plot_missingdata_row(DataFrame, title, pct_lines=True, savefig=False, verbos
     bin_color = "darkred"
     bin_edge = "black"
 
-
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
     plt.rcParams["figure.dpi"] = 180
     plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
 
 
     # Plot
