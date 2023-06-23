@@ -68,7 +68,13 @@ def plot_missingdata_col(DataFrame, title=None, del_threshold=100,
         if(nan_pct >= del_threshold and verbose == True):
             data = data.drop(columns=[col])
             print(f' >>> Warning: Column deleted. Delete threshold={del_threshold}% \n')
-        
+
+
+    # RC Params
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["figure.dpi"] = 180
+    plt.rcParams["ps.papersize"] = "A4"      
+
     
     # Plot
     # Adjusts
