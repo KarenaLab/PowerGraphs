@@ -90,13 +90,20 @@ def plot_heatmap(DataFrame, title=None, columns="all", decimals=2,
             if(i < j):
                 corr[i, j] = 0
 
+
+    # RC Params
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["figure.dpi"] = 180
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"]: "inout"
+    plt.rcParams["ytick.direction"]: "inout"
    
     # Plot
     fig = plt.figure(figsize=[8, 4.5])
     ax = fig.add_subplot()
     im = ax.imshow(corr, cmap=colormap, aspect=(4.5 / 8))
 
-    fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
+    fig.suptitle(title, fontsize=10, fontweight="bold")
 
     ax.set_yticks(np.arange(start=0, stop=no_rows))
     ax.set_xticks(np.arange(start=0, stop=no_rows))
