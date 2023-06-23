@@ -71,6 +71,15 @@ def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
               "cornflowerblue", "indianred", "yellowgreen", "bisque"]
            
     nlines = data.shape[1]
+
+
+    # RC Params
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["figure.dpi"] = 180
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"]: "inout"
+    plt.rcParams["ytick.direction"]: "inout"
+    
     
     # Plot
     fig = plt.figure(figsize=[8, 4.5])
