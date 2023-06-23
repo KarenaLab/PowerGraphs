@@ -70,7 +70,14 @@ def plot_missingdata_row(DataFrame, title, pct_lines=True, savefig=False, verbos
     bin_color = "darkred"
     bin_edge = "black"
 
-    # Figure
+
+    # RC Params
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["figure.dpi"] = 180
+    plt.rcParams["ps.papersize"] = "A4"
+
+
+    # Plot
     fig, ax1 = plt.subplots(figsize=[8, 4.5])
     fig.suptitle(title, fontsize=10, fontweight="bold")
 
