@@ -67,11 +67,17 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", savefig=False, ver
     else:
         print(f' >>> Error: "bins" option not valid. Using "sqrt" as forced option')
         no_bins = np.histogram_bin_edges(diff, bins="sqrt").size
-    
 
-    # Plot
+
+    # RC Params
     plt.rcParams["font.family"] = "Helvetica"
-                 
+    plt.rcParams["figure.dpi"] = 180
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+
+
+    # Plot         
     fig = plt.figure(figsize=[8, 4.5])
     grd = fig.add_gridspec(nrows=1, ncols=2, width_ratios=[7.5, 2.5])
 
@@ -83,6 +89,7 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", savefig=False, ver
     # ax0 = Scatter plot
     ax0.scatter(mean, diff, s=30, color="navy", edgecolor="white", alpha=0.7, zorder=20)
 
+    ax0.axvline(x=0, color="black", linestyle="-", linewidth=0.8, zorder=19)
     ax0.axhline(y=0, color="black", linestyle="-", linewidth=0.8, zorder=19)
     ax0.axhline(y=md, color="red", linestyle="-", linewidth=0.8, label = "Bias", zorder=18)
     ax0.axhline(y=(md - 1.96*sd), color="grey", linestyle="--", linewidth=0.8, zorder=17)
