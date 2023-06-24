@@ -111,6 +111,14 @@ def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
         kde_line = gaussian_kde(data, weights=None)(kde_space)
 
 
+    # RC Params
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["figure.dpi"] = 180
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+
+
     # Plot
     fig = plt.figure(figsize=[8, 4.5])
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
