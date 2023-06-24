@@ -58,6 +58,14 @@ def plot_identityline(ground_truth, comparison, title=None, xlabel=None,
 
     regr_x = np.linspace(start=lower, stop=upper, num=10)
     regr_y = intercept + regr_x * coef
+
+
+    # RC Params
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["figure.dpi"] = 180
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
     
 
     # Plot
