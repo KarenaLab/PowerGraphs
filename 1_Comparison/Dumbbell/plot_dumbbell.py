@@ -38,6 +38,14 @@ def plot_dumbbell(labels, minimum, maximum, title=None,
 
         if(verbose == True):
             print(f" >>> Error: Invalid value for right_border (0 < x <= 0.5)")
+
+
+    # RC Params
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["figure.dpi"] = 180
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
             
 
     # Plot
