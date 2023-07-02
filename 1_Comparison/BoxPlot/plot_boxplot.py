@@ -46,7 +46,14 @@ def plot_boxplot(DataFrame, columns=None, title=None,
     capprops = dict(linestyle="-", linewidth=1.5, color="black")
     medianprops = dict(linestyle="-", linewidth=1.5, color="orange")
     flierprops = dict(marker="o", markerfacecolor="darkred", markeredgecolor="black", markersize=6)
-    
+
+
+    # RC Params
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["figure.dpi"] = 180
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.major.size"] = 0
 
     # Plot
     fig = plt.figure(figsize=[8, 4.5])
