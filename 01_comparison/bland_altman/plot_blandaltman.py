@@ -1,4 +1,4 @@
-# Bland Altman Analysis ------------------------------------------------
+# Bland Altman Analysis [P196] -----------------------------------------
 
 # Versions 
 # 01 - Mar 22nd, 2023 - Starter
@@ -78,7 +78,7 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", savefig=False, ver
 
 
     # Plot         
-    fig = plt.figure(figsize=[8, 4.5])
+    fig = plt.figure(figsize=[6, 3.375])
     grd = fig.add_gridspec(nrows=1, ncols=2, width_ratios=[7.5, 2.5])
 
     ax0 = fig.add_subplot(grd[0, 0])
@@ -110,7 +110,7 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", savefig=False, ver
     plt.tight_layout()
 
     if(savefig == True):
-        plt.savefig(title, dpi=240)
+        plt.savefig(title, dpi=320)
 
         if(verbose == True):
             print(f' > saved plot as "{title}.png"')
