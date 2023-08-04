@@ -1,5 +1,4 @@
-
-# Identity Line --------------------------------------------------------
+# Identity Line [P315] -------------------------------------------------
 
 # Version
 # 01 - Jun 13th, 2023 - Starter
@@ -69,7 +68,7 @@ def plot_identityline(ground_truth, comparison, title=None, xlabel=None,
     
 
     # Plot
-    fig = plt.figure(figsize=[8, 4.5])
+    fig = plt.figure(figsize=[6, 3.375])
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
     plt.scatter(comparison, ground_truth, s=40, color="navy", edgecolor="white", alpha=alpha, label="data", zorder=20)
@@ -87,13 +86,14 @@ def plot_identityline(ground_truth, comparison, title=None, xlabel=None,
     plt.tight_layout()
 
     if(savefig == True):
-        plt.savefig(title, dpi=240)
+        plt.savefig(title, dpi=320)
 
         if(verbose == True):
             print(f' > saved plot as "{title}.png"')
 
     else:
         plt.show()
+
 
     plt.close(fig)
 
