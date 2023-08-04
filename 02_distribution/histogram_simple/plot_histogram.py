@@ -1,5 +1,4 @@
-
-# Histogram Simple -----------------------------------------------------
+# Histogram Simple [P290]
 
 # Versions
 # 01 - Jan 31st, 2023 - starter
@@ -9,7 +8,7 @@
 # 04 - 
 
 
-# Insights
+# Insights, improvements and bugfix
 # Extend kde line up to zero (left and right margins),
 #
 
@@ -25,9 +24,7 @@ import matplotlib.gridspec as gridspec
 from scipy.stats import gaussian_kde
 
 
-# Personal modules
-sys.path.append(r"C:\python_modules")
-
+# ----------------------------------------------------------------------
 
 def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
                    meanline=True, medianline=True, grid_axes="y", linebehind=True,
