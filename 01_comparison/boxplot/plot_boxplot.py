@@ -1,3 +1,4 @@
+# Boxplot [P333] -------------------------------------------------------
 
 # Libraries
 import numpy as np
@@ -56,7 +57,7 @@ def plot_boxplot(DataFrame, columns=None, title=None,
     plt.rcParams["ytick.major.size"] = 0
 
     # Plot
-    fig = plt.figure(figsize=[8, 4.5])
+    fig = plt.figure(figsize=[6, 3.375])
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
     plt.boxplot(data, labels=columns, notch=True, boxprops=boxprops, whiskerprops=whiskerprops,
@@ -67,7 +68,7 @@ def plot_boxplot(DataFrame, columns=None, title=None,
     plt.tight_layout()
 
     if(savefig == True):
-        plt.savefig(title, dpi=240)
+        plt.savefig(title, dpi=320)
 
         if (verbose == True):
             print(f' > saved plot as "{title}.png"')
