@@ -1,5 +1,12 @@
+# Heatmap [P262] -------------------------------------------------------
 
-# Heatmap --------------------------------------------------------------
+# Libraries
+import numpy as np
+import pandas as pd
+
+from pandas.api.types import is_numeric_dtype
+
+import matplotlib.pyplot as plt
 
 # Versions 
 # 01 - Jan 31st, 2021 - Starter
@@ -15,18 +22,9 @@
 # 09 - Jul 20th, 2023 - New standards and setup
 # 10 - 
 
-# Insights
+# Insights, improvements and bugfix
 # Add rotation to x_axis labels (need to check anchor),
 #
-
-
-# Libraries
-import numpy as np
-import pandas as pd
-
-from pandas.api.types import is_numeric_dtype
-
-import matplotlib.pyplot as plt
 
 
 def plot_heatmap(DataFrame, title=None, columns="all", decimals=2,
@@ -48,11 +46,9 @@ def plot_heatmap(DataFrame, title=None, columns="all", decimals=2,
     * verbose = True* or False for messages.    
 
     """
-
-    # Program ----------------------------------------------------------
+    # Data Preparation
     data = DataFrame.copy()
 
-    # Data Preparation
     # Title
     if(title == None):
         title = "Heatmap for correlation"
@@ -99,7 +95,7 @@ def plot_heatmap(DataFrame, title=None, columns="all", decimals=2,
     plt.rcParams["ytick.major.size"] = 0
    
     # Plot
-    fig = plt.figure(figsize=[8, 4.5])
+    fig = plt.figure(figsize=[6, 3.375])
     ax = fig.add_subplot()
     im = ax.imshow(corr, cmap=colormap, aspect=(4.5 / 8))
 
@@ -124,17 +120,18 @@ def plot_heatmap(DataFrame, title=None, columns="all", decimals=2,
                                color=textcolor, fontsize=8)
 
 
-    # Printing
-    fig.tight_layout()
+    plt.tight_layout()
 
+    # Printing
     if(savefig == True):
-        plt.savefig(title, dpi=240)
+        plt.savefig(title, dpi=320)
 
         if(verbose == True):
             print(f' > saved plot as "{title}.png"')
 
     else:
         plt.show()
+
 
     plt.close(fig)
 
