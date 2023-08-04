@@ -1,3 +1,21 @@
+# Histogram Duo [P328]
+
+# Versions
+# 01 - May 01st, 2023 - Starter
+# 02 -
+
+
+# Libraries
+import numpy as np
+import pandas as pd
+
+from scipy.stats import gaussian_kde
+
+import matplotlib.pyplot as plt
+
+
+# ----------------------------------------------------------------------
+
 def plot_histogramduo(serie1, serie2, name1=None, name2=None,
                       serie3=None, name3=None, title=None, bins="sqrt",
                       bins_alpha=0.3, savefig=False, verbose=True):
@@ -22,16 +40,6 @@ def plot_histogramduo(serie1, serie2, name1=None, name2=None,
     KDE Line: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gaussian_kde.html
 
     """
-    
-    # Libraries
-    import numpy as np
-    import pandas as pd
-
-    from scipy.stats import gaussian_kde
-
-    import matplotlib.pyplot as plt
-
-
     # Data preparation
     series_list = [serie1, serie2]
     names_list = [name1, name2]
