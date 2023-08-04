@@ -1,3 +1,5 @@
+# Dumbbell -------------------------------------------------------------
+
 
 # Libraries
 import numpy as np
@@ -49,7 +51,7 @@ def plot_dumbbell(labels, minimum, maximum, title=None,
             
 
     # Plot
-    fig = plt.figure(figsize=[8, 4.5])
+    fig = plt.figure(figsize=[6, 3.375])
     grd = fig.add_gridspec(ncols=2, width_ratios=[left, right])
 
     ax0 = fig.add_sublot(grd[0, 1])
@@ -71,7 +73,7 @@ def plot_dumbbell(labels, minimum, maximum, title=None,
     ax0.legend(loc="upper right", framealpha=1)
 
     if(savefig == True):
-        plt.savefig(title, dpi=240)
+        plt.savefig(title, dpi=320)
 
         if(verbose == True):
             print(f' > saved plot as "{title}.png"')
@@ -79,8 +81,8 @@ def plot_dumbbell(labels, minimum, maximum, title=None,
     else:
         plt.show()
 
-    plt.close(fig)
 
+    plt.close(fig)
 
     return None
 
