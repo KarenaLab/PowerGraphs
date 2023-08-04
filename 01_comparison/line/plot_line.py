@@ -1,12 +1,12 @@
-# Plot Line 
+# Plot Line [P264] -----------------------------------------------------
 
-# Versions -------------------------------------------------------------
+# Versions
 # 01 - Jan 21st, 2023 - Starter
 # 02 - Jun 12th, 2023 - Adjust params
 
 
-# Insights
-#
+# Insights and bugfix
+# 
 
 
 # Libraries
@@ -82,7 +82,7 @@ def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
     
     
     # Plot
-    fig = plt.figure(figsize=[8, 4.5])
+    fig = plt.figure(figsize=[6, 3.375])
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
     ax = plt.axes()   
@@ -117,12 +117,13 @@ def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
     plt.tight_layout()
 
     if(savefig == True):
-        plt.savefig(title, dpi=240)
+        plt.savefig(title, dpi=320)
         if(verbose == True):
             print(f' > saved plot as "{title}.png"')
 
     else:
         plt.show()
+
 
     plt.close(fig)   
 
