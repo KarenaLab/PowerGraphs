@@ -3,7 +3,8 @@
 # Versions 
 # 01 - Mar 22nd, 2023 - Starter
 # 02 - Jun 20th, 2023 - Applying adjusts to style
-# 03 - 
+# 02 - Jul 31st, 2023 - difference equation explicit at y_label
+# 
 
 
 # Insights
@@ -31,8 +32,7 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", savefig=False, ver
     y_true = np.array(y_true)
     y_pred = np.array(y_pred)
 
-
-    # Data
+    # Title
     if(title == None):
         title = "Bland-Altman"
 
@@ -97,7 +97,7 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", savefig=False, ver
     ax0.fill_between(x=[x_lower-x_step, x_upper+x_step], y1=(md-1.96*sd), y2=(md+1.96*sd), color="lightgrey")
 
     ax0.set_xlabel("mean", loc="center")
-    ax0.set_ylabel("difference", loc="center")
+    ax0.set_ylabel("difference (y pred - y true)", loc="center")
     ax0.grid(axis="both", color="grey", linestyle="--", linewidth=0.5)
     ax0.set_xlim(left=(x_lower - x_step), right=(x_upper + x_step))
     ax0.set_ylim(bottom=y_lower, top=y_upper)
@@ -106,6 +106,7 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", savefig=False, ver
     ax1.hist(x=diff, bins=bins, orientation="horizontal", color="navy", edgecolor="grey", zorder=20)
     ax1.set_xlabel("count", loc="center")
     ax1.grid(axis="both", color="grey", linestyle="--", linewidth=0.5)
+
 
     plt.tight_layout()
 
