@@ -1,9 +1,20 @@
+# Correlation map [P284] -----------------------------------------------
 
+# Libraries
 import numpy as np
 import pandas as pd
 
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
+
+
+# Versions
+# 01 - Jan 28th, 2023 - Starter
+# 02 - 
+
+
+# Insights, improvements and bugfix:
+# 
 
 
 def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
@@ -30,23 +41,10 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
     * verbose = True* or False for messages.    
 
     """
-
-    # Versions ----------------------------------------------------------
-    # 01 - Jan 28th, 2023 - Starter
-    # 02 - 
-
-
-    # Insights:
-    # 
-
-
-    # Setup/Config
+    # Data preparation
+    data = DataFrame.copy()
     space = 0.02
 
-    # Program ----------------------------------------------------------
-    data = DataFrame.copy()
-
-    # Data Preparation
     # Title
     if(title == None):
         title = "Correlation map"
@@ -103,7 +101,7 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
     corr_low = corr_map.head(low_threshold)
 
     # Plot
-    fig = plt.figure(figsize=[8, 4.5])      # Using widescreen ratio (16:9)
+    fig = plt.figure(figsize=[6, 3.375])      # Using widescreen ratio (16:9)
     grid = fig.add_gridspec(nrows=2, height_ratios=[high_threshold, low_threshold],
                             ncols=2, width_ratios=[2, 8])
 
@@ -112,7 +110,7 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
     # Using left column (first) as a space for long labels ;)
     # Do not use plt.tight_layout(), will remove this restriction.
     
-    fig.suptitle(title, fontsize=10, fontweight="bold")
+    fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
     ax0.barh(corr_high["tag"], corr_high["corr"], color=color, edgecolor="black", zorder=10)
     ax0.set_xlim(left=0, right=1)
@@ -135,13 +133,14 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
 
     # Printing
     if(savefig == True):
-        plt.savefig(title, dpi=240)
+        plt.savefig(title, dpi=320)
 
         if(verbose == True):
             print(f' > saved plot as "{title}.png"')
 
     else:
         plt.show()
+
 
     plt.close(fig)
     
