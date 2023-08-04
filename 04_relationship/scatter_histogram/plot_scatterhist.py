@@ -1,20 +1,25 @@
-# Scatter Plot with Histograms
+# Scatter Plot with Histograms [P287] ----------------------------------
+
+# Libraries
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Versions
+# 01 - 01st Jan 2021 - Starter
+# 02 - 30th Jan 2021 - Adding Labels into axis at Scatter Graph
+# 03 - 03rd Feb 2021 - Adijusting fig size for best print (A4 Ratio)
+# 04 -
+
+# Insights, improvements and bugfix
+#
+
 
 def ScatterHist(Title, Label_X, Data_X, Label_Y, Data_Y):
-
-    import numpy as np
-    import pandas as pd
-    import matplotlib.pyplot as plt
-
-    # Versions ----------------------------------------------------------
-    # 01 - 01st Jan 2021 - Starter
-    # 02 - 30th Jan 2021 - Adding Labels into axis at Scatter Graph
-    # 03 - 03rd Feb 2021 - Adijusting fig size for best print (A4 Ratio)
-    # 04 - 
+    """
 
 
-    # Program -----------------------------------------------------------
-
+    """
     # Creating Figure
     fig = plt.figure(figsize= (10, 8.5))        # A4 Ratio (1.4)
 
