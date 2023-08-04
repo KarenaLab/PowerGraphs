@@ -1,4 +1,32 @@
-# Scatter Plot with Histogram, Linear Regression and Error
+# Scatter Plot with Histogram, Linear Regression and Error [P288] ------
+
+# Libraries
+import numpy as np
+import pandas as pd
+
+import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
+
+from sklearn.linear_model import LinearRegression
+import sklearn.metrics as metrics
+
+
+# Versions ---------------------------------------------------------
+# 01 - Feb 01st, 2021 - Starter
+# 02 - Feb 03rd, 2021 - Adjusting print size for A4 Ratio, Adjusting
+#      Error Graph Position and adding MSE Error
+# 03 - Feb 23rd, 2021 - Adding **kwargs
+# 04 - Jun 06th, 2021 - Adjusting features
+# 05 - Jul 30th, 2021 - (( Adding QQ Plot ))
+# 06 - Sep 02nd, 2021 - Adding edge and alpha control
+# 07 - May 27th, 2022 - PEP-008 and adjusts
+# 08 - 
+
+# Insights, improvements and bugfix
+# Improve Linear Regression Line calc (make it easier)
+# add Pandas Series and Numpy options of imputation
+#
+
 
 def ScatterHistLinReg(title, data_x, data_y, decimals=4, **kwargs):
     """
@@ -18,36 +46,6 @@ def ScatterHistLinReg(title, data_x, data_y, decimals=4, **kwargs):
     * whiteedge = True* or False
     
     """
-
-    # Libraries
-    import numpy as np
-    import pandas as pd
-
-    import matplotlib.pyplot as plt
-    import matplotlib.gridspec as gridspec
-    
-    from sklearn.linear_model import LinearRegression
-    import sklearn.metrics as metrics
-    
-
-    # Versions ---------------------------------------------------------
-    # 01 - Feb 01st, 2021 - Starter
-    # 02 - Feb 03rd, 2021 - Adjusting print size for A4 Ratio, Adjusting
-    #      Error Graph Position and adding MSE Error
-    # 03 - Feb 23rd, 2021 - Adding **kwargs
-    # 04 - Jun 06th, 2021 - Adjusting features
-    # 05 - Jul 30th, 2021 - (( Adding QQ Plot ))
-    # 06 - Sep 02nd, 2021 - Adding edge and alpha control
-    # 07 - May 27th, 2022 - PEP-008 and adjusts
-    # 08 - 
-
-    # Insights
-    # Improve Linear Regression Line calc (make it easier)
-    # add Pandas Series and Numpy options of imputation
-    #
-
-    # Program ----------------------------------------------------------
-
     # Getting **kwargs
     markeralpha = kwargs.get("markeralpha")
     if(markeralpha == None):
@@ -125,7 +123,6 @@ def ScatterHistLinReg(title, data_x, data_y, decimals=4, **kwargs):
 
 
     # Plotting
-
     x_size, y_size = 11.28, 8
 
     figratio = kwargs.get("figratio")
