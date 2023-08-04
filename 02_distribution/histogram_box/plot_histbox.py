@@ -1,49 +1,38 @@
+# HistBox [P292]
+
+# Versions:
+# 01 - Initial
+# 02 - Correcting Whiskers (Adding Calculation) = 10th Dec 2020
+#      Automatic figure saving with Full HD size (1920x1080 px)
+# 03 - Adding a Vertical line in Histogram for Mean = 11th Dec 2020
+#      Correcting 1o Quantile Error label in Describe
+# 04 - Adjusting Mean and Median line colors
+# 05 - Dividing in THREE options: HistBox_v05, HistBoxInfo_v05 and
+#          HistBoxInfoNormal_v05
+# 06 - Adjusting the printing ratio for A4 Page - 03rd Feb 2021
+# 07 - Bar Color = RoyalBlue and adding border (edgecolor= white)
+#      Aug 27th, 2021
+# 08 - Changing position of BoxPlot and adding **kwargs - Sept 01st, 2021
+# 09 - Adding Binning options - Oct 11th, 2021
+# 10 -
+
+
+# Libraries     
+import numpy as np
+import pandas as pd
+import scipy.stats as stats
+
+import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
+
+
+# ----------------------------------------------------------------------
 
 def HistBox(Title, Data, **kwargs):
-
-    # Versions:
-    # 01 - Initial
-    # 02 - Correcting Whiskers (Adding Calculation) = 10th Dec 2020
-    #      Automatic figure saving with Full HD size (1920x1080 px)
-    # 03 - Adding a Vertical line in Histogram for Mean = 11th Dec 2020
-    #      Correcting 1o Quantile Error label in Describe
-    # 04 - Adjusting Mean and Median line colors
-    # 05 - Dividing in THREE options: HistBox_v05, HistBoxInfo_v05 and
-    #          HistBoxInfoNormal_v05
-    # 06 - Adjusting the printing ratio for A4 Page - 03rd Feb 2021
-    # 07 - Bar Color = RoyalBlue and adding border (edgecolor= white)
-    #      Aug 27th, 2021
-    # 08 - Changing position of BoxPlot and adding **kwargs - Sept 01st, 2021
-    # 09 - Adding Binning options - Oct 11th, 2021
-    # 10 -
-    
+    """
 
 
-    # List of Variables and **kwargs ------------------------------------
-
-    # Title = Figure Title and Filename (string)
-    # Data = Information to be used (Numpy array)
-
-    # roundsize = 4* or any integer number
-    # figratio = A4, Wide or Square
-    # savefig = False* or True
-    # show = True* or False
-    # bins = sqrt*, sturges or number of bins (int)
-    
-
-    # Libraries ---------------------------------------------------------        
-
-    import numpy as np
-    import pandas as pd
-    import scipy.stats as stats
-    
-    import matplotlib.pyplot as plt
-    import matplotlib.gridspec as gridspec
-
-
-    # Program -----------------------------------------------------------    
-
-    # Data
+    """
     DataPureNumbers = Data[np.logical_not(np.isnan(Data))]
 
     Data_Size = DataPureNumbers.size
@@ -161,4 +150,5 @@ def HistBox(Title, Data, **kwargs):
 
     if(show != False):
         plt.show()
+
 
