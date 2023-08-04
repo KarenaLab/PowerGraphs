@@ -29,6 +29,6 @@ def ScatterSimple(Data_x, Data_y, Title_x, Title_y):
     plt.tight_layout()
     plt.show()
 
-    return()
+    return None
 
 
