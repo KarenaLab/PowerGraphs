@@ -1,3 +1,31 @@
+# Missing Data per Column [P147] ---------------------------------------
+
+# Libraries
+import numpy as np
+import pandas as pd
+
+from pandas.api.types import is_string_dtype
+from pandas.api.types import is_numeric_dtype
+
+import matplotlib.pyplot as plt
+
+
+# Versions 
+# 01 - Dec 27th, 2020 - Starter
+# 02 - Feb 08th, 2021 - Adjusting printing area for A4 format
+# 03 - Apr 21st, 2021 - Adding **kwargs
+# 04 - Apr 22rd, 2021 - Changing Data acquisition (Pandas Based)
+# 05 - May 30th, 2021 - Adding is_numeric and is_string selection
+#                       Adding Secondary Y Axis (Percentage of)
+# 06 - May 31st, 2021 - Adding color option
+# 07 - Oct 14th, 2021 - Adding edgecolor = black
+# 08 - Oct 17th, 2021 - *** Changing Name = MissingDataCol ***
+# 09 - Jan 21st, 2023 - Adjusting
+# 10 -
+
+# Insights, improvements and bugfix
+#
+
 
 def plot_missingdata_col(DataFrame, title=None, del_threshold=100,
                          pct_lines=True, savefig=False, verbose=True):
@@ -18,33 +46,6 @@ def plot_missingdata_col(DataFrame, title=None, del_threshold=100,
       mation about the data analysis and plot (default=True).    
 
     """
-
-    # Versions ----------------------------------------------------------
-    # 01 - Dec 27th, 2020 - Starter
-    # 02 - Feb 08th, 2021 - Adjusting printing area for A4 format
-    # 03 - Apr 21st, 2021 - Adding **kwargs
-    # 04 - Apr 22rd, 2021 - Changing Data acquisition (Pandas Based)
-    # 05 - May 30th, 2021 - Adding is_numeric and is_string selection
-    #                       Adding Secondary Y Axis (Percentage of)
-    # 06 - May 31st, 2021 - Adding color option
-    # 07 - Oct 14th, 2021 - Adding edgecolor = black
-    # 08 - Oct 17th, 2021 - *** Changing Name = MissingDataCol ***
-    # 09 - Jan 21st, 2023 - Adjusting
-    # 10 -
-
-
-    # Libraries ---------------------------------------------------------
-
-    import numpy as np
-    import pandas as pd
-
-    from pandas.api.types import is_string_dtype
-    from pandas.api.types import is_numeric_dtype
-    
-    import matplotlib.pyplot as plt   
-
-
-    # Program -----------------------------------------------------------
     data = DataFrame.copy()
 
     nrows = data.shape[0]
@@ -88,7 +89,7 @@ def plot_missingdata_col(DataFrame, title=None, del_threshold=100,
     bin_edge = "black"
 
     # Figure
-    fig, ax1 = plt.subplots(figsize=[8, 4.5])
+    fig, ax1 = plt.subplots(figsize=[6, 3.375])
     fig.suptitle(title, fontsize=10, fontweight="bold")
 
     # ax1 = Primary plot = Frequency
@@ -119,7 +120,7 @@ def plot_missingdata_col(DataFrame, title=None, del_threshold=100,
     plt.tight_layout()
 
     if(savefig == True):
-        plt.savefig(title, dpi=240)
+        plt.savefig(title, dpi=320)
         print(f' > saved plot as "{title}.png"')
 
     else:
