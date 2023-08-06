@@ -1,3 +1,27 @@
+# Missing Data per Row [P147] ------------------------------------------
+
+# Libraries
+import numpy as np
+import pandas as pd
+
+from pandas.api.types import is_string_dtype
+from pandas.api.types import is_numeric_dtype
+
+import matplotlib.pyplot as plt
+
+
+# Versions
+
+# 01 - Oct 17th, 2021 - Starter*
+# 02 - Oct 17th, 2021 - Adding Secondary Y Axis
+# 03 - Oct 18th, 2021 - Adding a Middle Line (50% of Columns)
+# 04 - Jan 21st, 2023 - Adjusting
+# 05 - 
+
+
+# Insights, improvements and bugfix
+#
+
 
 def plot_missingdata_row(DataFrame, title, pct_lines=True, savefig=False, verbose=True):
     """
@@ -14,27 +38,8 @@ def plot_missingdata_row(DataFrame, title, pct_lines=True, savefig=False, verbos
     * verbose = True or False (quiet mode). If True will print some infor-
       mation about the data analysis and plot (default=True).    
 
-    """
-
-    # Versions ----------------------------------------------------------
-
-    # 01 - Oct 17th, 2021 - Starter*
-    # 02 - Oct 17th, 2021 - Adding Secondary Y Axis
-    # 03 - Oct 18th, 2021 - Adding a Middle Line (50% of Columns)
-    # 04 - Jan 21st, 2023 - Adjusting
-    # 05 -   
-
-
-    # Libraries ---------------------------------------------------------
-
-    import numpy as np
-    import pandas as pd
-
-    import matplotlib.pyplot as plt
-
-
-    # Program -----------------------------------------------------------
-
+    """  
+    # Data Preparation
     data = DataFrame.copy()
 
     nrows = data.shape[0]
@@ -79,7 +84,7 @@ def plot_missingdata_row(DataFrame, title, pct_lines=True, savefig=False, verbos
 
 
     # Plot
-    fig, ax1 = plt.subplots(figsize=[8, 4.5])
+    fig, ax1 = plt.subplots(figsize=[6, 3.375])
     fig.suptitle(title, fontsize=10, fontweight="bold")
 
     # ax1 = Primary plot = Frequency
@@ -112,7 +117,7 @@ def plot_missingdata_row(DataFrame, title, pct_lines=True, savefig=False, verbos
     plt.tight_layout()
 
     if(savefig == True):
-        plt.savefig(title, dpi=240)
+        plt.savefig(title, dpi=320)
         print(f' > saved plot as "{title}.png"')
 
     else:
