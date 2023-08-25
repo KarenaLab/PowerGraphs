@@ -45,7 +45,7 @@ def plot_missingdata_row(DataFrame, title, pct_lines=True, savefig=False, verbos
     nrows = data.shape[0]
     ncols = data.shape[1]
     
-    counting_dict = {}
+    counting_dict = dict()
 
     # Create a dictionary with index as the number of columns available
     for col in range(0, ncols+1):
@@ -83,7 +83,7 @@ def plot_missingdata_row(DataFrame, title, pct_lines=True, savefig=False, verbos
     plt.rcParams["ytick.direction"] = "inout"
 
 
-    # Plot
+    # Figure
     fig, ax1 = plt.subplots(figsize=[6, 3.375])
     fig.suptitle(title, fontsize=10, fontweight="bold")
 
@@ -123,10 +123,8 @@ def plot_missingdata_row(DataFrame, title, pct_lines=True, savefig=False, verbos
     else:
         plt.show()
 
+
     plt.close(fig)
 
     return None
-
-    # end ---------------------------------------------------------------
-
 
