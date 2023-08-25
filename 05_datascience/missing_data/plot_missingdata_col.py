@@ -46,14 +46,15 @@ def plot_missingdata_col(DataFrame, title=None, del_threshold=100,
       mation about the data analysis and plot (default=True).    
 
     """
+    # Data preparation
     data = DataFrame.copy()
 
     nrows = data.shape[0]
     ncols = data.shape[1]
     columns = data.columns.tolist()
     
-    nan_count_list = []
-    nan_pct_list = []
+    nan_count_list = list()
+    nan_pct_list = list()
 
     # Data Analysis (Missing Data)
     for col in columns:
@@ -88,9 +89,10 @@ def plot_missingdata_col(DataFrame, title=None, del_threshold=100,
     bin_color = "darkred"
     bin_edge = "black"
 
+
     # Figure
     fig, ax1 = plt.subplots(figsize=[6, 3.375])
-    fig.suptitle(title, fontsize=10, fontweight="bold")
+    fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
     # ax1 = Primary plot = Frequency
     ax1.bar(columns, nan_count_list, width=bin_width, bottom=0,
@@ -126,9 +128,8 @@ def plot_missingdata_col(DataFrame, title=None, del_threshold=100,
     else:
         plt.show()
 
+
     plt.close(fig)
 
     return None
-
-    # end ---------------------------------------------------------------
 
