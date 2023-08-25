@@ -71,10 +71,6 @@ def plot_missingdata_row(DataFrame, title, pct_lines=True, savefig=False, verbos
     if(title == None):
         title = "Missing Data by rows"
 
-    bin_width = 0.8
-    bin_color = "darkred"
-    bin_edge = "black"
-
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
     plt.rcParams["figure.dpi"] = 180
@@ -82,10 +78,14 @@ def plot_missingdata_row(DataFrame, title, pct_lines=True, savefig=False, verbos
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.direction"] = "inout"
 
+    bin_width = 0.8
+    bin_color = "darkred"
+    bin_edge = "black"
+
 
     # Figure
     fig, ax1 = plt.subplots(figsize=[6, 3.375])
-    fig.suptitle(title, fontsize=10, fontweight="bold")
+    fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
     # ax1 = Primary plot = Frequency
     ax1.bar(index, values_abs, width=bin_width, bottom=0,
@@ -113,6 +113,9 @@ def plot_missingdata_row(DataFrame, title, pct_lines=True, savefig=False, verbos
 
     ax1.set_ylabel("NaN frequency (qty)", loc="top")
     ax2.set_ylabel("NaN percentage (%)", loc="top")
+
+    ax1.xaxis.set_tick_params(width=0)
+    ax2.xaxis.set_tick_params(width=0)
 
     plt.tight_layout()
 
