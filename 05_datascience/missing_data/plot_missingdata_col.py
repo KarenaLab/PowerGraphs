@@ -71,25 +71,24 @@ def plot_missingdata_col(DataFrame, title=None, del_threshold=100,
             data = data.drop(columns=[col])
             print(f' >>> Warning: Column deleted. Delete threshold={del_threshold}% \n')
 
+   
+    # Plot
+    # Adjusts
+    if(title == None):
+        title = "Missing Data by columns"
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
     plt.rcParams["figure.dpi"] = 180
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
-    plt.rcParams["ytick.direction"] = "inout"     
-
-    
-    # Plot
-    # Adjusts
-    if(title == None):
-        title = "Missing Data by columns"
+    plt.rcParams["ytick.direction"] = "inout"
 
     bin_width = 0.8
     bin_color = "darkred"
     bin_edge = "black"
 
-
+    
     # Figure
     fig, ax1 = plt.subplots(figsize=[6, 3.375])
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
@@ -119,6 +118,9 @@ def plot_missingdata_col(DataFrame, title=None, del_threshold=100,
     ax2.set_ylabel("NaN percentage (%)", loc="top")
 
     plt.setp(ax1.get_xticklabels(), fontsize=8, rotation=90)
+    ax1.xaxis.set_tick_params(width=0)
+    ax2.xaxis.set_tick_params(width=0)
+
     plt.tight_layout()
 
     if(savefig == True):
