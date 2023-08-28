@@ -14,7 +14,8 @@ import matplotlib.gridspec as gridspec
 
 
 # Insights, improvements and bugfix:
-# 
+# Add option to print only high or low part
+#
 
 
 def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
@@ -47,9 +48,11 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
 
     # Title
     if(title == None):
-        title = "Correlation map"
+        title = f"Correlation map ({method})"
 
-    title = f"{title} ({method})"
+    else:
+        title = f"{title} ({method})"
+
 
     # Columns
     if(columns != "all"):
@@ -82,6 +85,7 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
             if(i < j):
                 corr[i, j] = 0
 
+
     # Creating a list with Correlation
     corr_map = pd.DataFrame(data=[], columns=["var_01", "var_02", "tag", "corr"])
 
@@ -100,6 +104,7 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
     corr_high = corr_map.tail(high_threshold)
     corr_low = corr_map.head(low_threshold)
 
+
     # Plot
     fig = plt.figure(figsize=[6, 3.375])      # Using widescreen ratio (16:9)
     grid = fig.add_gridspec(nrows=2, height_ratios=[high_threshold, low_threshold],
@@ -112,6 +117,7 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
     
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
+    # High plot (high threshold)
     ax0.barh(corr_high["tag"], corr_high["corr"], color=color, edgecolor="black", zorder=10)
     ax0.set_xlim(left=0, right=1)
     ax0.grid(axis="x", color="lightgrey", linestyle="--", linewidth=0.5, zorder=1)
@@ -120,7 +126,9 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
 
     for x, y in list(zip(corr_high["corr"], corr_high["tag"])):
         ax0.text((space + x), y, str(x), fontsize=9, ha="left", va="center")
-    
+
+
+    # Lower plot (low threshold)   
     ax1.barh(corr_low["tag"], corr_low["corr"], color=color, edgecolor="black", zorder=10)    
     ax1.set_xlim(left=0, right=1)
     ax1.grid(axis="x", color="lightgrey", linestyle="--", linewidth=0.5, zorder=1)
