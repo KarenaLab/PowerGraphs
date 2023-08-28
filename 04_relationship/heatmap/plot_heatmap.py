@@ -8,6 +8,7 @@ from pandas.api.types import is_numeric_dtype
 
 import matplotlib.pyplot as plt
 
+
 # Versions 
 # 01 - Jan 31st, 2021 - Starter
 # 02 - Jan 31st, 2021 - Removing Duplicated Info
@@ -29,7 +30,7 @@ import matplotlib.pyplot as plt
 
 def plot_heatmap(DataFrame, title=None, columns="all", decimals=2,
                  method="pearson", colormap="Blues", savefig=False,
-                 verbose=True):
+                 textsize=7, verbose=True):
     """
     Plots a triangular **Heatmap** for **correlations** between variables,
     using Pearson, Spearman or Kendall methods.
@@ -51,9 +52,10 @@ def plot_heatmap(DataFrame, title=None, columns="all", decimals=2,
 
     # Title
     if(title == None):
-        title = "Heatmap for correlation"
+        title = f"Heatmap for correlation ({method})"
 
-    title = f"{title} ({method})"
+    else:
+        title = f"{title} ({method})"
 
     # Columns select    
     if(columns != "all"):
@@ -97,17 +99,17 @@ def plot_heatmap(DataFrame, title=None, columns="all", decimals=2,
     # Plot
     fig = plt.figure(figsize=[6, 3.375])
     ax = fig.add_subplot()
-    im = ax.imshow(corr, cmap=colormap, aspect=(4.5 / 8))
+    im = ax.imshow(corr, cmap=colormap, aspect=(3.375 / 6))
 
-    fig.suptitle(title, fontsize=10, fontweight="bold")
+    fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
     ax.set_yticks(np.arange(start=0, stop=no_rows))
-    ax.set_xticks(np.arange(start=0, stop=no_rows))
     ax.set_yticklabels(columns, rotation=0, fontsize=9)
+    ax.set_xticks(np.arange(start=0, stop=no_rows))
     ax.set_xticklabels(columns, rotation=90, fontsize=9)
 
 
-    # Creating Text Annotations
+    # Text Annotations
     for i in range(0, len(columns)):
         for j in range(0, len(columns)):
             if(i >= j):
@@ -117,7 +119,7 @@ def plot_heatmap(DataFrame, title=None, columns="all", decimals=2,
                 else: textcolor = "black"
 
                 text = ax.text(j, i, value, ha="center", va="center",
-                               color=textcolor, fontsize=8)
+                               color=textcolor, fontsize=textsize)
 
 
     plt.tight_layout()
