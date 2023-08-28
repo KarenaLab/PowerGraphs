@@ -18,10 +18,10 @@ import matplotlib.pyplot as plt
 
 # Program --------------------------------------------------------------
 
-def plot_boxplot(DataFrame, columns=None, title=None,
-                 savefig=False, verbose=True):
+def plot_boxplot(DataFrame, columns=None, title=None, savefig=False, verbose=True):
     """
-
+    Plots a boxplot comparing the data.
+    Simple view.
 
     """
 
@@ -67,6 +67,7 @@ def plot_boxplot(DataFrame, columns=None, title=None,
 
     plt.tight_layout()
 
+    # Saving
     if(savefig == True):
         plt.savefig(title, dpi=320)
 
