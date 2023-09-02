@@ -27,6 +27,7 @@ def plot_identityline(ground_truth, comparison, title=None, xlabel=None,
     Plots an identity line comparison.
 
     """
+    # Data preparation
     ground_truth = np.array(ground_truth)
     comparison = np.array(comparison)
     
@@ -72,15 +73,15 @@ def plot_identityline(ground_truth, comparison, title=None, xlabel=None,
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
     plt.scatter(comparison, ground_truth, s=40, color="navy", edgecolor="white", alpha=alpha, label="data", zorder=20)
-    plt.plot([lower, upper], [lower, upper], color="red", label="truth line", zorder=19)
-    plt.plot(regr_x, regr_y, color="green", label="regression", zorder=18)
+    plt.plot([lower, upper], [lower, upper], color="red", linewidth=0.5, label="identity line", zorder=19)
+    plt.plot(regr_x, regr_y, color="green", linewidth=0.5, label="regression", zorder=18)
 
     plt.grid(axis="both", color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
 
     plt.ylim([lower-step, upper+step])
     plt.xlim([lower-step, upper+step])
-    plt.ylabel(ylabel, fontsize=10, loc="center")
-    plt.xlabel(xlabel, fontsize=10, loc="center")
+    plt.ylabel(ylabel, fontsize=9, loc="center")
+    plt.xlabel(xlabel, fontsize=9, loc="center")
     
     plt.legend(loc="lower right", fontsize=9, framealpha=1)
     plt.tight_layout()
