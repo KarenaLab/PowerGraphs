@@ -42,7 +42,6 @@ def plot_identityline(ground_truth, comparison, title=None, xlabel=None,
         ylabel = "ground truth"
 
     # Add a color adjust
-
     lower = min(comparison.min(), ground_truth.min())
     upper = max(comparison.max(), ground_truth.max())
     step = (upper - lower) / 10
