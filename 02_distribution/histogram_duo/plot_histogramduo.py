@@ -64,7 +64,7 @@ def plot_histogramduo(serie1, serie2, name1=None, name2=None,
 
 
     # Plot
-    fig = plt.figure(figsize=[8, 4.5])
+    fig = plt.figure(figsize=[6, 3.375])
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
     zorder = 20
@@ -77,7 +77,7 @@ def plot_histogramduo(serie1, serie2, name1=None, name2=None,
 
         data_min = data.min()
         data_max = data.max()
-        step = (data_max - data_min) / 5
+        step = (data_max - data_min) * 0.25
 
         kde_space = np.linspace(start=(data_min - step), stop=(data_max + step), num=(10 * bin_count))
         kde_line = gaussian_kde(data, weights=None)(kde_space)
@@ -88,7 +88,7 @@ def plot_histogramduo(serie1, serie2, name1=None, name2=None,
 
         zorder = zorder + 1
 
-    plt.grid(axis="y", color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
+    plt.grid(axis="both", color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
     plt.ylabel("density", loc="top")
 
     plt.legend(loc="upper right", framealpha=1)
