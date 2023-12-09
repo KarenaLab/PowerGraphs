@@ -19,6 +19,51 @@ import matplotlib.pyplot as plt
 
 
 # Functions
+def plot_ttest(data_a, data_b, title=None, savefig=False, verbose=True):
+    """
+
+
+    """
+    # Data preparation
+    data_a = np.array(data_a)
+    data_b = np.array(data_b)
+
+    if(title != None):
+        title = "T Test"
+
+    # RC Params
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["figure.dpi"] = 180
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+
+    # Plot
+    fig = plt.figure(figsize=[6, 3.375])
+    fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
+
+    plt.grid(axis="both", color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
+    plt.ylabel("density", loc="top")
+
+    plt.legend(loc="upper right", framealpha=1)
+
+    plt.tight_layout()
+
+    if(savefig == True):
+        plt.savefig(title, dpi=240)
+
+        if(verbose == True):
+            print(f' > saved plot as "{title}.png"')
+
+    else:
+        plt.show()
+
+
+    plt.close(fig)
+
+    return None    
+
+    
 def gaussian_curve(loc, scale, num=500):
     """
 
