@@ -28,6 +28,7 @@ def plot_ttest(data_a, data_b, title=None, savefig=False, verbose=True):
     data_a = np.array(data_a)
     data_b = np.array(data_b)
 
+
     if(title != None):
         title = "T Test"
 
