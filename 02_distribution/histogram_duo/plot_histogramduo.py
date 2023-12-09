@@ -107,7 +107,6 @@ def plot_histogramduo(serie1, serie2, name1=None, name2=None,
 
     plt.close(fig)
 
-
     return None
 
 
