@@ -21,9 +21,11 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
 
+# -----------------------------------------------------------------------
 
 def plot_identityline(y_true, y_pred, title=None, xlabel=None,
                       ylabel=None, alpha=0.7, identity_line=True,
+                      legend_loc="lower right",
                       savefig=False, verbose=True):
     """
     Plots an identity line from **y_true** versus **y_pred**.
@@ -84,7 +86,7 @@ def plot_identityline(y_true, y_pred, title=None, xlabel=None,
     plt.ylabel(ylabel, fontsize=9, loc="center")
     plt.xlabel(xlabel, fontsize=9, loc="center")
     
-    plt.legend(loc="lower right", fontsize=9, framealpha=1).set_zorder(99)
+    plt.legend(loc=legend_loc, fontsize=9, framealpha=1).set_zorder(99)
 
     # Printing
     plt.tight_layout()
