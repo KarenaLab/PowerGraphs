@@ -2,8 +2,9 @@
 
 # Versions 
 # 01 - Mar 22nd, 2023 - Starter
-# 02 - Jun 20th, 2023 - Applying adjusts to style
-# 02 - Jul 31st, 2023 - difference equation explicit at y_label
+#    - Jun 20th, 2023 - Applying adjusts to style
+#    - Jul 31st, 2023 - difference equation explicit at y_label
+#    - Jan 03rd, 2024 - Add legend
 # 
 
 
@@ -87,7 +88,7 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", savefig=False, ver
     fig.suptitle(title, fontsize=10, fontweight="bold")
 
     # ax0 = Scatter plot
-    ax0.scatter(mean, diff, s=30, color="navy", edgecolor="white", alpha=0.7, zorder=20)
+    ax0.scatter(mean, diff, s=30, color="navy", edgecolor="white", alpha=0.7, label="Error", zorder=20)
 
     ax0.axvline(x=0, color="black", linestyle="-", linewidth=0.8, zorder=19)
     ax0.axhline(y=0, color="black", linestyle="-", linewidth=0.8, zorder=19)
@@ -101,6 +102,8 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", savefig=False, ver
     ax0.grid(axis="both", color="grey", linestyle="--", linewidth=0.5)
     ax0.set_xlim(left=(x_lower - x_step), right=(x_upper + x_step))
     ax0.set_ylim(bottom=y_lower, top=y_upper)
+
+    ax0.legend(loc="best", framealpha=1).set_zorder(99)
 
     #ax1 = Histogram of difference
     ax1.hist(x=diff, bins=bins, orientation="horizontal", color="navy", edgecolor="grey", zorder=20)
