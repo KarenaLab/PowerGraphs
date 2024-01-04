@@ -3,6 +3,8 @@
 # Versions
 # 01 - Jan 21st, 2023 - Starter
 # 02 - Jun 12th, 2023 - Adjust params
+#    - Jan 03rd, 2024 - Set legend over all items
+#
 
 
 # Insights and bugfix
@@ -110,7 +112,7 @@ def plot_line(DataFrame, title=None, xlabel=None, ylabel=None, index=None,
         plt.xlabel(xlabel, loc="right")
 
     if(len(columns) > 1 and legend == True):
-        plt.legend(loc=legend_loc, framealpha=1)    
+        plt.legend(loc=legend_loc, framealpha=1).set_zorder(99)  
 
 
     # Printing
