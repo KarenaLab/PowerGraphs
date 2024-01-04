@@ -2,7 +2,9 @@
 
 # Version
 # 01 - Jun 13th, 2023 - Starter
-# 02 -
+#    - Jan 03rd, 2024 - Set legend over all items,
+#    - Jan 04th, 2024 - Adjust variables names
+#
 
 
 # Insights and bugfix
@@ -20,35 +22,35 @@ import matplotlib.gridspec as gridspec
 
 
 
-def plot_identityline(ground_truth, comparison, title=None, xlabel=None,
-                     ylabel=None, alpha=0.7, truth_line=True, savefig=False,
-                     verbose=True):
+def plot_identityline(y_true, y_pred, title=None, xlabel=None,
+                      ylabel=None, alpha=0.7, identity_line=True,
+                      savefig=False, verbose=True):
     """
-    Plots an identity line comparison.
+    Plots an identity line from **y_true** versus **y_pred**.
 
     """
     # Data preparation
-    ground_truth = np.array(ground_truth)
-    comparison = np.array(comparison)
+    y_true = np.array(y_true)
+    y_pred = np.array(y_pred)
     
     # Plot details adjust
     if(title == None):
         title = "Identity line"
 
     if(xlabel == None):
-        xlabel = "comparison"
+        xlabel = "y_pred"
 
     if(ylabel == None):
         ylabel = "ground truth"
 
     # Add a color adjust
-    lower = min(comparison.min(), ground_truth.min())
-    upper = max(comparison.max(), ground_truth.max())
+    lower = min(y_pred.min(), y_true.min())
+    upper = max(y_pred.max(), y_true.max())
     step = (upper - lower) / 10
 
     # Linear regression
-    x = comparison.reshape(-1, 1)
-    y = ground_truth.reshape(-1, 1)
+    x = y_pred.reshape(-1, 1)
+    y = y_true.reshape(-1, 1)
 
     regr = LinearRegression().fit(x, y)
 
@@ -61,17 +63,17 @@ def plot_identityline(ground_truth, comparison, title=None, xlabel=None,
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["figure.dpi"] = 180
+    plt.rcParams["figure.dpi"] = 150
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.direction"] = "inout"
     
 
     # Plot
-    fig = plt.figure(figsize=[6, 3.375])
+    fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
-    plt.scatter(comparison, ground_truth, s=40, color="navy", edgecolor="white", alpha=alpha, label="data", zorder=20)
+    plt.scatter(y_pred, y_true, s=30, color="navy", edgecolor="white", alpha=alpha, label="data", zorder=20)
     plt.plot([lower, upper], [lower, upper], color="red", linewidth=0.5, label="identity line", zorder=19)
     plt.plot(regr_x, regr_y, color="green", linewidth=0.5, label="regression", zorder=18)
 
@@ -82,7 +84,9 @@ def plot_identityline(ground_truth, comparison, title=None, xlabel=None,
     plt.ylabel(ylabel, fontsize=9, loc="center")
     plt.xlabel(xlabel, fontsize=9, loc="center")
     
-    plt.legend(loc="lower right", fontsize=9, framealpha=1)
+    plt.legend(loc="lower right", fontsize=9, framealpha=1).set_zorder(99)
+
+    # Printing
     plt.tight_layout()
 
     if(savefig == True):
