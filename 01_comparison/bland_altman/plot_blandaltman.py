@@ -22,7 +22,8 @@ import matplotlib.gridspec as gridspec
 
 
 
-def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", savefig=False, verbose=True):
+def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt",
+                     savefig=False, verbose=True):
     """
     Performs Bland-Altman analysis to evaluate a bias between the mean
     differences, and to estimate an agreement interval, within which
@@ -72,20 +73,20 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", savefig=False, ver
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["figure.dpi"] = 180
+    plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.direction"] = "inout"
 
 
     # Plot         
-    fig = plt.figure(figsize=[6, 3.375])
+    fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
     grd = fig.add_gridspec(nrows=1, ncols=2, width_ratios=[7.5, 2.5])
 
     ax0 = fig.add_subplot(grd[0, 0])
     ax1 = fig.add_subplot(grd[0, 1], sharey=ax0)
 
-    fig.suptitle(title, fontsize=10, fontweight="bold")
+    fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
     # ax0 = Scatter plot
     ax0.scatter(mean, diff, s=30, color="navy", edgecolor="white", alpha=0.7, label="Error", zorder=20)
@@ -111,6 +112,7 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", savefig=False, ver
     ax1.grid(axis="both", color="grey", linestyle="--", linewidth=0.5)
 
 
+    # Printing
     plt.tight_layout()
 
     if(savefig == True):
@@ -126,4 +128,3 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", savefig=False, ver
 
     return None
 
-# end
