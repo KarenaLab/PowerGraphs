@@ -11,7 +11,8 @@ import matplotlib.gridspec as gridspec
 
 # Versions
 # 01 - May 12th, 2023 - First version
-# 02 -
+#    - Jan 03rd, 2024 - Set legend over all items,
+# 
 
 
 # Insights and future upgrades
@@ -70,7 +71,7 @@ def plot_dumbbell(labels, minimum, maximum, title=None,
     if(xlabel != None):
         plt.set_xlabel(xlabel, loc="right")
 
-    ax0.legend(loc="upper right", framealpha=1)
+    ax0.legend(loc="upper right", framealpha=1).set_zorder(99)
 
     if(savefig == True):
         plt.savefig(title, dpi=320)
