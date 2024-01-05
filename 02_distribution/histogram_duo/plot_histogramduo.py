@@ -2,7 +2,7 @@
 
 # Versions
 # 01 - May 01st, 2023 - Starter
-# 02 -
+#    - Jan 03rd, 2024 - Set legend over all items
 
 
 # Libraries
@@ -91,12 +91,12 @@ def plot_histogramduo(serie1, serie2, name1=None, name2=None,
     plt.grid(axis="both", color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
     plt.ylabel("density", loc="top")
 
-    plt.legend(loc="upper right", framealpha=1)
+    plt.legend(loc="upper right", framealpha=1).set_zorder(99)
 
     plt.tight_layout()
 
     if(savefig == True):
-        plt.savefig(title, dpi=240)
+        plt.savefig(title, dpi=320)
 
         if(verbose == True):
             print(f' > saved plot as "{title}.png"')
