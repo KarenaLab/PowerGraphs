@@ -1,11 +1,13 @@
 # Histogram Simple [P290]
 
 # Versions
-# 01 - Jan 31st, 2023 - starter
-# 02 - Feb 14th, 2023 - using python_modules source
-#                       added linebehind option
-# 03 - Jun 07th, 2023 - Remove binning function and using a numpy func.
-# 04 - 
+# 01 - Jan 31st, 2023 - Starter
+# 02 - Feb 14th, 2023 - using python_modules source,
+#                       added linebehind option,
+# 03 - Jun 07th, 2023 - Remove binning function and using a numpy func,
+#    - Jan 03rd, 2024 - Set legend over all items,
+#    - Jan 04th, 2024 - Set smaller window size (for 13")
+#  
 
 
 # Insights, improvements and bugfix
@@ -117,7 +119,7 @@ def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
 
 
     # Plot
-    fig = plt.figure(figsize=[8, 4.5])
+    fig = plt.figure(figsize=[6, 3.375])
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
     plt.hist(data, bins=no_bins, density=density, color=colors["blue"],
@@ -145,13 +147,13 @@ def plot_histogram(Series, title=None, xlabel=None, bins="sqrt", kde=True,
     plt.ylabel(ylabel, loc="top")
 
     if(kde == True or meanline == True or medianline == True):
-        plt.legend(fontsize=9, loc="upper right", framealpha=1)
+        plt.legend(fontsize=9, loc="upper right", framealpha=1).set_zorder(99)
 
 
     plt.tight_layout()
 
     if(savefig == True):
-        plt.savefig(title, dpi=240)
+        plt.savefig(title, dpi=320)
 
         if(verbose == True):
             print(f' > saved plot as "{title}.png"')
