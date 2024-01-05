@@ -46,7 +46,7 @@ def plot_ttest(data_a, data_b, title=None, savefig=False, verbose=True):
     plt.grid(axis="both", color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
     plt.ylabel("density", loc="top")
 
-    plt.legend(loc="upper right", framealpha=1)
+    plt.legend(loc="upper right", framealpha=1).set_zorder(99)
 
     plt.tight_layout()
 
