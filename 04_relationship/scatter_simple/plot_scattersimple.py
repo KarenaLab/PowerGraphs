@@ -2,7 +2,7 @@
 
 # Versions
 # 01 - Fev 14th, 2023 - Starter
-#    - Jan 03rd, 2024 - Rafactoring
+#    - Jan 03rd, 2024 - Rafactoring code (new code style)
 #
 
 
@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 # -----------------------------------------------------------------------
 
 def plot_scattersimple(x, y, title=None, xlabel=None, ylabel=None,
-                       alpha=0.8, mark_size=30, verbose=True, savefig=False):
+                       alpha=0.8, mark_size=20, verbose=True, savefig=False):
     """
 
     More info:
@@ -33,9 +33,7 @@ def plot_scattersimple(x, y, title=None, xlabel=None, ylabel=None,
     y = np.array(y)
 
     # Title
-    if(title == None):
-        title = "Scatter plot"
-
+    if(title == None): title = "Scatter plot"
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
