@@ -2,7 +2,8 @@
 
 # Versions
 # 01 - Nov 22nd, 2023 - Starter
-# 02 -
+#    - Jan 03rd, 2024 - Set legend over all items
+# 
 
 
 # Insights, improvements and bugfix
@@ -84,7 +85,7 @@ def plot_kde_duo(sample1, sample2, name1=None, name2=None, title=None,
 
     plt.grid(axis="both", color="lightgrey", linewidth=0.5, linestyle="--", zorder=10)
     plt.ylim(bottom=0)
-    plt.legend(loc="best", framealpha=1)
+    plt.legend(loc="best", framealpha=1).set_zorder(99)
 
     plt.tight_layout()
 
