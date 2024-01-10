@@ -1,154 +1,201 @@
-# HistBox [P292]
+# Histogram Simple [P290]
 
-# Versions:
-# 01 - Initial
-# 02 - Correcting Whiskers (Adding Calculation) = 10th Dec 2020
-#      Automatic figure saving with Full HD size (1920x1080 px)
-# 03 - Adding a Vertical line in Histogram for Mean = 11th Dec 2020
-#      Correcting 1o Quantile Error label in Describe
-# 04 - Adjusting Mean and Median line colors
-# 05 - Dividing in THREE options: HistBox_v05, HistBoxInfo_v05 and
-#          HistBoxInfoNormal_v05
-# 06 - Adjusting the printing ratio for A4 Page - 03rd Feb 2021
-# 07 - Bar Color = RoyalBlue and adding border (edgecolor= white)
-#      Aug 27th, 2021
-# 08 - Changing position of BoxPlot and adding **kwargs - Sept 01st, 2021
-# 09 - Adding Binning options - Oct 11th, 2021
-# 10 -
+# Versions
+# 11 - Jan 09th, 2024 - Refactoring and using Histogram simple as base
 
 
-# Libraries     
+# Insights, improvements and bugfix
+# Extend kde line up to zero (left and right margins),
+#
+
+
+# Libraries
 import numpy as np
 import pandas as pd
-import scipy.stats as stats
 
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
+from scipy.stats import gaussian_kde
+
+
+# Insights, improvements and bugfix
+# 01 - Extend KDE line up to the zero (left and right margins),
+# 02 - Remove labels from boxplot and move xticks for upper part, to use
+#          the same labels for boh plots,
+# 03 - Create a vertical version for plot (better usage if paper),
+#
+
 
 # ----------------------------------------------------------------------
 
-def HistBox(Title, Data, **kwargs):
+def plot_histbox(data, title=None, xlabel=None, bins="sqrt",
+                 kde=True, meanline=True, medianline=True, notch=True,
+                 grid_axes="y", linebehind=True, tail_size=15,
+                 savefig=False, verbose=True):
     """
+    Plots the histogram of a given *DataFrame* with selected *columns*.
 
-
+    Variables:
+    * data: Pandas data with data.
+    * title: Title for the plot (default="Histogram - {column name}"),
+    * xlabel: Label for x_axis (default=None).
+    * bins: Number of bins for plot (default="sqrt"). Check *binning*
+            module for more details.
+    * kde: Plot the Kernel-Gaussian density estimation line,
+    * meanline: Plot a green line showing the mean,
+    * medianline: Plot an orange line showing the median,
+    * grid_axis: Plot axis (dafault=y)
+    * linebehind = Plots mean and median line behind the plot.
+    * savefig: True or False*. If True will save a report with the title
+               name and do not show the plot. If False will not save the
+               report but will show in the screen.(default=False),
+    * verbose: True* or False (quiet mode). If True will print some in-
+               formation about the data analysis and plot (default=True)
+     
     """
-    DataPureNumbers = Data[np.logical_not(np.isnan(Data))]
+    # Data preparation
+    data = np.array(data)
+    data = data[~(np.isnan(data))]          # Remove NaNs
+    
+    # Title
+    if(title == None):
+        title = "Histogram with Boxplot"
 
-    Data_Size = DataPureNumbers.size
-    No_Bins = int((Data_Size**(1/2))+ 0.5)
+    
+    # Colors
+    colors = {"blue": "navy",
+              "red": "darkred",
+              "orange": "orange",
+              "green": "darkgreen"}
+
+    # Bins
+    # more info: https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html
+    bins_list = ["fd", "doane", "scott", "stone", "rice", "sturges", "sqrt"]
+
+    if(isinstance(bins, int) == True):
+        no_bins = bins
+
+    elif(bins_list.count(bins) == 1):
+        no_bins = np.histogram_bin_edges(data, bins=bins).size
+
+    else:
+        print(f' >>> Error: "bins" option not valid. Using "sqrt" as forced option')
+        no_bins = np.histogram_bin_edges(data, bins="sqrt").size
 
 
-    bins_method = kwargs.get("bins")
+    # Grid Axis
+    grid_list = ["x", "y", "both"]
+    if(grid_list.count(grid_axes) == 0):
+        grid_axes = "y"
+        print(f' >>> Error: "grid_axis" oprtion not valid. Using "y" as forced option.')
 
-    if(bins_method == None):
-        bins_method = "sqrt"
+    
+    # Histogram settings 
+    # KDE: Kernel-density estimate for gaussian distribution
+    if(kde == True):
+        bins_alpha = 0.7
+        bins_edge = colors["blue"]
+        density = True
+        ylabel = "density"
 
-
-    if(bins_method == "sqrt"):
-
-        No_Bins = int((Data_Size**(1/2))+ 0.5)
-
-        # Number of bins always as a ODD number = histogram is symetrical
-
-        if(Data_Size >= 500 and No_Bins % 2 == 0):
-            No_Bins = No_Bins-1
-
-
-    if(bins_method == "sturges"):
-
-        No_Bins = int((np.log2(Data_Size)+1)+ 0.5)
+        # Add tail for the density line
+        x_min = data.min()
+        x_max = data.max()
+        step = (x_max - x_min) * (tail_size / 100)
         
+        kde_space = np.linspace(start=(x_min - step), stop=(x_max + step), num=(50 * no_bins))
+        kde_line = gaussian_kde(data, weights=None)(kde_space)
 
-    if(type(bins_method) == int):
+    else:
+        bins_alpha = 1
+        bins_edge = "dimgrey"
+        density = False
+        ylabel = "frequency"
 
-        No_Bins = bins_method
+
+    # RC Params
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["figure.dpi"] = 120
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+
+
+    # Plot
+    fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
+    grd = fig.add_gridspec(ncols=1, width_ratios=[1],
+                           nrows=2, height_ratios=[7, 3])
+
+    ax0 = fig.add_subplot(grd[0, 0])                # Histogram
+    ax1 = fig.add_subplot(grd[1, 0], sharex=ax0)    # Boxplot
+    
+    fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
+
+
+    # Histogram
+    ax0.hist(data, bins=no_bins, density=density, color=colors["blue"],
+             alpha=bins_alpha, edgecolor=bins_edge, zorder=20)
+
+    ax0.grid(axis=grid_axes, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
+
+    # Density line
+    if(kde == True):
+        ax0.plot(kde_space, kde_line, color=colors["red"], linewidth=1.5, label="kde", zorder=23)
+
+
+    if(linebehind == True):
+        zorder = 11
+
+    else:
+        zorder = 21
     
 
-    # Setting Figure
+    if(meanline == True):
+        ax0.axvline(x=np.mean(data), color=colors["green"], linewidth=1.0, label="mean", zorder=zorder)
 
-    y_size = 8
-    x_size = 11.28
+    if(medianline == True):
+        ax0.axvline(x=np.median(data), color=colors["orange"], linewidth=1.0, label="median", zorder=zorder)
 
-    figratio = kwargs.get("figratio")
+    if(xlabel != None):
+        ax0.set_xlabel(xlabel, loc="right")
 
-    if figratio:
+    if(ylabel != None):
+        ax0.set_ylabel(ylabel, loc="top")
 
-        if(figratio == "square"):
-            ratio = 1
-
-        if(figratio == "wide"):
-            ratio = 1.7778
-
-        if(figratio == "A4"):
-            ratio = 1.4095
-
-        x_size = round(y_size * ratio, ndigits= 2)
-
-        
-    fig = plt.figure(figsize=(x_size, y_size)) 
-    gs = gridspec.GridSpec(nrows= 2, ncols= 2,
-                           width_ratios= [7, 3], height_ratios= [8, 2]) 
-
-    ax0 = plt.subplot(gs[0, :])                 # Main = Histogram
-    ax1 = plt.subplot(gs[1, :], sharex= ax0)    # Boxplot
+    if(kde == True or meanline == True or medianline == True):
+        ax0.legend(fontsize=9, loc="upper right", framealpha=1).set_zorder(99)
 
 
-    fig.suptitle(Title, fontsize= 16)
+    # Boxplot
+    # Parameters
+    boxprops = dict(color="black", linestyle="-", linewidth=1.5)
+    whiskerprops = dict(color="black", linestyle="-", linewidth=1.5)
+    capprops = dict(color="black", linestyle="-", linewidth=1.5)
+    medianprops = dict(color="orange", linestyle="-", linewidth=1.5)
+    flierprops = dict(markerfacecolor="darkred", markeredgecolor="black", marker="o", markersize=6)
 
+    ax1.boxplot(data, vert=False, widths=[0.6], notch=notch, boxprops=boxprops, whiskerprops=whiskerprops,
+                medianprops=medianprops, capprops=capprops, flierprops=flierprops, zorder=20)
 
-    # 1 - Histogram (ax0)
-    
-    n, bins, patches = ax0.hist(x= DataPureNumbers, bins= No_Bins,
-                                color= "navy", edgecolor= "white")
+    ax1.grid(axis="x", color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
 
-    # bins = Central Value of the bin
-    # n = Quantity of items inside the bin
-    # patches = Color information (Internal Variable)
-
-    Mean = round(np.mean(DataPureNumbers), 4)
-    StdDev = round(np.std(DataPureNumbers), 4)
-    Median = round(np.median(DataPureNumbers), 4)
-
-    # y = ((1/(np.sqrt(2*np.pi)*StdDev)) * np.exp(-0.5*(1/StdDev*(bins-Mean))**2))
-    # Curve = y * 1000
-    # ax0.plot(bins, Curve, color= "red", linestyle= "--", linewidth= 0.75)
-
-
-    ax0.grid(color= "lightgrey", linestyle= "--", linewidth= 0.5)
-    ax0.set_axisbelow(True)
-
-    ax0.axvline(x= Mean, color= "green", linewidth= 1)
-    ax0.axvline(x= Median, color= "orange", linewidth= 1)
-
-    # *** Coincidir as linhas de grade com os steps de StdDev ***
-
-
-    # 2 - Box Plot
-    
-    Red_Bullet = dict(markerfacecolor= "r")
-
-    ax1.boxplot(x= DataPureNumbers, vert= False, widths= 0.5,
-                showmeans= True, meanline= True, flierprops= Red_Bullet)
-    ax1.xaxis.grid(color= "lightgrey", linestyle= "--", linewidth= 0.5)
-
-    ax1.set_axisbelow(True)
     ax1.set_yticks([])
+    
 
-
-    # 4 - Plotting
-
+    # Printing
     plt.tight_layout()
 
-    savefig = kwargs.get("savefig")
-
     if(savefig == True):
-        plt.savefig(Title, dpi= 240)
-        
+        plt.savefig(title, dpi=320)
 
-    show = kwargs.get("show")
+        if(verbose == True):
+            print(f' > saved plot as "{title}.png"')
 
-    if(show != False):
+    else:
         plt.show()
 
+    plt.close(fig)
 
+    return None
+        
