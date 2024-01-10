@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt
 
 # -----------------------------------------------------------------------
 
-def plot_scattersimple(x, y, title=None, xlabel=None, ylabel=None,
+def plot_scattersimple(x, y, title=None, xlabel=None, ylabel=None, color="navy",
                        alpha=0.8, mark_size=20, verbose=True, savefig=False):
     """
 
@@ -37,7 +37,7 @@ def plot_scattersimple(x, y, title=None, xlabel=None, ylabel=None,
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["figure.dpi"] = 150
+    plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.direction"] = "inout"
@@ -46,7 +46,7 @@ def plot_scattersimple(x, y, title=None, xlabel=None, ylabel=None,
     fig = plt.figure(figsize=[6, 3.375])    # Widescreen 16:9
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
-    plt.scatter(x, y, s=mark_size, color="navy", edgecolor="white", alpha=alpha, zorder=20)
+    plt.scatter(x, y, s=mark_size, color=color, edgecolor="white", alpha=alpha, zorder=20)
 
     if(xlabel != None): plt.xlabel(xlabel, loc="center")
     if(ylabel != None): plt.ylabel(ylabel, loc="center")
