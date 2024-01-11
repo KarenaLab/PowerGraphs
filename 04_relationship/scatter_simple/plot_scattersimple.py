@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 # -----------------------------------------------------------------------
 
 def plot_scattersimple(x, y, title=None, xlabel=None, ylabel=None, color="navy",
-                       alpha=0.8, mark_size=20, verbose=True, savefig=False):
+                       alpha=0.8, mark_size=20, savefig=False, verbose=True):
     """
 
     More info:
