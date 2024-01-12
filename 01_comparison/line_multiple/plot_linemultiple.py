@@ -1,14 +1,12 @@
 # Plot Line [P264] -----------------------------------------------------
 
 # Versions
-# 01 - Jan 21st, 2023 - Starter
-# 02 - Jun 12th, 2023 - Adjust params
-#    - Jan 03rd, 2024 - Set legend over all items
-# 03 - Jan 04th, 2024 - (( refactoring ))
+# 01 - Jan 11th, 2024 - Starter
+#
 
 
 # Insights, improvements and bugfix
-# 
+# 01 - Limit up to 05 (five) columns
 
 
 # Libraries
@@ -20,32 +18,40 @@ import matplotlib.pyplot as plt
 
 # -----------------------------------------------------------------------
 
-def plot_line(x, y, title=None, xlabel=None, ylabel=None, color="navy",
-              linewidth=1.5, grid="both", remove_axis=False,
-              savefig=False, verbose=True):
+def plot_linemultiple(DataFrame, columns=None, title=None, xlabel=None,
+                      ylabel=None, linewidth=1.5, grid="both", remove_axis=False,
+                      legend_loc="best", savefig=False, verbose=True):
 
     """
-    Plots a line graph with **x** and **y**.
+    Plots a multiple line graph with **x** and **y**.
     Objective is to make life easier for a first simple plot and be a
     support for more detailed graphs.
 
     """
     # Data preparation
-    x = np.array(x)
-    y = np.array(y)
+    data = DataFrame.copy()
+    columns = col_select(data, columns)         # Improvement #01
+
+    # Data separation
+    data = data[columns]
+    #data = data.dropna().reset_index(drop=True)
 
     # Title
     if(title == None):
-        title = "Line plot"
+        title = "Line multiple plot"
 
     # Grid (Default mode is **both**)
     grid_options = ["both", "y", "x"]
     if(grid_options.count(grid) == 0):
         grid = "both"
 
+    # Colors
+    colors = ["navy", "darkred", "orange", "darkgreen", "darkviolet"]
+    colors = colors[0:len(columns)]
+
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["figure.dpi"] = 150
+    plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.direction"] = "inout"
@@ -55,7 +61,11 @@ def plot_line(x, y, title=None, xlabel=None, ylabel=None, color="navy",
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
     ax = plt.axes()
 
-    plt.plot(x, y, color=color, linewidth=linewidth, zorder=20)
+    for col, color in zip(columns, colors):
+        x = np.array(data[col].index)
+        y = np.array(data[col])
+
+        plt.plot(x, y, color=color, linewidth=linewidth, label=col, zorder=20)
 
     plt.grid(axis=grid, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
 
@@ -70,6 +80,9 @@ def plot_line(x, y, title=None, xlabel=None, ylabel=None, color="navy",
         ax.spines.right.set_visible(False)
         ax.spines.top.set_visible(False)
         ax.spines.left.set_visible(False)
+
+    if(len(columns) > 1):
+        plt.legend(loc=legend_loc, framealpha=1).set_zorder(99)
 
 
     # Printing
@@ -88,3 +101,44 @@ def plot_line(x, y, title=None, xlabel=None, ylabel=None, color="navy",
 
     return None
 
+
+def col_select(DataFrame, columns):
+    """
+    Columns names verification.
+    Also standatize the output as a list for pandas standard.
+    
+    """
+    def column_checker(DataFrame, col_list):
+        col_select = list()
+        df_cols = DataFrame.columns.to_list()
+
+        for i in col_list:
+            if(df_cols.count(i) == 1):
+                col_select.append(i)
+
+
+        return col_select
+
+
+    # Columns preparation
+    if(columns == "all"):
+        # Default: takes **all** columns from DataFrame.
+        col_select = DataFrame.columns.to_list()
+
+    elif(isinstance(columns, str) == True):
+        # Tranforms a sting into a list
+        columns = columns.replace(" ", "")
+        columns = columns.split(",")
+        col_select = column_checker(DataFrame, columns)
+
+    elif(isinstance(columns, list) == True):
+        col_select = column_checker(DataFrame, columns)
+
+    else:
+        col_select = list()
+
+
+    return col_select
+
+
+# end
