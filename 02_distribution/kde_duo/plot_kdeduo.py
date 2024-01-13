@@ -20,9 +20,9 @@ import matplotlib.pyplot as plt
 
 
 # ----------------------------------------------------------------------
-def plot_kde_duo(sample1, sample2, name1=None, name2=None, title=None,
-                 bins="sqrt", alpha=0.3, mean_line=True, savefig=False,
-                 verbose=True):
+def plot_kdeduo(sample1, sample2, name1=None, name2=None, title=None,
+                bins="sqrt", alpha=0.3, mean_line=True,
+                savefig=False, verbose=True):
     """
     Plots two kernel-density gaussian line.
 
