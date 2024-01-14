@@ -102,7 +102,7 @@ def plot_histbox(data, title=None, xlabel=None, bins="sqrt",
         # Add tail for the density line
         x_min = data.min()
         x_max = data.max()
-        step = (x_max - x_min) * (tail_size / 100)
+        step = (x_max - x_min) * (tail_size / 100)      # Improvement No.01
         
         kde_space = np.linspace(start=(x_min - step), stop=(x_max + step), num=(50 * no_bins))
         kde_line = gaussian_kde(data, weights=None)(kde_space)
@@ -181,6 +181,7 @@ def plot_histbox(data, title=None, xlabel=None, bins="sqrt",
     ax1.grid(axis="x", color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
 
     ax1.set_yticks([])
+    ax1.tick_params(axis="x", bottom=False, top=True, labelbottom=False, labeltop=False)
     
 
     # Printing
