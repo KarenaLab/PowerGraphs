@@ -16,7 +16,8 @@ import matplotlib.gridspec as gridspec
 #
 
 # Insights, improvements and bugfix
-#
+# 01 - Add bins_select for better vizualization
+# 02 -
 
 
 # -----------------------------------------------------------------------
