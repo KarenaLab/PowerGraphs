@@ -6,6 +6,7 @@
 
 
 # Insights, improvements and bugfix
+# 01 - Add labels to the bars (Excel style)
 #
 
 
@@ -43,6 +44,7 @@ def plot_barh(x, width, title=None, xlabel=None, color="navy", left=0,
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
     plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
