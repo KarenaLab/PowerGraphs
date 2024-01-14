@@ -21,16 +21,17 @@ import matplotlib.pyplot as plt
 #                       Added correlation method to the title/filename
 # 08 - Jan 26th, 2023 - Adjusting new strategies
 # 09 - Jul 20th, 2023 - New standards and setup
-# 10 - 
+# 10 - Jan 13th, 2024 - Refactoring
+#
 
 # Insights, improvements and bugfix
 # Add rotation to x_axis labels (need to check anchor),
 #
 
 
-def plot_heatmap(DataFrame, title=None, columns="all", decimals=2,
-                 method="pearson", colormap="Blues", savefig=False,
-                 textsize=7, verbose=True):
+def plot_heatmap(DataFrame, columns="all", title=None, decimals=2,
+                 method="pearson", colormap="Blues", textsize=7,
+                 savefig=False, verbose=True):
     """
     Plots a triangular **Heatmap** for **correlations** between variables,
     using Pearson, Spearman or Kendall methods.
@@ -49,6 +50,7 @@ def plot_heatmap(DataFrame, title=None, columns="all", decimals=2,
     """
     # Data Preparation
     data = DataFrame.copy()
+    columns = col_select(data, columns)
 
     # Title
     if(title == None):
@@ -57,55 +59,52 @@ def plot_heatmap(DataFrame, title=None, columns="all", decimals=2,
     else:
         title = f"{title} ({method})"
 
-    # Columns select    
-    if(columns != "all"):
-        if(isinstance(columns, str) == True):
-            columns = columns.split(",")
 
-        data = data[columns]
-
-    else:
-        columns = data.columns.tolist()
-
-
-    # Remove string columns
-    cols_remove = []
+    # Columns preparation
+    cols = list()
     for col in columns:
-        if(is_numeric_dtype(data[col]) == False):
-            cols_remove.append(col)
+        if(is_numeric_dtype(data[col]) == True):
+           cols.append(col)
 
-    data = data.drop(columns=cols_remove)
+    columns = cols[:]   # To avoid problems with duplicated variables
+    data = data[columns]
     
 
-    # Data Processing
-    no_rows = len(columns)
+    # Correlation (Heatmap)
+    n_cols = len(columns)
     corr = data.corr(method=method).values
     corr = np.abs(np.round(corr, decimals=decimals))   
+
   
     # Removing Duplicated Data (Right Triangle Figure)
-    for i in range(0, no_rows):
-        for j in range(0, no_rows):
+    for i in range(0, n_cols):
+        for j in range(0, n_cols):
             if(i < j):
                 corr[i, j] = 0
+
+    # Figure size
+    size_hor = 6
+    size_ver = 3.375
 
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["figure.dpi"] = 180
+    plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.major.size"] = 0
     plt.rcParams["ytick.major.size"] = 0
    
-    # Plot
-    fig = plt.figure(figsize=[6, 3.375])
-    ax = fig.add_subplot()
-    im = ax.imshow(corr, cmap=colormap, aspect=(3.375 / 6))
 
+    # Plot   
+    fig = plt.figure(figsize=[size_hor, size_ver])
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
-    ax.set_yticks(np.arange(start=0, stop=no_rows))
+    ax = fig.add_subplot()
+    im = ax.imshow(corr, cmap=colormap, aspect=(size_ver / size_hor))
+
+    ax.set_yticks(np.arange(start=0, stop=n_cols))
     ax.set_yticklabels(columns, rotation=0, fontsize=9)
-    ax.set_xticks(np.arange(start=0, stop=no_rows))
+    ax.set_xticks(np.arange(start=0, stop=n_cols))
     ax.set_xticklabels(columns, rotation=90, fontsize=9)
 
 
@@ -114,14 +113,16 @@ def plot_heatmap(DataFrame, title=None, columns="all", decimals=2,
         for j in range(0, len(columns)):
             if(i >= j):
                 value = corr[i, j]
-                
-                if(value >= 0.6): textcolor = "white"
+
+                if(value == 1): textcolor = "grey"                
+                elif(value >= 0.6): textcolor = "white"
                 else: textcolor = "black"
 
                 text = ax.text(j, i, value, ha="center", va="center",
                                color=textcolor, fontsize=textsize)
 
 
+    # Printing 
     plt.tight_layout()
 
     # Printing
@@ -139,3 +140,44 @@ def plot_heatmap(DataFrame, title=None, columns="all", decimals=2,
 
     return None
 
+
+def col_select(DataFrame, columns):
+    """
+    Columns names verification.
+    Also standatize the output as a list for pandas standard.
+    
+    """
+    def column_checker(DataFrame, col_list):
+        col_select = list()
+        df_cols = DataFrame.columns.to_list()
+
+        for i in col_list:
+            if(df_cols.count(i) == 1):
+                col_select.append(i)
+
+
+        return col_select
+
+
+    # Columns preparation
+    if(columns == "all"):
+        # Default: takes **all** columns from DataFrame.
+        col_select = DataFrame.columns.to_list()
+
+    elif(isinstance(columns, str) == True):
+        # Tranforms a sting into a list
+        columns = columns.replace(" ", "")
+        columns = columns.split(",")
+        col_select = column_checker(DataFrame, columns)
+
+    elif(isinstance(columns, list) == True):
+        col_select = column_checker(DataFrame, columns)
+
+    else:
+        col_select = list()
+
+
+    return col_select
+
+
+# end
