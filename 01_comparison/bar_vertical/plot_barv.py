@@ -43,6 +43,7 @@ def plot_barv(x, height, title=None, ylabel=None, color="navy",
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
     plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
