@@ -79,6 +79,7 @@ def plot_missingdata_col(DataFrame, title=None, del_threshold=100,
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
     plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
