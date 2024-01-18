@@ -40,6 +40,7 @@ def plot_boxplot(DataFrame, columns=None, title=None, y_label=None, notch=True,
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
     plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
@@ -51,7 +52,7 @@ def plot_boxplot(DataFrame, columns=None, title=None, y_label=None, notch=True,
     whiskerprops = dict(linestyle="-", linewidth=1.5, color="black")
     capprops = dict(linestyle="-", linewidth=1.5, color="black")
     medianprops = dict(linestyle="-", linewidth=1.5, color="orange")
-    flierprops = dict(marker="o", markerfacecolor="darkred", markeredgecolor="black", markersize=6)
+    flierprops = dict(marker="o", markerfacecolor="darkred", markeredgecolor="black", markersize=3)
 
 
     # Plot
