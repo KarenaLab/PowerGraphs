@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 
 # Program --------------------------------------------------------------
 
-def plot_boxplot(DataFrame, columns=None, title=None, y_label=None, notch=True,
+def plot_boxplot(DataFrame, columns=None, title=None, ylabel=None, notch=True,
                  savefig=False, verbose=True):
     """
     Plots a boxplot comparing the data.
@@ -38,6 +38,7 @@ def plot_boxplot(DataFrame, columns=None, title=None, y_label=None, notch=True,
     if(title == None):
         title = "BoxPlot"
 
+
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
     plt.rcParams["font.size"] = 8
@@ -46,6 +47,7 @@ def plot_boxplot(DataFrame, columns=None, title=None, y_label=None, notch=True,
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.major.size"] = 0
     plt.rcParams["xtick.bottom"] = False        # Specific for BoxPlot
+
     
     # Parameters
     boxprops = dict(linestyle="-", linewidth=1.5, color="black")
@@ -62,6 +64,9 @@ def plot_boxplot(DataFrame, columns=None, title=None, y_label=None, notch=True,
     plt.boxplot(data, labels=columns, notch=notch, boxprops=boxprops, whiskerprops=whiskerprops,
                 medianprops=medianprops, capprops=capprops, flierprops=flierprops, zorder=20)
 
+    if(ylabel != None):
+        plt.ylabel(ylabel, loc="top")
+    
     plt.grid(axis="y", color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
 
        
