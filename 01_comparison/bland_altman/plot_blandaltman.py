@@ -6,7 +6,8 @@
 #    - Jul 31st, 2023 - difference equation explicit at y_label
 #    - Jan 03rd, 2024 - Add legend
 #    - Jan 04th, 2024 - Adjust plot area, legend_loc and title position
-#
+#    - Jan 14th, 2024 - Add 0 line at Histogram,
+#                     - Adjust font.size param
 
 
 # Insights
@@ -74,6 +75,7 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", legend_loc="best",
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
     plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
@@ -89,7 +91,7 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", legend_loc="best",
 
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
-    # ax0 = Scatter plot
+    # Scatter plot
     ax0.scatter(mean, diff, s=30, color="navy", edgecolor="white", alpha=0.7, label="Error", zorder=20)
 
     ax0.axvline(x=0, color="black", linestyle="-", linewidth=0.8, zorder=19)
@@ -107,10 +109,12 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", legend_loc="best",
 
     ax0.legend(loc=legend_loc, framealpha=1).set_zorder(99)
 
-    #ax1 = Histogram of difference
+
+    # Histogram of difference
     ax1.hist(x=diff, bins=bins, orientation="horizontal", color="navy", edgecolor="grey", zorder=20)
     ax1.set_xlabel("count", loc="center")
     ax1.grid(axis="both", color="grey", linestyle="--", linewidth=0.5)
+    ax1.axhline(y=0, color="black", linestyle="-", linewidth=0.8, zorder=19)
 
 
     # Printing
