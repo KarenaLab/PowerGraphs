@@ -42,10 +42,15 @@ def plot_dumbbell(labels, minimum, maximum, title=None,
         if(verbose == True):
             print(f" >>> Error: Invalid value for right_border (0 < x <= 0.5)")
 
+    # Title (and filename)
+    if(title == None):
+        title = "Dumbell plot"
+
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["figure.dpi"] = 180
+    plt.rcParams["font.size"] = 8
+    plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.direction"] = "inout"
@@ -56,9 +61,6 @@ def plot_dumbbell(labels, minimum, maximum, title=None,
     grd = fig.add_gridspec(ncols=2, width_ratios=[left, right])
 
     ax0 = fig.add_sublot(grd[0, 1])
-
-    if(title == None):
-        title = "Dumbell plot"
 
     plt.suptitle(title, fontsize=10, fontweight="bold")
 
