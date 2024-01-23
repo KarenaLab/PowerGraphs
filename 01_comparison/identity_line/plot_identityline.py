@@ -65,7 +65,8 @@ def plot_identityline(y_true, y_pred, title=None, xlabel=None,
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["figure.dpi"] = 150
+    plt.rcParams["font.size"] = 8
+    plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.direction"] = "inout"
