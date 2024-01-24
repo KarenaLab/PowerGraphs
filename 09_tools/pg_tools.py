@@ -6,7 +6,9 @@
 
 
 # Insights, improvements and bugfix
-# 
+# 01 - Create "binning" function
+# 02 - Create a standard color pallete
+#
 
 
 # Libraries
@@ -17,7 +19,6 @@ import scipy.stats as st
 
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
-
 
 
 # ----------------------------------------------------------------------
