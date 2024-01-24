@@ -6,7 +6,7 @@
 
 
 # Insights, improvements and bugfix
-#
+# 
 
 
 # Libraries
@@ -38,3 +38,43 @@ def import_rcparams():
     return None    
 
 
+def col_select(DataFrame, columns):
+    """
+    Columns names verification.
+    Also standatize the output as a list for pandas standard.
+    
+    """
+    def column_checker(DataFrame, col_list):
+        col_select = list()
+        df_cols = DataFrame.columns.to_list()
+
+        for i in col_list:
+            if(df_cols.count(i) == 1):
+                col_select.append(i)
+
+
+        return col_select
+
+
+    # Columns preparation
+    if(columns == "all"):
+        # Default: takes **all** columns from DataFrame.
+        col_select = DataFrame.columns.to_list()
+
+    elif(isinstance(columns, str) == True):
+        # Tranforms a sting into a list
+        columns = columns.replace(" ", "")
+        columns = columns.split(",")
+        col_select = column_checker(DataFrame, columns)
+
+    elif(isinstance(columns, list) == True):
+        col_select = column_checker(DataFrame, columns)
+
+    else:
+        col_select = list()
+
+
+    return col_select
+
+
+# end
