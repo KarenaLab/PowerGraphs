@@ -34,6 +34,7 @@ def plot_ttest(data_a, data_b, title=None, savefig=False, verbose=True):
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
     plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
