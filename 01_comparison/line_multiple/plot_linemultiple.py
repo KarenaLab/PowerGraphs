@@ -49,12 +49,15 @@ def plot_linemultiple(DataFrame, columns=None, title=None, xlabel=None,
     colors = ["navy", "darkred", "orange", "darkgreen", "darkviolet"]
     colors = colors[0:len(columns)]
 
+
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
     plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.direction"] = "inout"
+
 
     # Plot
     fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
