@@ -116,6 +116,7 @@ def plot_histbox(data, title=None, xlabel=None, bins="sqrt",
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
     plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
@@ -143,14 +144,9 @@ def plot_histbox(data, title=None, xlabel=None, bins="sqrt",
     if(kde == True):
         ax0.plot(kde_space, kde_line, color=colors["red"], linewidth=1.5, label="kde", zorder=23)
 
-
-    if(linebehind == True):
-        zorder = 11
-
-    else:
-        zorder = 21
+    if(linebehind == True): zorder = 11
+    else: zorder = 21
     
-
     if(meanline == True):
         ax0.axvline(x=np.mean(data), color=colors["green"], linewidth=1.0, label="mean", zorder=zorder)
 
