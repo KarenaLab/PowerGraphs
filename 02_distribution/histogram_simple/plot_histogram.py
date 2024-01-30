@@ -90,11 +90,6 @@ def plot_histogram(data, title=None, xlabel=None, bins="sqrt",
 
     
     # Histogram settings 
-    bins_alpha = 1
-    bins_edge = "dimgrey"
-    density = False
-    ylabel = "frequency"
-
     # KDE: Kernel-density estimate for gaussian distribution
     if(kde == True):
         bins_alpha = 0.7
@@ -110,9 +105,16 @@ def plot_histogram(data, title=None, xlabel=None, bins="sqrt",
         kde_space = np.linspace(start=(x_min - step), stop=(x_max + step), num=(50 * no_bins))
         kde_line = gaussian_kde(data, weights=None)(kde_space)
 
+    else:
+        bins_alpha = 1
+        bins_edge = "dimgrey"
+        density = False
+        ylabel = "frequency"
+
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
     plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
@@ -133,11 +135,8 @@ def plot_histogram(data, title=None, xlabel=None, bins="sqrt",
         plt.plot(kde_space, kde_line, color=colors["red"], linewidth=1.5, label="kde", zorder=23)
 
 
-    if(linebehind == True):
-        zorder = 11
-
-    else:
-        zorder = 21
+    if(linebehind == True): zorder = 11
+    else: zorder = 21
     
 
     if(meanline == True):
@@ -154,6 +153,7 @@ def plot_histogram(data, title=None, xlabel=None, bins="sqrt",
     if(kde == True or meanline == True or medianline == True):
         plt.legend(fontsize=9, loc="upper right", framealpha=1).set_zorder(99)
 
+
     # Printing
     plt.tight_layout()
 
@@ -169,4 +169,4 @@ def plot_histogram(data, title=None, xlabel=None, bins="sqrt",
     plt.close(fig)
 
     return None
-        
+    
