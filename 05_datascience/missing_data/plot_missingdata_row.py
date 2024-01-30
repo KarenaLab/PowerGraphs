@@ -73,6 +73,7 @@ def plot_missingdata_row(DataFrame, title, pct_lines=True, savefig=False, verbos
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
     plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
