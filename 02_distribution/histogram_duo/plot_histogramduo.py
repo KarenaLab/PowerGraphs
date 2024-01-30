@@ -57,7 +57,8 @@ def plot_histogramduo(serie1, serie2, name1=None, name2=None,
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["figure.dpi"] = 180
+    plt.rcParams["font.size"] = 8
+    plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.direction"] = "inout"
@@ -87,6 +88,7 @@ def plot_histogramduo(serie1, serie2, name1=None, name2=None,
         plt.plot(kde_space, kde_line, color=color, linewidth=2, zorder=zorder+6)
 
         zorder = zorder + 1
+
 
     plt.grid(axis="both", color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
     plt.ylabel("density", loc="top")
