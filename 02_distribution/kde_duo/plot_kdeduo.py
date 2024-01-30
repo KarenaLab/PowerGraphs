@@ -55,7 +55,8 @@ def plot_kdeduo(sample1, sample2, name1=None, name2=None, title=None,
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["figure.dpi"] = 180
+    plt.rcParams["font.size"] = 8
+    plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.direction"] = "inout"
@@ -87,6 +88,8 @@ def plot_kdeduo(sample1, sample2, name1=None, name2=None, title=None,
     plt.ylim(bottom=0)
     plt.legend(loc="best", framealpha=1).set_zorder(99)
 
+
+    # Printing
     plt.tight_layout()
 
     if(savefig == True):
