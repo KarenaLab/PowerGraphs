@@ -2,6 +2,7 @@
 
 # Versions
 # 01 - Jan 06th, 2024 - Starter
+#      Jan 30th, 2024 - Add ´upside_down´ variable
 #
 
 
@@ -20,7 +21,7 @@ import matplotlib.pyplot as plt
 # -----------------------------------------------------------------------
 
 def plot_barh(x, width, title=None, xlabel=None, color="navy", left=0,
-              grid_axes="x", remove_axis=False,
+              upside_down=True, grid_axes="x", remove_axis=False,
               savefig=False, verbose=True):
     """
     width = y
@@ -28,12 +29,19 @@ def plot_barh(x, width, title=None, xlabel=None, color="navy", left=0,
 
     """
     # Data preparation
-    x = np.flip(x, axis=0)          # np.flip to make plot upside-down
-    width = np.flip(width, axis=0)
+    if(upside_down == True):
+        x = np.flip(x, axis=0)          # np.flip to make plot upside-down
+        width = np.flip(width, axis=0)
+        
+    else:
+        x = np.array(x)
+        width = np.array(width)
+
 
     # Title
     if(title == None):
         title = "Bar horizontal"
+
 
     # Grid Axis
     grid_default = "x"
@@ -41,6 +49,7 @@ def plot_barh(x, width, title=None, xlabel=None, color="navy", left=0,
     if(grid_list.count(grid_axes) == 0):
         print(f' >>> Error: "grid_axis" oprtion not valid. Using "{grid_default}" as forced option.')
         grid_axes = grid_default[:]
+
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
@@ -50,6 +59,7 @@ def plot_barh(x, width, title=None, xlabel=None, color="navy", left=0,
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.direction"] = "inout"
     plt.rcParams["ytick.major.size"] = 0
+
 
     # Plot
     fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
@@ -68,6 +78,7 @@ def plot_barh(x, width, title=None, xlabel=None, color="navy", left=0,
         ax.spines.top.set_visible(False)
         ax.spines.bottom.set_visible(False)
 
+
     # Printing
     plt.tight_layout()
 
@@ -78,7 +89,7 @@ def plot_barh(x, width, title=None, xlabel=None, color="navy", left=0,
 
     else:
         plt.show()
-
+        
 
     plt.close(fig)   
 
