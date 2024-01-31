@@ -78,12 +78,19 @@ def col_select(DataFrame, columns):
     return col_select
 
 
-    # Grid Axis
-    grid_default = "x"
+def grid_select(grid_axes, default="x"):
+    """
+    Tests the grid selection
+    
+    """
     grid_list = ["x", "y", "both"]
+
     if(grid_list.count(grid_axes) == 0):
-        print(f' >>> Error: "grid_axis" option not valid. Using "{grid_default}" as forced option.')
-        grid_axes = grid_default[:]
+        print(f' >>> Error: "grid_axis" option not valid. Using "{default}" as forced option.')
+        grid_axes = default[:]
+
+
+    return grid_axes
 
 
 # end
