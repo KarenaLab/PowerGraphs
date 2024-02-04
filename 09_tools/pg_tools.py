@@ -93,4 +93,15 @@ def grid_select(grid_axes, default="x"):
     return grid_axes
 
 
+def basic_palette():
+    """
+    Returns a 05 (five) basic colors for plot.
+
+    """
+    colors = ["navy", "darkred", "darkgreen", "orange", "darkviolet"]
+
+
+    return colors
+
+
 # end
