@@ -31,6 +31,7 @@ def plot_dumbbell(labels, minimum, maximum, title=None,
     minimum = np.array(minimum)
     maximum = np.array(maximum)
 
+    # Adjust left border (data labels space)
     if(left_border > 0 and left_border <= 0.5):
         left = left_border * 10
         right = (1 - left_border) * 10
@@ -42,7 +43,8 @@ def plot_dumbbell(labels, minimum, maximum, title=None,
         if(verbose == True):
             print(f" >>> Error: Invalid value for right_border (0 < x <= 0.5)")
 
-    # Title (and filename)
+
+    # Title
     if(title == None):
         title = "Dumbell plot"
 
@@ -57,7 +59,7 @@ def plot_dumbbell(labels, minimum, maximum, title=None,
             
 
     # Plot
-    fig = plt.figure(figsize=[6, 3.375])
+    fig = plt.figure(figsize=[6, 3.375])        # [16:9] Widescreen
     grd = fig.add_gridspec(ncols=2, width_ratios=[left, right])
 
     ax0 = fig.add_sublot(grd[0, 1])
