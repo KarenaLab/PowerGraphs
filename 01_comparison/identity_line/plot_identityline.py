@@ -4,18 +4,18 @@
 # 01 - Jun 13th, 2023 - Starter
 #    - Jan 03rd, 2024 - Set legend over all items,
 #    - Jan 04th, 2024 - Adjust variables names
+#    - Jan 30th, 2024 - Adjust linear regression
 #
 
 
 # Insights and bugfix
+# 01 - Add a color adjust
 #
 
 
 # Libraries
 import numpy as np
 import pandas as pd
-
-from sklearn.linear_model import LinearRegression
 
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
@@ -45,22 +45,15 @@ def plot_identityline(y_true, y_pred, title=None, xlabel=None,
     if(ylabel == None):
         ylabel = "ground truth"
 
-    # Add a color adjust
+    # Set graph borders
     lower = min(y_pred.min(), y_true.min())
     upper = max(y_pred.max(), y_true.max())
     step = (upper - lower) / 10
 
     # Linear regression
-    x = y_pred.reshape(-1, 1)
-    y = y_true.reshape(-1, 1)
-
-    regr = LinearRegression().fit(x, y)
-
-    intercept = regr.intercept_[0]
-    coef = regr.coef_[0][0]
-
     regr_x = np.linspace(start=lower, stop=upper, num=10)
-    regr_y = intercept + regr_x * coef
+    b, a = np.polyfit(y_pred, y_true, deg=1)
+    regr_y = [a + b * i for i in regr_x]
 
 
     # RC Params
@@ -78,7 +71,7 @@ def plot_identityline(y_true, y_pred, title=None, xlabel=None,
 
     plt.scatter(y_pred, y_true, s=30, color="navy", edgecolor="white", alpha=alpha, label="data", zorder=20)
     plt.plot([lower, upper], [lower, upper], color="red", linewidth=0.5, label="identity line", zorder=19)
-    plt.plot(regr_x, regr_y, color="green", linewidth=0.5, label="regression", zorder=18)
+    plt.plot(regr_x, regr_y, color="green", linestyle="-.", linewidth=0.5, label="regression", zorder=18)
 
     plt.grid(axis="both", color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
 
@@ -87,7 +80,7 @@ def plot_identityline(y_true, y_pred, title=None, xlabel=None,
     plt.ylabel(ylabel, fontsize=9, loc="center")
     plt.xlabel(xlabel, fontsize=9, loc="center")
     
-    plt.legend(loc=legend_loc, fontsize=9, framealpha=1).set_zorder(99)
+    plt.legend(loc=legend_loc, fontsize=8, framealpha=1).set_zorder(99)
 
     # Printing
     plt.tight_layout()
