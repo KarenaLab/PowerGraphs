@@ -85,10 +85,10 @@ def plot_identityline(y_true, y_pred, title=None, xlabel=None,
 
     plt.ylim([lower-step, upper+step])
     plt.xlim([lower-step, upper+step])
-    plt.ylabel(ylabel, fontsize=9, loc="center")
-    plt.xlabel(xlabel, fontsize=9, loc="center")
+    plt.ylabel(ylabel, loc="center")
+    plt.xlabel(xlabel, loc="center")
     
-    plt.legend(loc=legend_loc, fontsize=8, framealpha=1).set_zorder(99)
+    plt.legend(loc=legend_loc, fontsize=7, framealpha=1).set_zorder(99)
 
     # Printing
     plt.tight_layout()
