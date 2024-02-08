@@ -49,6 +49,7 @@ def plot_barv(x, height, title=None, ylabel=None, color="navy",
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.direction"] = "inout"
     plt.rcParams["xtick.major.size"] = 0
+    plt.rcParams["ytick.major.size"] = 3.5
 
     # Plot
     fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
