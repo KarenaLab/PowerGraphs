@@ -5,6 +5,7 @@
 #    - Jan 03rd, 2024 - Set legend over all items,
 #    - Jan 04th, 2024 - Adjust variables names
 #    - Jan 30th, 2024 - Adjust linear regression
+#    - Fev 07th, 2024 - Add grid validation
 #
 
 
@@ -25,7 +26,7 @@ import matplotlib.gridspec as gridspec
 
 def plot_identityline(y_true, y_pred, title=None, xlabel=None,
                       ylabel=None, alpha=0.7, identity_line=True,
-                      legend_loc="lower right",
+                      legend_loc="lower right", grid="both",
                       savefig=False, verbose=True):
     """
     Plots an identity line from **y_true** versus **y_pred**.
@@ -40,10 +41,17 @@ def plot_identityline(y_true, y_pred, title=None, xlabel=None,
         title = "Identity line"
 
     if(xlabel == None):
-        xlabel = "y_pred"
+        xlabel = "ground truth"
 
     if(ylabel == None):
-        ylabel = "ground truth"
+        ylabel = "prediction"
+
+    # Grid Axis
+    grid_default = "both"
+    grid_list = ["x", "y", "both"]
+    if(grid_list.count(grid_axes) == 0):
+        print(f' >>> Error: "grid_axis" oprtion not valid. Using "{grid_default}" as forced option.')
+        grid_axes = grid_default[:]
 
     # Set graph borders
     lower = min(y_pred.min(), y_true.min())
