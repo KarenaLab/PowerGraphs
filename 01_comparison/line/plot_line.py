@@ -5,6 +5,8 @@
 # 02 - Jun 12th, 2023 - Adjust params
 #    - Jan 03rd, 2024 - Set legend over all items
 # 03 - Jan 04th, 2024 - (( refactoring ))
+#      Fev 06th, 2024 - Add grid default selection
+#
 
 
 # Insights, improvements and bugfix
@@ -53,7 +55,8 @@ def plot_line(x, y, title=None, xlabel=None, ylabel=None, color="navy",
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.direction"] = "inout"
-
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 3.5
 
     # Plot
     fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
