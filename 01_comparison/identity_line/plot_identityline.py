@@ -49,9 +49,9 @@ def plot_identityline(y_true, y_pred, title=None, xlabel=None,
     # Grid Axis
     grid_default = "both"
     grid_list = ["x", "y", "both"]
-    if(grid_list.count(grid_axes) == 0):
+    if(grid_list.count(grid) == 0):
         print(f' >>> Error: "grid_axis" oprtion not valid. Using "{grid_default}" as forced option.')
-        grid_axes = grid_default[:]
+        grid = grid_default[:]
 
     # Set graph borders
     lower = min(y_pred.min(), y_true.min())
@@ -60,7 +60,7 @@ def plot_identityline(y_true, y_pred, title=None, xlabel=None,
 
     # Linear regression
     regr_x = np.linspace(start=lower, stop=upper, num=10)
-    b, a = np.polyfit(y_pred, y_true, deg=1)
+    b, a = np.polyfit(y_true, y_pred, deg=1)
     regr_y = [a + b * i for i in regr_x]
 
 
@@ -77,11 +77,11 @@ def plot_identityline(y_true, y_pred, title=None, xlabel=None,
     fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
-    plt.scatter(y_pred, y_true, s=30, color="navy", edgecolor="white", alpha=alpha, label="data", zorder=20)
-    plt.plot([lower, upper], [lower, upper], color="red", linewidth=0.5, label="identity line", zorder=19)
+    plt.scatter(y_true, y_pred, s=30, color="navy", edgecolor="white", alpha=alpha, label="data", zorder=20)
+    plt.plot([lower, upper], [lower, upper], color="red", linewidth=0.8, label="identity line", zorder=19)
     plt.plot(regr_x, regr_y, color="green", linestyle="-.", linewidth=0.5, label="regression", zorder=18)
 
-    plt.grid(axis="both", color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
+    plt.grid(axis=grid, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
 
     plt.ylim([lower-step, upper+step])
     plt.xlim([lower-step, upper+step])
