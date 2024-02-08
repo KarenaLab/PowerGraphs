@@ -38,10 +38,12 @@ def plot_line(x, y, title=None, xlabel=None, ylabel=None, color="navy",
     if(title == None):
         title = "Line plot"
 
-    # Grid (Default mode is **both**)
-    grid_options = ["both", "y", "x"]
-    if(grid_options.count(grid) == 0):
-        grid = "both"
+    # Grid Axis
+    grid_default = "both"
+    grid_list = ["x", "y", "both"]
+    if(grid_list.count(grid_axes) == 0):
+        print(f' >>> Error: "grid_axis" oprtion not valid. Using "{grid_default}" as forced option.')
+        grid_axes = grid_default[:]
 
 
     # RC Params
@@ -90,4 +92,3 @@ def plot_line(x, y, title=None, xlabel=None, ylabel=None, color="navy",
     plt.close(fig)   
 
     return None
-
