@@ -58,7 +58,9 @@ def plot_barh(x, width, title=None, xlabel=None, color="navy", left=0,
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.direction"] = "inout"
+    plt.rcParams["xtick.major.size"] = 3.5
     plt.rcParams["ytick.major.size"] = 0
+    
 
 
     # Plot
