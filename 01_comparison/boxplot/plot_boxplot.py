@@ -45,8 +45,9 @@ def plot_boxplot(DataFrame, columns=None, title=None, ylabel=None, notch=True,
     plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
-    plt.rcParams["ytick.major.size"] = 0
-    plt.rcParams["xtick.bottom"] = False        # Specific for BoxPlot
+    plt.rcParams["ytick.direction"] = "inout"
+    plt.rcParams["xtick.major.size"] = 0
+    plt.rcParams["ytick.major.size"] = 3.5
 
     
     # Parameters
