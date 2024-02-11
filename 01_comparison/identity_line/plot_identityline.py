@@ -11,7 +11,8 @@
 
 # Insights and bugfix
 # 01 - Add a color adjust
-#
+# 02 - Add remove ticks from axis
+# 
 
 
 # Libraries
@@ -71,7 +72,8 @@ def plot_identityline(y_true, y_pred, title=None, xlabel=None,
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.direction"] = "inout"
-    
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 3.5
 
     # Plot
     fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
