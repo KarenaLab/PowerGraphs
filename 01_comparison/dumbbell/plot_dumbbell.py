@@ -31,7 +31,6 @@ def plot_dumbbell(labels, minimum, maximum, title=None,
     minimum = np.array(minimum)
     maximum = np.array(maximum)
 
-    # Adjust left border (data labels space)
     if(left_border > 0 and left_border <= 0.5):
         left = left_border * 10
         right = (1 - left_border) * 10
@@ -43,8 +42,7 @@ def plot_dumbbell(labels, minimum, maximum, title=None,
         if(verbose == True):
             print(f" >>> Error: Invalid value for right_border (0 < x <= 0.5)")
 
-
-    # Title
+    # Title (and filename)
     if(title == None):
         title = "Dumbell plot"
 
@@ -56,10 +54,12 @@ def plot_dumbbell(labels, minimum, maximum, title=None,
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.direction"] = "inout"
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 3.5
             
 
     # Plot
-    fig = plt.figure(figsize=[6, 3.375])        # [16:9] Widescreen
+    fig = plt.figure(figsize=[6, 3.375])
     grd = fig.add_gridspec(ncols=2, width_ratios=[left, right])
 
     ax0 = fig.add_sublot(grd[0, 1])
