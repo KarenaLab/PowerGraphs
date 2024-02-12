@@ -2,7 +2,8 @@
 
 # Versions
 # 01 - Jan 04th, 2024 - Starter
-#
+#      Fev 07th, 2024 - Add grid default validation
+# 
 
 
 # Insights, improvements and bugfix
@@ -55,7 +56,8 @@ def plot_lineduo(x1, y1, x2, y2, title=None, label1=None, label2=None,
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.direction"] = "inout"
-
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 3.5
 
     # Plot
     fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
