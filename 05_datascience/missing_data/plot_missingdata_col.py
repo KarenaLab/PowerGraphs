@@ -84,6 +84,8 @@ def plot_missingdata_col(DataFrame, title=None, del_threshold=100,
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.direction"] = "inout"
+    plt.rcParams["xtick.major.size"] = 0
+    plt.rcParams["ytick.major.size"] = 3.5
 
     bin_width = 0.8
     bin_color = "darkred"
