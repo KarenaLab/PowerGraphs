@@ -52,7 +52,9 @@ def plot_scattermultiple(DataFrame, x, y, target, title=None, xlabel=None,
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.direction"] = "inout"
     plt.rcParams["ytick.direction"] = "inout"
-
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 3.5
+    
     # Plot
     fig = plt.figure(figsize=[6, 3.375])    # Widescreen 16:9
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
