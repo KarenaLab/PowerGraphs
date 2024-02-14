@@ -93,6 +93,8 @@ def plot_heatmap(DataFrame, columns="all", title=None, decimals=2,
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.major.size"] = 0
     plt.rcParams["ytick.major.size"] = 0
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 3.5
    
 
     # Plot   
