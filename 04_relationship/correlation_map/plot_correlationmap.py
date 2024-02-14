@@ -10,7 +10,8 @@ import matplotlib.gridspec as gridspec
 
 # Versions
 # 01 - Jan 28th, 2023 - Starter
-# 02 - 
+#    - Fev 14th, 2024 - Refactoring
+# 
 
 
 # Insights, improvements and bugfix:
@@ -18,8 +19,8 @@ import matplotlib.gridspec as gridspec
 #
 
 
-def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
-                        high_threshold=10, low_threshold=10,
+def plot_correlationmap(DataFrame, columns="all", title=None, color="darkblue",
+                        high_threshold=6, low_threshold=6,
                         decimals=2, method="pearson",
                         savefig=False, verbose=True):
     """
@@ -44,8 +45,7 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
     """
     # Data preparation
     data = DataFrame.copy()
-    space = 0.02
-
+    
     # Title
     if(title == None):
         title = f"Correlation map ({method})"
@@ -73,6 +73,7 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
     plt.rcParams["figure.dpi"] = 180
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.major.size"] = 0
@@ -99,6 +100,7 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
 
                 corr_map = pd.concat([corr_map, new_row.to_frame().T], ignore_index=True)
 
+
     corr_map = corr_map.sort_values(by="corr", ascending=True, ignore_index=True)
 
     corr_high = corr_map.tail(high_threshold)
@@ -106,16 +108,17 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
 
 
     # Plot
-    fig = plt.figure(figsize=[6, 3.375])      # Using widescreen ratio (16:9)
+    fig = plt.figure(figsize=[6, 3.375])      # [16:9] Widescreen
     grid = fig.add_gridspec(nrows=2, height_ratios=[high_threshold, low_threshold],
                             ncols=2, width_ratios=[2, 8])
 
     ax0 = fig.add_subplot(grid[0, 1])
     ax1 = fig.add_subplot(grid[1, 1])
+
     # Using left column (first) as a space for long labels ;)
     # Do not use plt.tight_layout(), will remove this restriction.
     
-    fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
+    fig.suptitle(title, fontsize=9, fontweight="bold", x=0.98, ha="right")
 
     # High plot (high threshold)
     ax0.barh(corr_high["tag"], corr_high["corr"], color=color, edgecolor="black", zorder=10)
@@ -124,6 +127,7 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
     ax0.axvline(x=0.1, color="red", linestyle="--", linewidth=0.5, zorder=2)
     ax0.axvline(x=0.9, color="red", linestyle="--", linewidth=0.5, zorder=3)
 
+    space = 0.02
     for x, y in list(zip(corr_high["corr"], corr_high["tag"])):
         ax0.text((space + x), y, str(x), fontsize=9, ha="left", va="center")
 
@@ -135,6 +139,7 @@ def plot_correlationmap(DataFrame, title=None, columns="all", color="darkblue",
     ax1.axvline(x=0.1, color="red", linestyle="--", linewidth=0.5, zorder=2)
     ax1.axvline(x=0.9, color="red", linestyle="--", linewidth=0.5, zorder=3)
 
+    space = 0.02
     for x, y in list(zip(corr_low["corr"], corr_low["tag"])):
         ax1.text((space + x), y, str(x), fontsize=9, ha="left", va="center")
 
