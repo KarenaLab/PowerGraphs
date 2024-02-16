@@ -89,6 +89,7 @@ def plot_heatmap(DataFrame, columns="all", title=None, decimals=2,
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
     plt.rcParams["figure.dpi"] = 120
     plt.rcParams["ps.papersize"] = "A4"
     plt.rcParams["xtick.major.size"] = 0
@@ -99,7 +100,7 @@ def plot_heatmap(DataFrame, columns="all", title=None, decimals=2,
 
     # Plot   
     fig = plt.figure(figsize=[size_hor, size_ver])
-    fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
+    fig.suptitle(title, fontsize=9, fontweight="bold", x=0.98, ha="right")
 
     ax = fig.add_subplot()
     im = ax.imshow(corr, cmap=colormap, aspect=(size_ver / size_hor))
