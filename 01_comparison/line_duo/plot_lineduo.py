@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 
 # -----------------------------------------------------------------------
 
-def plot_lineduo(x1, y1, x2, y2, title=None, label1=None, label2=None,
+def plot_lineduo(x1, y1, y2, x2=None, title=None, label1=None, label2=None,
                  xlabel=None, ylabel=None, color1="navy", color2="darkred",
                  linewidth=1.5, grid="both", remove_axis=False, legend_loc="best",
                  savefig=False, verbose=True):
@@ -33,9 +33,14 @@ def plot_lineduo(x1, y1, x2, y2, title=None, label1=None, label2=None,
     # Data preparation
     x1 = np.array(x1)
     y1 = np.array(y1)
-    
-    x2 = np.array(x2)
     y2 = np.array(y2)
+
+    if(x2 == None):
+        x2 = x1
+
+    else:
+        x2 = np.array(x2)
+    
 
     # Title
     if(title == None):
