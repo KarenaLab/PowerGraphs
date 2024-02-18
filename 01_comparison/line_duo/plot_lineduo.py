@@ -1,8 +1,10 @@
 # Plot Line [P391] -----------------------------------------------------
 
 # Versions
-# 01 - Jan 04th, 2024 - Starter
-#      Fev 07th, 2024 - Add grid default validation
+# 01 - Jan 04th, 2024 - Starter,
+#      Feb 07th, 2024 - Add grid default validation,
+#      Feb 17th, 2024 - Improve x2 axis and avoid repetition of data if
+#                           both (x1 and x2) uses the same range,
 # 
 
 
