@@ -44,9 +44,9 @@ def plot_lineduo(x1, y1, x2, y2, title=None, label1=None, label2=None,
     # Grid Axis
     grid_default = "both"
     grid_list = ["x", "y", "both"]
-    if(grid_list.count(grid_axes) == 0):
-        print(f' >>> Error: "grid_axis" oprtion not valid. Using "{grid_default}" as forced option.')
-        grid_axes = grid_default[:]
+    if(grid_list.count(grid) == 0):
+        print(f' >>> Error: "grid_axis" option not valid. Using "{grid_default}" as forced option.')
+        grid = grid_default[:]
 
 
     # RC Params
