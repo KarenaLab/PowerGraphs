@@ -23,7 +23,8 @@ import matplotlib.pyplot as plt
 #
 
 
-def plot_missingdata_row(DataFrame, title, pct_lines=True, savefig=False, verbose=True):
+def plot_missingdata_row(DataFrame, title, pct_lines=True, grid="y",
+                         savefig=False, verbose=True):
     """
     Plots the missing data of a **DataFrame** by rows.
 
@@ -70,6 +71,14 @@ def plot_missingdata_row(DataFrame, title, pct_lines=True, savefig=False, verbos
     # Adjusts
     if(title == None):
         title = "Missing Data by rows"
+
+    # Grid Axis
+    grid_default = "y"
+    grid_list = ["x", "y", "both"]
+    if(grid_list.count(grid_axes) == 0):
+        print(f' >>> Error: "grid_axis" option not valid. Using "{grid_default}" as forced option.')
+        grid_axes = grid_default[:]
+
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
