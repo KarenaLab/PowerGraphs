@@ -69,9 +69,15 @@ def plot_line(x, y, title=None, xlabel=None, ylabel=None, color="navy",
 
     plt.grid(axis=grid, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
 
+    if(isinstance(hline, (int, float)) == True):
+        hline = [hline]
+
     if(isinstance(hline, list) == True):
         for y in hline:
             plt.axhline(y=y, color="darkred", linewidth=0.8, zorder=19)
+
+    if(isinstance(vline, (int, float)) == True):
+       vline = [vline]
 
     if(isinstance(vline, list) == True):
         for x in vline:
