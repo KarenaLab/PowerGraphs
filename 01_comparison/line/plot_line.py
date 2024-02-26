@@ -44,7 +44,7 @@ def plot_line(x, y, title=None, xlabel=None, ylabel=None, color="navy",
     grid_default = "both"
     grid_list = ["x", "y", "both"]
     if(grid_list.count(grid_axes) == 0):
-        print(f' >>> Error: "grid_axis" oprtion not valid. Using "{grid_default}" as forced option.')
+        print(f' >>> Error: "grid_axis" option not valid. Using "{grid_default}" as forced option.')
         grid_axes = grid_default[:]
 
 
