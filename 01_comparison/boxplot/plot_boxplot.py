@@ -18,7 +18,8 @@ import matplotlib.pyplot as plt
 
 # Program --------------------------------------------------------------
 
-def plot_boxplot(DataFrame, columns=None, title=None, ylabel=None, notch=True,
+def plot_boxplot(DataFrame, columns=None, title=None, ylabel=None,
+                 notch=True, grid="y",
                  savefig=False, verbose=True):
     """
     Plots a boxplot comparing the data.
@@ -38,6 +39,12 @@ def plot_boxplot(DataFrame, columns=None, title=None, ylabel=None, notch=True,
     if(title == None):
         title = "BoxPlot"
 
+    # Grid Axis
+    grid_default = "y"
+    grid_list = ["x", "y", "both"]
+    if(grid_list.count(grid_axes) == 0):
+        print(f' >>> Error: "grid_axis" option not valid. Using "{grid_default}" as forced option.')
+        grid_axes = grid_default[:]
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
@@ -68,7 +75,7 @@ def plot_boxplot(DataFrame, columns=None, title=None, ylabel=None, notch=True,
     if(ylabel != None):
         plt.ylabel(ylabel, loc="top")
     
-    plt.grid(axis="y", color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
+    plt.grid(axis=grid, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
 
        
     # Printing
