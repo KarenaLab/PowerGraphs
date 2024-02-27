@@ -3,12 +3,13 @@
 # Versions
 # 01 - Jan 06th, 2024 - Starter
 #      Jan 30th, 2024 - Add ´upside_down´ variable
+#      Feb 23rd, 2024 - Bugfix: grid and grid_default
 #
 
 
 # Insights, improvements and bugfix
 # 01 - Add labels to the bars (Excel style)
-#
+# 02 - 
 
 
 # Libraries
@@ -21,7 +22,7 @@ import matplotlib.pyplot as plt
 # -----------------------------------------------------------------------
 
 def plot_barh(x, width, title=None, xlabel=None, color="navy", left=0,
-              upside_down=True, grid_axes="x", remove_axis=False,
+              upside_down=True, grid="x", remove_axis=False,
               savefig=False, verbose=True):
     """
     width = y
@@ -47,7 +48,7 @@ def plot_barh(x, width, title=None, xlabel=None, color="navy", left=0,
     grid_default = "x"
     grid_list = ["x", "y", "both"]
     if(grid_list.count(grid_axes) == 0):
-        print(f' >>> Error: "grid_axis" oprtion not valid. Using "{grid_default}" as forced option.')
+        print(f' >>> Error: "grid_axis" option not valid. Using "{grid_default}" as forced option.')
         grid_axes = grid_default[:]
 
 
@@ -69,7 +70,7 @@ def plot_barh(x, width, title=None, xlabel=None, color="navy", left=0,
 
     plt.barh(x, width=width, color=color, edgecolor="black", left=left, zorder=20)
 
-    plt.grid(axis=grid_axes, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
+    plt.grid(axis=grid, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
 
     if(xlabel != None):
         plt.xlabel(xlabel, loc="right")
