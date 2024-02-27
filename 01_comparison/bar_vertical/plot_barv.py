@@ -37,9 +37,9 @@ def plot_barv(x, height, title=None, ylabel=None, color="navy",
     # Grid Axis
     grid_default = "y"
     grid_list = ["x", "y", "both"]
-    if(grid_list.count(grid_axes) == 0):
-        print(f' >>> Error: "grid_axis" option not valid. Using "{grid_default}" as forced option.')
-        grid_axes = grid_default[:]
+    if(grid_list.count(grid) == 0):
+        print(f' >>> Error: "grid" option not valid. Using "{grid_default}" as forced option.')
+        grid = grid_default[:]
 
 
     # RC Params
@@ -65,7 +65,7 @@ def plot_barv(x, height, title=None, ylabel=None, color="navy",
 
     if(remove_axis == True):
         plt.tick_params(length=0,labelleft="on", labelbottom="on")
-        ax.spines.right.set_visible(False)
+        fig.spines.right.set_visible(False)
         ax.spines.top.set_visible(False)
         ax.spines.left.set_visible(False)
 
@@ -84,5 +84,3 @@ def plot_barv(x, height, title=None, ylabel=None, color="navy",
     plt.close(fig)   
 
     return None
-
-    
