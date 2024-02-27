@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 # -----------------------------------------------------------------------
 
 def plot_barv(x, height, title=None, ylabel=None, color="navy",
-              grid_axes="y", remove_axis=False,
+              grid="y", remove_axis=False,
               savefig=False, verbose=True):
     """
     width = y
@@ -38,8 +38,9 @@ def plot_barv(x, height, title=None, ylabel=None, color="navy",
     grid_default = "y"
     grid_list = ["x", "y", "both"]
     if(grid_list.count(grid_axes) == 0):
-        print(f' >>> Error: "grid_axis" oprtion not valid. Using "{grid_default}" as forced option.')
+        print(f' >>> Error: "grid_axis" option not valid. Using "{grid_default}" as forced option.')
         grid_axes = grid_default[:]
+
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
@@ -57,7 +58,7 @@ def plot_barv(x, height, title=None, ylabel=None, color="navy",
 
     plt.bar(x, height=height, color=color, edgecolor="black", zorder=20)
 
-    plt.grid(axis=grid_axes, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
+    plt.grid(axis=grid, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
 
     if(ylabel != None):
         plt.ylabel(ylabel, loc="top")
