@@ -90,7 +90,7 @@ def plot_line(x, y, title=None, xlabel=None, ylabel=None, color="navy",
         plt.ylabel(ylabel, loc="top")
 
     if(remove_axis == True):
-        plt.tick_params(length=0,labelleft="on", labelbottom="on")
+        plt.tick_params(length=0, labelleft="on", labelbottom="on")
         ax.spines.right.set_visible(False)
         ax.spines.top.set_visible(False)
         ax.spines.left.set_visible(False)
