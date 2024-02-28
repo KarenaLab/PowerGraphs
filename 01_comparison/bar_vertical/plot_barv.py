@@ -55,6 +55,7 @@ def plot_barv(x, height, title=None, ylabel=None, color="navy",
     # Plot
     fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
+    ax = plt.axes()
 
     plt.bar(x, height=height, color=color, edgecolor="black", zorder=20)
 
@@ -64,8 +65,8 @@ def plot_barv(x, height, title=None, ylabel=None, color="navy",
         plt.ylabel(ylabel, loc="top")
 
     if(remove_axis == True):
-        plt.tick_params(length=0,labelleft="on", labelbottom="on")
-        fig.spines.right.set_visible(False)
+        plt.tick_params(length=0, labelleft="on", labelbottom="on")
+        ax.spines.right.set_visible(False)
         ax.spines.top.set_visible(False)
         ax.spines.left.set_visible(False)
 
