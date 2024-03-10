@@ -34,10 +34,10 @@ def plot_histbox(data, title=None, xlabel=None, bins="sqrt",
                  grid_axes="y", linebehind=True, tail_size=15,
                  savefig=False, verbose=True):
     """
-    Plots the histogram of a given *DataFrame* with selected *columns*.
+    Plots the histogram of a given **data**.
 
     Variables:
-    * data: Pandas data with data.
+    * data: Pandas Series, Numpy array or Python list,
     * title: Title for the plot (default="Histogram - {column name}"),
     * xlabel: Label for x_axis (default=None).
     * bins: Number of bins for plot (default="sqrt"). Check *binning*
