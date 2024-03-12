@@ -18,6 +18,7 @@
 # Libraries
 import numpy as np
 import pandas as pd
+import scipy.stats as st
 
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
@@ -26,7 +27,7 @@ import matplotlib.gridspec as gridspec
 # -----------------------------------------------------------------------
 
 def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", legend_loc="best",
-                     savefig=False, verbose=True):
+                     sigma=1.96, savefig=False, verbose=True):
     """
     Performs Bland-Altman analysis to evaluate a bias between the mean
     differences, and to estimate an agreement interval, within which
@@ -47,6 +48,10 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", legend_loc="best",
 
     md = np.mean(diff)
     sd = np.std(diff)
+
+    # Sigma limits
+    sigma_lower = md - (sigma * sd)
+    sigma_upper = md + (sigma * sd)
 
     # Graph limits (useful for plot adjusts)
     x_lower = np.min(mean)
@@ -85,7 +90,8 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", legend_loc="best",
 
     # Plot         
     fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
-    grd = fig.add_gridspec(nrows=1, ncols=2, width_ratios=[7.5, 2.5])
+    grd = fig.add_gridspec(nrows=1,
+                           ncols=2, width_ratios=[7.5, 2.5])
 
     ax0 = fig.add_subplot(grd[0, 0])
     ax1 = fig.add_subplot(grd[0, 1], sharey=ax0)
@@ -97,10 +103,11 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", legend_loc="best",
 
     ax0.axvline(x=0, color="black", linestyle="-", linewidth=0.8, zorder=19)
     ax0.axhline(y=0, color="black", linestyle="-", linewidth=0.8, zorder=19)
+
     ax0.axhline(y=md, color="red", linestyle="-", linewidth=0.8, label = "Bias", zorder=18)
-    ax0.axhline(y=(md - 1.96*sd), color="grey", linestyle="--", linewidth=0.8, zorder=17)
-    ax0.axhline(y=(md + 1.96*sd), color="grey", linestyle="--", linewidth=0.8, zorder=16)
-    ax0.fill_between(x=[x_lower-x_step, x_upper+x_step], y1=(md-1.96*sd), y2=(md+1.96*sd), color="lightgrey")
+    ax0.axhline(y=sigma_lower, color="grey", linestyle="--", linewidth=0.8, zorder=17)
+    ax0.axhline(y=sigma_upper, color="grey", linestyle="--", linewidth=0.8, zorder=17)
+    ax0.fill_between(x=[x_lower-x_step, x_upper+x_step], y1=sigma_lower, y2=sigma_upper, color="lightgrey")
 
     ax0.set_xlabel("mean", loc="center")
     ax0.set_ylabel("difference (y pred - y true)", loc="center")
@@ -116,6 +123,9 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", legend_loc="best",
     ax1.set_xlabel("count", loc="center")
     ax1.grid(axis="both", color="grey", linestyle="--", linewidth=0.5)
     ax1.axhline(y=0, color="black", linestyle="-", linewidth=0.8, zorder=19)
+    ax1.axhline(y=md, color="red", linestyle="-", linewidth=0.8, label = "Bias", zorder=18)
+    ax1.axhline(y=sigma_lower, color="grey", linestyle="--", linewidth=0.8, zorder=17)
+    ax1.axhline(y=sigma_upper, color="grey", linestyle="--", linewidth=0.8, zorder=17)
 
 
     # Printing
