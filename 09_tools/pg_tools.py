@@ -104,4 +104,36 @@ def basic_palette():
     return colors
 
 
+def bins_strategy(data, bins="sqrt"):
+    """
+
+
+    """
+    # Start
+    # more info: https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html
+    bins_list = ["fd", "doane", "scott", "stone", "rice", "sturges", "sqrt"]
+
+    if(isinstance(bins, int) == True):
+        # (( Not need for this function, but to keep consitency with other plots. ))
+        no_bins = bins
+
+    elif(bins_list.count(bins) == 1):
+        no_bins = np.histogram_bin_edges(data, bins=bins).size
+
+    elif(bins == "min"):
+        no_bins = np.min([np.histogram_bin_edges(data, bins=x).size for x in bins_list])
+
+    elif(bins == "max"):
+        no_bins = np.max([np.histogram_bin_edges(data, bins=x).size for x in bins_list])
+
+    else:
+        print(f' >>> Error: "bins" option not valid. Using "sqrt" as forced option')
+        no_bins = np.histogram_bin_edges(data, bins="sqrt").size
+    # End
+    # If... if will copy and paste for a plot, copy the the lines between Start-End
+    
+
+    return no_bins
+
+
 # end
