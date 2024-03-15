@@ -54,7 +54,6 @@ def plot_histogramduo(serie1, serie2, name1=None, name2=None,
     if(title == None):
         title = "Histogram Duo"
 
-
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
     plt.rcParams["font.size"] = 8
@@ -74,18 +73,37 @@ def plot_histogramduo(serie1, serie2, name1=None, name2=None,
         data = serie.copy().dropna()
 
         # KDE = Kernal Density Gaussian Estimation
-        bin_edges = np.histogram_bin_edges(data, bins=bins)
-        bin_count = len(bin_edges)
+        # Bins
+        # more info: https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html
+        bins_list = ["fd", "doane", "scott", "stone", "rice", "sturges", "sqrt"]
 
+        if(isinstance(bins, int) == True):
+            no_bins = bins
+
+        elif(bins_list.count(bins) == 1):
+            no_bins = np.histogram_bin_edges(data, bins=bins).size
+
+        elif(bins == "min"):
+            no_bins = np.min([np.histogram_bin_edges(data, bins=x).size for x in bins_list])
+
+        elif(bins == "max"):
+            no_bins = np.max([np.histogram_bin_edges(data, bins=x).size for x in bins_list])
+
+        else:
+            print(f' >>> Error: "bins" option not valid. Using "sqrt" as forced option')
+            bins = "sqrt"
+            no_bins = np.histogram_bin_edges(data, bins=bins).size
+
+        
         data_min = data.min()
         data_max = data.max()
         step = (data_max - data_min) * 0.25
 
-        kde_space = np.linspace(start=(data_min - step), stop=(data_max + step), num=(10 * bin_count))
+        kde_space = np.linspace(start=(data_min - step), stop=(data_max + step), num=(10 * no_bins))
         kde_line = gaussian_kde(data, weights=None)(kde_space)
 
         # Bars and KDE Line
-        plt.hist(data, bins=bin_count, density=True, color=color, alpha=bins_alpha, edgecolor=color, label=name, zorder=zorder)
+        plt.hist(data, bins=no_bins, density=True, color=color, alpha=bins_alpha, edgecolor=color, label=name, zorder=zorder)
         plt.plot(kde_space, kde_line, color=color, linewidth=2, zorder=zorder+6)
 
         zorder = zorder + 1
