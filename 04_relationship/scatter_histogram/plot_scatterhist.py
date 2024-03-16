@@ -39,6 +39,32 @@ def plot_scatterhist(x, y, title=None, xlabel=None, ylabel=None, color="navy",
     if(title == None):
         title = "Scatter with Histogram"
 
+    # Bins
+    # more info: https://numpy.org/doc/stable/reference/generated/numpy.histogram_bin_edges.html
+    bins_list = ["fd", "doane", "scott", "stone", "rice", "sturges", "sqrt"]
+
+    if(isinstance(bins, int) == True):
+        bins_x = bins
+        bins_y = bins
+
+    elif(bins_list.count(bins) == 1):
+        bins_x = np.histogram_bin_edges(x, bins=bins).size
+        bins_y = np.histogram_bin_edges(y, bins=bins).size
+
+    elif(bins == "min"):
+        bins_x = np.min([np.histogram_bin_edges(x, bins=s).size for s in bins_list])
+        bins_y = np.min([np.histogram_bin_edges(y, bins=s).size for s in bins_list])
+
+    elif(bins == "max"):
+        bins_x = np.max([np.histogram_bin_edges(x, bins=s).size for s in bins_list])
+        bins_y = np.max([np.histogram_bin_edges(y, bins=s).size for s in bins_list])
+
+    else:
+        print(f' >>> Error: "bins" option not valid. Using "sqrt" as forced option')
+        bins = "sqrt"
+        bins_x = np.histogram_bin_edges(x, bins=bins).size
+        bins_y = np.histogram_bin_edges(y, bins=bins).size
+
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
     plt.rcParams["figure.dpi"] = 120
@@ -73,13 +99,13 @@ def plot_scatterhist(x, y, title=None, xlabel=None, ylabel=None, color="navy",
 
 
     # Histogram for x
-    ax1.hist(x, bins=bins, color=color, orientation="vertical", zorder=20)
+    ax1.hist(x, bins=bins_x, color=color, orientation="vertical", zorder=20)
     ax1.grid(axis="both", color="grey", linestyle="--", linewidth=0.5, zorder=5)       
     ax1.tick_params(axis="x", labelbottom=False)
 
 
     # Histogram for y
-    ax2.hist(y, bins=bins, color=color, orientation="horizontal", zorder=20)
+    ax2.hist(y, bins=bins_y, color=color, orientation="horizontal", zorder=20)
     ax2.grid(axis="both", color="grey", linestyle="--", linewidth=0.5, zorder=5)       
     ax2.tick_params(axis="y", labelleft=False)
     
@@ -102,6 +128,3 @@ def plot_scatterhist(x, y, title=None, xlabel=None, ylabel=None, color="navy",
 
 
 # end
-
-
-
