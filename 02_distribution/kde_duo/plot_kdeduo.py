@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 
 # ----------------------------------------------------------------------
 def plot_kdeduo(sample1, sample2, name1=None, name2=None, title=None,
-                bins="sqrt", alpha=0.3, mean_line=True,
+                alpha=0.3, mean_line=True,
                 savefig=False, verbose=True):
     """
     Plots two kernel-density gaussian line.
@@ -51,7 +51,6 @@ def plot_kdeduo(sample1, sample2, name1=None, name2=None, title=None,
 
     if(name2 == None):
         name2 = "sample 2"
-
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
