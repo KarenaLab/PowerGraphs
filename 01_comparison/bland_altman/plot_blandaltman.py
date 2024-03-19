@@ -73,6 +73,12 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", legend_loc="best",
     elif(bins_list.count(bins) == 1):
         no_bins = np.histogram_bin_edges(diff, bins=bins).size
 
+    elif(bins == "min"):
+        no_bins = np.min([np.histogram_bin_edges(diff, bins=x).size for x in bins_list])
+
+    elif(bins == "max"):
+        no_bins = np.max([np.histogram_bin_edges(diff, bins=x).size for x in bins_list])
+
     else:
         print(f' >>> Error: "bins" option not valid. Using "sqrt" as forced option')
         no_bins = np.histogram_bin_edges(diff, bins="sqrt").size
@@ -119,7 +125,7 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", legend_loc="best",
 
 
     # Histogram of difference
-    ax1.hist(x=diff, bins=bins, orientation="horizontal", color="navy", edgecolor="grey", zorder=20)
+    ax1.hist(x=diff, bins=no_bins, orientation="horizontal", color="navy", edgecolor="grey", zorder=20)
     ax1.set_xlabel("count", loc="center")
     ax1.grid(axis="both", color="grey", linestyle="--", linewidth=0.5)
     ax1.axhline(y=0, color="black", linestyle="-", linewidth=0.8, zorder=19)
