@@ -9,7 +9,8 @@
 
 # Insights, improvements and bugfix
 # 01 - Add labels to the bars (Excel style)
-# 02 - 
+# 02 - Create an ascendant sequence
+# 03 - 
 
 
 # Libraries
@@ -25,8 +26,22 @@ def plot_barh(x, width, title=None, xlabel=None, color="navy", left=0,
               upside_down=True, grid="x", remove_axis=False,
               savefig=False, verbose=True):
     """
-    width = y
-    upside-down sequence
+    Plots a Horizontal bar. **width** is the **y** values and follows an
+    **upside-down** sequence.
+
+    Variables:
+    x:
+    width:
+    title:
+    xlabel:
+    color:
+    left:
+    upside_down:
+    grid:
+    remove_axis:
+    savefig:
+    verbose:
+    
 
     """
     # Data preparation
@@ -62,7 +77,6 @@ def plot_barh(x, width, title=None, xlabel=None, color="navy", left=0,
     plt.rcParams["xtick.major.size"] = 3.5
     plt.rcParams["ytick.major.size"] = 0
     
-
 
     # Plot
     fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
