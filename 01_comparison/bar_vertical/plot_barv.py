@@ -2,11 +2,13 @@
 
 # Versions
 # 01 - Jan 06th, 2024 - Starter
+#      Mar 29th, 2024 - Add `upside_down` variable
 #
 
 
 # Insights, improvements and bugfix
-#
+# 01 - Add labels to the bars (Excel style)
+# 02 - 
 
 
 # Libraries
@@ -19,7 +21,7 @@ import matplotlib.pyplot as plt
 # -----------------------------------------------------------------------
 
 def plot_barv(x, height, title=None, ylabel=None, color="navy",
-              grid="y", remove_axis=False,
+              upside_down=True, grid="y", remove_axis=False,
               savefig=False, verbose=True):
     """
     width = y
@@ -27,12 +29,19 @@ def plot_barv(x, height, title=None, ylabel=None, color="navy",
 
     """
     # Data preparation
-    x = np.array(x)
-    height = np.array(height)
+    if(upside_down == True):
+        x = np.flip(x, axis=0)          # np.flip to make plot upside-down
+        width = np.flip(width, axis=0)
+        
+    else:
+        x = np.array(x)
+        width = np.array(width)
+        
 
     # Title
     if(title == None):
         title = "Bar vertical"
+
 
     # Grid Axis
     grid_default = "y"
@@ -51,6 +60,7 @@ def plot_barv(x, height, title=None, ylabel=None, color="navy",
     plt.rcParams["ytick.direction"] = "inout"
     plt.rcParams["xtick.major.size"] = 0
     plt.rcParams["ytick.major.size"] = 3.5
+
 
     # Plot
     fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
