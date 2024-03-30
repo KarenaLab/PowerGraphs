@@ -30,9 +30,8 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", legend_loc="best",
                      sigma=1.96, savefig=False, verbose=True):
     """
     Performs Bland-Altman analysis to evaluate a bias between the mean
-    differences, and to estimate an agreement interval, within which
-    95% of the differences.
-
+    differences.
+    
     """
     # Data Preparation
     y_true = np.array(y_true)
@@ -79,6 +78,9 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", legend_loc="best",
     elif(bins == "max"):
         no_bins = np.max([np.histogram_bin_edges(diff, bins=x).size for x in bins_list])
 
+    elif(bins == "median"):
+        no_bins = int(np.median([np.histogram_bin_edges(diff, bins=x).size for x in bins_list]))
+
     else:
         print(f' >>> Error: "bins" option not valid. Using "sqrt" as forced option')
         no_bins = np.histogram_bin_edges(diff, bins="sqrt").size
@@ -93,6 +95,7 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", legend_loc="best",
     plt.rcParams["ytick.direction"] = "inout"
     plt.rcParams["xtick.major.size"] = 3.5
     plt.rcParams["ytick.major.size"] = 3.5
+
 
     # Plot         
     fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
@@ -123,7 +126,6 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", legend_loc="best",
 
     ax0.legend(loc=legend_loc, framealpha=1).set_zorder(99)
 
-
     # Histogram of difference
     ax1.hist(x=diff, bins=no_bins, orientation="horizontal", color="navy", edgecolor="grey", zorder=20)
     ax1.set_xlabel("count", loc="center")
@@ -132,7 +134,6 @@ def plot_blandaltman(y_true, y_pred, title=None, bins="sqrt", legend_loc="best",
     ax1.axhline(y=md, color="red", linestyle="-", linewidth=0.8, label = "Bias", zorder=18)
     ax1.axhline(y=sigma_lower, color="grey", linestyle="--", linewidth=0.8, zorder=17)
     ax1.axhline(y=sigma_upper, color="grey", linestyle="--", linewidth=0.8, zorder=17)
-
 
     # Printing
     plt.tight_layout()
