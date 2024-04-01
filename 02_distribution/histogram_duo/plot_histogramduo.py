@@ -89,6 +89,9 @@ def plot_histogramduo(serie1, serie2, name1=None, name2=None,
         elif(bins == "max"):
             no_bins = np.max([np.histogram_bin_edges(data, bins=x).size for x in bins_list])
 
+        elif(bins == "median"):
+            no_bins = int(np.median([np.histogram_bin_edges(diff, bins=x).size for x in bins_list]))
+
         else:
             print(f' >>> Error: "bins" option not valid. Using "sqrt" as forced option')
             bins = "sqrt"
