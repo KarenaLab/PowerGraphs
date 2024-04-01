@@ -59,6 +59,10 @@ def plot_scatterhist(x, y, title=None, xlabel=None, ylabel=None, color="navy",
         bins_x = np.max([np.histogram_bin_edges(x, bins=s).size for s in bins_list])
         bins_y = np.max([np.histogram_bin_edges(y, bins=s).size for s in bins_list])
 
+    elif(bins == "median"):
+        bins_x = int(np.median([np.histogram_bin_edges(x, bins=s).size for s in bins_list]))
+        bins_y = int(np.median([np.histogram_bin_edges(y, bins=s).size for s in bins_list]))
+       
     else:
         print(f' >>> Error: "bins" option not valid. Using "sqrt" as forced option')
         bins = "sqrt"
