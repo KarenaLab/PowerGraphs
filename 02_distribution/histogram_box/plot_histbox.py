@@ -85,6 +85,9 @@ def plot_histbox(data, title=None, xlabel=None, bins="sqrt",
     elif(bins == "max"):
         no_bins = np.max([np.histogram_bin_edges(data, bins=x).size for x in bins_list])
 
+    elif(bins == "median"):
+        no_bins = int(np.median([np.histogram_bin_edges(diff, bins=x).size for x in bins_list]))
+
     else:
         print(f' >>> Error: "bins" option not valid. Using "sqrt" as forced option')
         no_bins = np.histogram_bin_edges(data, bins="sqrt").size
