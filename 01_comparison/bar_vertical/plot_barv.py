@@ -24,18 +24,18 @@ def plot_barv(x, height, title=None, ylabel=None, color="navy",
               upside_down=True, grid="y", remove_axis=False,
               savefig=False, verbose=True):
     """
-    width = y
+    height = y
     upside-down sequence
 
     """
     # Data preparation
     if(upside_down == True):
         x = np.flip(x, axis=0)          # np.flip to make plot upside-down
-        width = np.flip(width, axis=0)
+        height = np.flip(height, axis=0)
         
     else:
         x = np.array(x)
-        width = np.array(width)
+        height = np.array(height)
         
 
     # Title
