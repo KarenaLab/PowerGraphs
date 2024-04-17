@@ -52,7 +52,7 @@ def plot_lineduo(x1, y1, y2, x2=None, title=None, label1=None, label2=None,
     grid_default = "both"
     grid_list = ["x", "y", "both"]
     if(grid_list.count(grid) == 0):
-        print(f' >>> Error: "grid_axis" option not valid. Using "{grid_default}" as forced option.')
+        print(f' >>> Error: "grid" option not valid. Using "{grid_default}" as forced option.')
         grid = grid_default[:]
 
 
