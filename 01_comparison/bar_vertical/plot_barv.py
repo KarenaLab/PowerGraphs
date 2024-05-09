@@ -8,7 +8,8 @@
 
 # Insights, improvements and bugfix
 # 01 - Add labels to the bars (Excel style)
-# 02 - 
+# 02 - Add rotation for x axis labels
+# 03 - 
 
 
 # Libraries
