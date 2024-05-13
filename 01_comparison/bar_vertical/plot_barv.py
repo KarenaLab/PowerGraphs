@@ -3,12 +3,13 @@
 # Versions
 # 01 - Jan 06th, 2024 - Starter
 #      Mar 29th, 2024 - Add `upside_down` variable
+#      May 13rd, 2024 - xticks rotation
 #
 
 
 # Insights, improvements and bugfix
 # 01 - Add labels to the bars (Excel style)
-# 02 - Add rotation for x axis labels
+# 02 - Add rotation for x axis labels [Solved]
 # 03 - 
 
 
@@ -22,7 +23,7 @@ import matplotlib.pyplot as plt
 # -----------------------------------------------------------------------
 
 def plot_barv(x, height, title=None, ylabel=None, color="navy",
-              upside_down=True, grid="y", remove_axis=False,
+              upside_down=True, grid="y", remove_axis=False, xrotation=False,
               savefig=False, verbose=True):
     """
     height = y
@@ -71,6 +72,9 @@ def plot_barv(x, height, title=None, ylabel=None, color="navy",
     plt.bar(x, height=height, color=color, edgecolor="black", zorder=20)
 
     plt.grid(axis=grid, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
+
+    if(xrotation == True):
+        plt.xticks(rotation=90)
 
     if(ylabel != None):
         plt.ylabel(ylabel, loc="top")
