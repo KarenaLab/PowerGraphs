@@ -111,3 +111,4 @@ def plot_line(x, y, title=None, xlabel=None, ylabel=None, color="navy",
     plt.close(fig)   
 
     return None
+
