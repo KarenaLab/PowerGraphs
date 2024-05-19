@@ -63,7 +63,7 @@ def plot_kdeduo(sample1, sample2, name1=None, name2=None, title=None,
     plt.rcParams["ytick.major.size"] = 3.5
 
     # Plot
-    fig = plt.figure(figsize=[6, 3.375])
+    fig = plt.figure(figsize=[6, 3.375])    # 16:9 [Widescreen]
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
     sample_list = [sample1, sample2]
