@@ -50,13 +50,17 @@ def plot_scattersimple(x, y, title=None, xlabel=None, ylabel=None, color="navy",
 
     plt.scatter(x, y, s=mark_size, color=color, edgecolor="white", alpha=alpha, zorder=20)
 
-    if(xlabel != None): plt.xlabel(xlabel, loc="center")
-    if(ylabel != None): plt.ylabel(ylabel, loc="center")
+    if(xlabel != None):
+        plt.xlabel(xlabel, loc="center")
+        
+    if(ylabel != None):
+        plt.ylabel(ylabel, loc="center")
 
     plt.grid(axis="both", color="grey", linestyle="--", linewidth=0.5, zorder=5)       
 
     plt.tight_layout()
 
+    # Printing 
     if(savefig == True):
         plt.savefig(title, dpi=320)
 
@@ -69,6 +73,5 @@ def plot_scattersimple(x, y, title=None, xlabel=None, ylabel=None, color="navy",
     plt.close(fig)
 
     return None    
-
 
 # end
