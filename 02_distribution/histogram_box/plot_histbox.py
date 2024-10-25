@@ -1,8 +1,9 @@
-# Histogram Simple [P290]
+# Histogram with Box Plot [P292]
 
 # Versions
-# 11 - Jan 09th, 2024 - Refactoring and using Histogram simple as base
-
+# 11 - Jan 09th, 2024 - Refactoring and using Histogram simple as base,
+#      Oct 24th, 2024 - Text adjustments,
+#
 
 # Insights, improvements and bugfix
 # Extend kde line up to zero (left and right margins),
@@ -45,13 +46,13 @@ def plot_histbox(data, title=None, xlabel=None, bins="sqrt",
     * kde: Plot the Kernel-Gaussian density estimation line,
     * meanline: Plot a green line showing the mean,
     * medianline: Plot an orange line showing the median,
-    * grid_axis: Plot axis (dafault=y)
-    * linebehind = Plots mean and median line behind the plot.
+    * grid_axes: Plot axis (dafault=y),
+    * linebehind = Plots mean and median line behind the plot,
     * savefig: True or False*. If True will save a report with the title
                name and do not show the plot. If False will not save the
                report but will show in the screen.(default=False),
     * verbose: True* or False (quiet mode). If True will print some in-
-               formation about the data analysis and plot (default=True)
+               formation about the data analysis and plot (default=True),
      
     """
     # Data preparation
@@ -97,7 +98,7 @@ def plot_histbox(data, title=None, xlabel=None, bins="sqrt",
     grid_list = ["x", "y", "both"]
     if(grid_list.count(grid_axes) == 0):
         grid_axes = "y"
-        print(f' >>> Error: "grid_axis" oprtion not valid. Using "y" as forced option.')
+        print(f' >>> Error: "grid_axes" oprtion not valid. Using "y" as forced option.')
 
     
     # Histogram settings 
@@ -143,7 +144,6 @@ def plot_histbox(data, title=None, xlabel=None, bins="sqrt",
     
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
-
     # Histogram
     ax0.hist(data, bins=no_bins, density=density, color=colors["blue"],
              alpha=bins_alpha, edgecolor=bins_edge, zorder=20)
@@ -154,8 +154,11 @@ def plot_histbox(data, title=None, xlabel=None, bins="sqrt",
     if(kde == True):
         ax0.plot(kde_space, kde_line, color=colors["red"], linewidth=1.5, label="kde", zorder=23)
 
-    if(linebehind == True): zorder = 11
-    else: zorder = 21
+    if(linebehind == True): 
+        zorder = 11
+    
+    else: 
+        zorder = 21
     
     if(meanline == True):
         ax0.axvline(x=np.mean(data), color=colors["green"], linewidth=1.0, label="mean", zorder=zorder)
