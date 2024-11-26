@@ -30,19 +30,18 @@ def plot_barh(x, width, title=None, xlabel=None, color="navy", left=0,
     **upside-down** sequence.
 
     Variables:
-    x:
-    width:
-    title:
-    xlabel:
-    color:
-    left:
-    upside_down:
-    grid:
-    remove_axis:
-    savefig:
-    verbose:
+    * x: 
+    * width:
+    * title: Graph title (also the filename if verbose is True),
+    * xlabel: Label for x axis,
+    * color: Color of bars (default="navy"),
+    * left: 
+    * upside_down:
+    * grid: Choose the grid to be plot (default="x"),
+    * remove_axis: Remove axis and borders of graph (cleaner view),
+    * savefig: Choose to save the plot as a .png figure (default=False),
+    * verbose: Choose the verbose mode (default=False).
     
-
     """
     # Data preparation
     if(upside_down == True):
