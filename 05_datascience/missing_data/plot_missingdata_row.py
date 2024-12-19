@@ -16,8 +16,9 @@ import matplotlib.pyplot as plt
 # 02 - Oct 17th, 2021 - Adding Secondary Y Axis
 # 03 - Oct 18th, 2021 - Adding a Middle Line (50% of Columns)
 # 04 - Jan 21st, 2023 - Adjusting
-# 05 - 
-
+#    - Dec 18th, 2024 - Solve bugfix with grid selection
+# 
+ 
 
 # Insights, improvements and bugfix
 #
@@ -75,9 +76,9 @@ def plot_missingdata_row(DataFrame, title, pct_lines=True, grid="y",
     # Grid Axis
     grid_default = "y"
     grid_list = ["x", "y", "both"]
-    if(grid_list.count(grid_axes) == 0):
+    if(grid_list.count(grid) == 0):
         print(f' >>> Error: "grid_axis" option not valid. Using "{grid_default}" as forced option.')
-        grid_axes = grid_default[:]
+        grid = grid_default[:]
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
