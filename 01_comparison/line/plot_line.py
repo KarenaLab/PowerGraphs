@@ -1,13 +1,13 @@
 # Plot Line [P264] -----------------------------------------------------
 
 # Versions
-# 01 - Jan 21st, 2023 - Starter
-# 02 - Jun 12th, 2023 - Adjust params
-#    - Jan 03rd, 2024 - Set legend over all items
-# 03 - Jan 04th, 2024 - (( refactoring ))
-#      Feb 06th, 2024 - Add grid default selection
-#      Feb 26th, 2024 - Add hline and vline option
-#
+# Jan 21st, 2023 - Starter
+# Jun 12th, 2023 - Adjust params
+# Jan 03rd, 2024 - Set legend over all items
+# Jan 04th, 2024 - (( refactoring ))
+# Feb 06th, 2024 - Add grid default selection
+# Feb 26th, 2024 - Add hline and vline option
+# Jan 27th, 2025 - Add hline and vline color option
 
 
 # Insights, improvements and bugfix
@@ -25,7 +25,7 @@ import matplotlib.pyplot as plt
 
 def plot_line(x, y, title=None, xlabel=None, ylabel=None, color="navy",
               linewidth=1.5, grid="both", vline=None, hline=None,
-              remove_axis=False,
+              remove_axis=False, vline_color="black", hline_color="darkred",
               savefig=False, verbose=True):
 
     """
@@ -74,14 +74,14 @@ def plot_line(x, y, title=None, xlabel=None, ylabel=None, color="navy",
 
     if(isinstance(hline, list) == True):
         for y in hline:
-            plt.axhline(y=y, color="darkred", linewidth=0.8, zorder=19)
+            plt.axhline(y=y, color=hline_color, linewidth=0.8, zorder=19)
 
     if(isinstance(vline, (int, float)) == True):
        vline = [vline]
 
     if(isinstance(vline, list) == True):
         for x in vline:
-            plt.axvline(x=x, color="darkred", linewidth=0.8, zorder=19)
+            plt.axvline(x=x, color=vline_color, linewidth=0.8, zorder=19)
             
     if(xlabel != None):
         plt.xlabel(xlabel, loc="right")
