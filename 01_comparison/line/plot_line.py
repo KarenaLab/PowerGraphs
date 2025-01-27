@@ -26,7 +26,7 @@ import matplotlib.pyplot as plt
 def plot_line(x, y, title=None, xlabel=None, ylabel=None, color="navy",
               linewidth=1.5, grid="both", vline=None, hline=None,
               remove_axis=False, vline_color="black", hline_color="darkred",
-              savefig=False, verbose=True):
+              x_rotation=0, savefig=False, verbose=True):
 
     """
     Plots a line graph with **x** and **y**.
@@ -68,6 +68,7 @@ def plot_line(x, y, title=None, xlabel=None, ylabel=None, color="navy",
     plt.plot(x, y, color=color, linewidth=linewidth, zorder=20)
 
     plt.grid(axis=grid, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
+    plt.xticks(rotation=x_rotation)
 
     if(isinstance(hline, (int, float)) == True):
         hline = [hline]
