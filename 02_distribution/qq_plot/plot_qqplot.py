@@ -22,15 +22,17 @@ def plot_qqplot(data, title=None, xlabel=None, ylabel=None,
                 savefig=False, verbose=True):
     """
 
-    The formula used for the theoretical quantiles (horizontal axis of the
-    probability plot) is Filliben’s estimate
+    The formula used for the theoretical quantiles (horizontal axis
+    of the probability plot) is Filliben’s estimate
 
     More info:
     https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.probplot.html
+    https://www1.cmc.edu/pages/faculty/MONeill/Math152/Handouts/filliben.pdf
 
     """
     # Data preparation
     data = np.array(data)
+    data = data.flatten()
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
@@ -74,6 +76,7 @@ def plot_qqplot(data, title=None, xlabel=None, ylabel=None,
     if(ylabel == None):
         ylabel = "Sample quantiles (data)"
 
+
     plt.xlabel(xlabel, loc="center")
     plt.ylabel(ylabel, loc="center")
 
@@ -97,7 +100,10 @@ def plot_qqplot(data, title=None, xlabel=None, ylabel=None,
 
 if(__name__ == "__main__"):
     np.random.seed(314)
-    data = np.random.normal(loc=6, scale=.5, size=50)
+
+    data_norm = np.random.normal(loc=6, scale=.5, size=50)
+    data_unif = np.random.uniform(low=6, high=np.max(data_norm)*1.5, size=25)
+    data = np.append(data_norm, data_unif)
 
     plot_qqplot(data, savefig=False)
     
