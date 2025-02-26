@@ -1,8 +1,7 @@
-# [Pxxx] Project name
-# (optional) Short description
+# [P491] BoxPlot with keys for Statistical Tests
 
 # Versions
-# 01 - Date - Starter
+# 01 - Feb 26th, 2025 - Starter
 # 02 -
 
 
@@ -20,7 +19,7 @@ import matplotlib.pyplot as plt
 
 
 # ----------------------------------------------------------------------
-def name():
+def plot_boxplot_tests():
     """
     Description of the function
     Information about variables and **kwargs
