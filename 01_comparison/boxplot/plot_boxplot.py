@@ -8,16 +8,18 @@ import matplotlib.pyplot as plt
 
 
 # Version
-# 01 - May 30th, 2023 - Starter
-# 02 - Jan 06th, 2024 - Refactoring
+# May 30th, 2023 - Starter,
+# Jan 06th, 2024 - Refactoring,
+# Feb 27th, 2025 - Solve NaNs indepenent and add boxprops facecolor,
+#
 
 
 # Insights
-# 01 - Only drop NaNs by column (Data separation)
+# 01 - Only drop NaNs by column (Data separation) - Feb 27th, 2025,
+#
 
 
 # Program --------------------------------------------------------------
-
 def plot_boxplot(DataFrame, columns=None, title=None, ylabel=None,
                  notch=True, grid_axes="y", facecolor="white",
                  savefig=False, verbose=True):
@@ -76,16 +78,16 @@ def plot_boxplot(DataFrame, columns=None, title=None, ylabel=None,
     bp = plt.boxplot(data, labels=columns, notch=notch, boxprops=boxprops, whiskerprops=whiskerprops,
                      medianprops=medianprops, capprops=capprops, flierprops=flierprops, patch_artist=True, zorder=20)
 
+    # BoxProps background color
+    for patch in bp["boxes"]:
+        patch.set_facecolor(facecolor)
+
     # Labels
     if(ylabel != None):
         plt.ylabel(ylabel, loc="top")
 
     # Grid    
     plt.grid(axis=grid_axes, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
-
-    # BoxProps background color
-    for patch in bp["boxes"]:
-        patch.set_facecolor(facecolor)
 
        
     # Printing
