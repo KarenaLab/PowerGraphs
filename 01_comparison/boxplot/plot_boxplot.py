@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 # Program --------------------------------------------------------------
 
 def plot_boxplot(DataFrame, columns=None, title=None, ylabel=None,
-                 notch=True, grid="y",
+                 notch=True, grid_axes="y",
                  savefig=False, verbose=True):
     """
     Plots a boxplot comparing the data.
@@ -28,13 +28,17 @@ def plot_boxplot(DataFrame, columns=None, title=None, ylabel=None,
 
     """
     # Data preparation
-    data = DataFrame.copy()
-    columns = col_select(data, columns)
+    columns = col_select(DataFrame, columns)
+    print(columns)
 
     # Data separation
-    data = data[columns]
-    data = data.dropna().reset_index(drop=True)         # Improve #01
-
+    data = list()
+    for col in columns:
+        info = np.array(DataFrame[col])
+        info = list(info[~np.isnan(info)])
+        data.append(info)
+        print(len(info))
+        
     # Title
     if(title == None):
         title = "BoxPlot"
@@ -75,7 +79,7 @@ def plot_boxplot(DataFrame, columns=None, title=None, ylabel=None,
     if(ylabel != None):
         plt.ylabel(ylabel, loc="top")
     
-    plt.grid(axis=grid, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
+    plt.grid(axis=grid_axes, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
 
        
     # Printing
