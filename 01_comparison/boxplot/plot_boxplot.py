@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 # Program --------------------------------------------------------------
 
 def plot_boxplot(DataFrame, columns=None, title=None, ylabel=None,
-                 notch=True, grid_axes="y",
+                 notch=True, grid_axes="y", facecolor="white",
                  savefig=False, verbose=True):
     """
     Plots a boxplot comparing the data.
@@ -29,19 +29,18 @@ def plot_boxplot(DataFrame, columns=None, title=None, ylabel=None,
     """
     # Data preparation
     columns = col_select(DataFrame, columns)
-    print(columns)
 
-    # Data separation
     data = list()
     for col in columns:
         info = np.array(DataFrame[col])
         info = list(info[~np.isnan(info)])
         data.append(info)
-        print(len(info))
+
         
     # Title
     if(title == None):
         title = "BoxPlot"
+
 
     # Grid Axis
     grid_default = "y"
@@ -49,6 +48,7 @@ def plot_boxplot(DataFrame, columns=None, title=None, ylabel=None,
     if(grid_list.count(grid_axes) == 0):
         print(f' >>> Error: "grid_axis" option not valid. Using "{grid_default}" as forced option.')
         grid_axes = grid_default[:]
+
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
@@ -73,13 +73,19 @@ def plot_boxplot(DataFrame, columns=None, title=None, ylabel=None,
     fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
 
-    plt.boxplot(data, labels=columns, notch=notch, boxprops=boxprops, whiskerprops=whiskerprops,
-                medianprops=medianprops, capprops=capprops, flierprops=flierprops, zorder=20)
+    bp = plt.boxplot(data, labels=columns, notch=notch, boxprops=boxprops, whiskerprops=whiskerprops,
+                     medianprops=medianprops, capprops=capprops, flierprops=flierprops, patch_artist=True, zorder=20)
 
+    # Labels
     if(ylabel != None):
         plt.ylabel(ylabel, loc="top")
-    
+
+    # Grid    
     plt.grid(axis=grid_axes, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
+
+    # BoxProps background color
+    for patch in bp["boxes"]:
+        patch.set_facecolor(facecolor)
 
        
     # Printing
