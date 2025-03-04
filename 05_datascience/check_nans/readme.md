@@ -1,4 +1,0 @@
-### PowerGraphs - Check NaNs
-
-
-
