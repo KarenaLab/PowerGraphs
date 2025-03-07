@@ -25,13 +25,14 @@ def plot_missingno_matrix(DataFrame, title=None, figsize=[8, 4.5],
     """
 
 
-    """   
+    """
+    # Settings (fixed)
     color = (0, 0, 0)   # Only accepts RGB colors)
     fontsize = 7
-    
+
+    # Plot   
     msno.matrix(DataFrame, figsize=figsize, sort=sort, fontsize=fontsize,
                 color=color, sparkline=True, width_ratios=[10,1])
-
 
     # Printing
     if(savefig == True):
