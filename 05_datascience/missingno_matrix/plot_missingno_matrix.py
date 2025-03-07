@@ -19,12 +19,31 @@ import matplotlib.pyplot as plt
 
 
 # ----------------------------------------------------------------------
-def plot_missingno_matrix():
-    """
-    Description of the function
-    Information about variables and **kwargs
-
+def plot_missingno_matrix(DataFrame, title=None, figsize=[8, 4.5],
+                          sort=None,
+                          savefig=False, verbose=True):
     """
 
-    return None    
+
+    """   
+    color = (0, 0, 0)   # Only accepts RGB colors)
+    fontsize = 7
+    
+    msno.matrix(DataFrame, figsize=figsize, sort=sort, fontsize=fontsize,
+                color=color, sparkline=True, width_ratios=[10,1])
+
+
+    # Printing
+    if(savefig == True):
+        plt.savefig(title, dpi=320)
+        if(verbose == True):
+            print(f' > saved plot as "{title}.png"')
+
+    else:
+        plt.show()
+
+
+    plt.close()   
+
+    return None 
 
