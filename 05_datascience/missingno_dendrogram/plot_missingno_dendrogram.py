@@ -1,8 +1,8 @@
-# [Pxxx] Project name
+# [P499] PowerGraphs MissingNo Dendrogram
 # (optional) Short description
 
 # Versions
-# 01 - Date - Starter
+# 01 - Mar 07th, 2025 - Starter
 # 02 -
 
 
@@ -13,14 +13,14 @@
 # Libraries
 import numpy as np
 import pandas as pd
-import scipy.stats as st
+import scipy.stats as stats
+import missingno as msno
 
 import matplotlib.pyplot as plt
 
 
-
 # ----------------------------------------------------------------------
-def name():
+def plot_missingno_dendrogram():
     """
     Description of the function
     Information about variables and **kwargs
@@ -28,4 +28,5 @@ def name():
     """
 
     return None    
+    
 
