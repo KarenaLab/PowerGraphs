@@ -1,4 +1,4 @@
-# [Pxxx] Project name
+# [P496] Project name
 # (optional) Short description
 
 # Versions
@@ -14,13 +14,14 @@
 import numpy as np
 import pandas as pd
 import scipy.stats as st
+import missingno as msno
 
 import matplotlib.pyplot as plt
 
 
 
 # ----------------------------------------------------------------------
-def name():
+def plot_missingno_bar():
     """
     Description of the function
     Information about variables and **kwargs
