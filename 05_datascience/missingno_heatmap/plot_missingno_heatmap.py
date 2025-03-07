@@ -21,12 +21,32 @@ import matplotlib.pyplot as plt
 
 
 # ----------------------------------------------------------------------
-def plot_missingno_heatmaps():
-    """
-    Description of the function
-    Information about variables and **kwargs
-
+def plot_missingno_heatmap(DataFrame, title=None, figsize=[8, 4.5],
+                           cmap="Blues",
+                           savefig=False, verbose=True):
     """
 
-    return None    
 
+    """
+    # Settings (fixed)
+    color = (0, 0, 0)
+    fontsize = 7
+
+    # Plot
+    msno.heatmap(DataFrame, figsize=figsize, fontsize=fontsize, cmap=cmap,
+                 vmin=0, vmax=1)
+
+
+    # Printing
+    if(savefig == True):
+        plt.savefig(title, dpi=320)
+        if(verbose == True):
+            print(f' > saved plot as "{title}.png"')
+
+    else:
+        plt.show()
+
+
+    plt.close()   
+
+    return None 
