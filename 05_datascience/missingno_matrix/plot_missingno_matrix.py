@@ -1,8 +1,7 @@
-# [Pxxx] Project name
-# (optional) Short description
+# [P497] PowerGraphs - MissingNo Matrix
 
 # Versions
-# 01 - Date - Starter
+# 01 - Mar 07th, 2025 - Starter
 # 02 -
 
 
@@ -13,10 +12,10 @@
 # Libraries
 import numpy as np
 import pandas as pd
+import scipy.stats as stats
 import missingno as msno
 
 import matplotlib.pyplot as plt
-
 
 
 # ----------------------------------------------------------------------
