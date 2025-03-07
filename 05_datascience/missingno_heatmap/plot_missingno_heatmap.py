@@ -1,4 +1,4 @@
-# [Pxxx] Project name
+# [P498] PwerGraphs - MissingNo Heatmap
 # (optional) Short description
 
 # Versions
@@ -13,14 +13,15 @@
 # Libraries
 import numpy as np
 import pandas as pd
-import scipy.stats as st
+import scipy.stats as stats
+import missingno as msno
 
 import matplotlib.pyplot as plt
 
 
 
 # ----------------------------------------------------------------------
-def name():
+def plot_missingno_heatmaps():
     """
     Description of the function
     Information about variables and **kwargs
