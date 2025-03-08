@@ -1,5 +1,4 @@
 # [P499] PowerGraphs MissingNo Dendrogram
-# (optional) Short description
 
 # Versions
 # 01 - Mar 07th, 2025 - Starter
@@ -20,12 +19,31 @@ import matplotlib.pyplot as plt
 
 
 # ----------------------------------------------------------------------
-def plot_missingno_dendrogram():
+def plot_missingno_dendrogram(DataFrame, figsize=[8, 4.5], title=None, filter=None,
+                              savefig=False, verbose=True):
     """
-    Description of the function
-    Information about variables and **kwargs
+
 
     """
+    # Settings (fixed)
+    color = (0, 0, 0)
+    fontsize = 7
+
+    # Plot
+    msno.dendrogram(DataFrame, figsize=figsize, fontsize=fontsize, filter=filter)
+
+
+    # Printing
+    if(savefig == True):
+        plt.savefig(title, dpi=320)
+        if(verbose == True):
+            print(f' > saved plot as "{title}.png"')
+
+    else:
+        plt.show()
+
+
+    plt.close()   
 
     return None    
     
