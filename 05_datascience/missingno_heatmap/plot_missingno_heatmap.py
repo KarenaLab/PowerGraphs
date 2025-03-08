@@ -36,7 +36,6 @@ def plot_missingno_heatmap(DataFrame, title=None, figsize=[8, 4.5],
     msno.heatmap(DataFrame, figsize=figsize, fontsize=fontsize, cmap=cmap,
                  vmin=0, vmax=1)
 
-
     # Printing
     if(savefig == True):
         plt.savefig(title, dpi=320)
@@ -50,3 +49,4 @@ def plot_missingno_heatmap(DataFrame, title=None, figsize=[8, 4.5],
     plt.close()   
 
     return None 
+
