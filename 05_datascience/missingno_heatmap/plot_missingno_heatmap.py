@@ -1,8 +1,7 @@
-# [P498] PwerGraphs - MissingNo Heatmap
-# (optional) Short description
+# [P498] PowerGraphs - MissingNo Heatmap
 
 # Versions
-# 01 - Date - Starter
+# 01 - Mar 07th, 2025 - Starter
 # 02 -
 
 
@@ -19,17 +18,15 @@ import missingno as msno
 import matplotlib.pyplot as plt
 
 
-
 # ----------------------------------------------------------------------
 def plot_missingno_heatmap(DataFrame, title=None, figsize=[8, 4.5],
                            cmap="Blues",
                            savefig=False, verbose=True):
     """
 
-
+    More info: https://github.com/ResidentMario/missingno/blob/master/missingno/missingno.py
     """
     # Settings (fixed)
-    color = (0, 0, 0)
     fontsize = 7
 
     # Plot
