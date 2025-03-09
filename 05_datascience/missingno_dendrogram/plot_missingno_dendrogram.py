@@ -23,7 +23,7 @@ def plot_missingno_dendrogram(DataFrame, figsize=[8, 4.5], title=None, filter=No
                               savefig=False, verbose=True):
     """
 
-
+    More info: https://github.com/ResidentMario/missingno/blob/master/missingno/missingno.py
     """
     # Settings (fixed)
     color = (0, 0, 0)
