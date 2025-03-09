@@ -24,7 +24,7 @@ def plot_missingno_matrix(DataFrame, title=None, figsize=[8, 4.5],
                           savefig=False, verbose=True):
     """
 
-
+    More info: https://github.com/ResidentMario/missingno/blob/master/missingno/missingno.py
     """
     # Settings (fixed)
     color = (0, 0, 0)   # Only accepts RGB colors)
