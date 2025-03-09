@@ -1,7 +1,7 @@
 # [P496] PowerGraphs - MissingNo Bar
 
 # Versions
-# 01 - Date - Starter
+# 01 - Mar 07th, 2025 - Starter
 # 02 -
 
 
@@ -12,11 +12,10 @@
 # Libraries
 import numpy as np
 import pandas as pd
-import scipy.stats as st
+import scipy.stats as stats
 import missingno as msno
 
 import matplotlib.pyplot as plt
-
 
 
 # ----------------------------------------------------------------------
@@ -24,7 +23,7 @@ def plot_missingno_bar(DataFrame, figsize=[8, 4.5], title=None,
                        savefig=False, verbose=True):
     """
 
-
+    More info: https://github.com/ResidentMario/missingno/blob/master/missingno/missingno.py
     """
     # Settings (fixed)
     fontsize = 7
