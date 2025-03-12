@@ -78,6 +78,7 @@ def plot_boxplot(DataFrame, columns=None, title=None, ylabel=None,
     bp = plt.boxplot(data, labels=columns, notch=notch, boxprops=boxprops, whiskerprops=whiskerprops,
                      medianprops=medianprops, capprops=capprops, flierprops=flierprops, patch_artist=True, zorder=20)
 
+
     # BoxProps background color
     for patch in bp["boxes"]:
         patch.set_facecolor(facecolor)
@@ -88,7 +89,6 @@ def plot_boxplot(DataFrame, columns=None, title=None, ylabel=None,
 
     # Grid    
     plt.grid(axis=grid_axes, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
-
        
     # Printing
     plt.tight_layout()
