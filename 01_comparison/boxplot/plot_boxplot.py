@@ -1,4 +1,4 @@
-# Boxplot [P333] -------------------------------------------------------
+# [P333] Boxplot -------------------------------------------------------
 
 # Libraries
 import numpy as np
@@ -127,9 +127,9 @@ def col_select(DataFrame, columns):
 
 
     # Columns preparation
-    if(columns == "all"):
+    if(columns == "all" or columns == None):
         # Default: takes **all** columns from DataFrame.
-        col_select = DataFrame.columns.to_list()
+        col_select = list(DataFrame.columns)
 
     elif(isinstance(columns, str) == True):
         # Tranforms a sting into a list
