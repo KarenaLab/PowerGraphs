@@ -22,6 +22,7 @@ def plot_paired(before, after, title=None, ylabel=None,
 
     """
     Returns a plot comparing **before** and **after**.
+    Useful for T-Test visualizations.
 
 
     """
@@ -49,7 +50,7 @@ def plot_paired(before, after, title=None, ylabel=None,
     ax = plt.axes()
 
     for [bfr, afr] in zip(before, after):
-        color = color_pick(bfr, afr, down_color, up_color, neutral_color)
+        color = _color_pick(bfr, afr, down_color, up_color, neutral_color)
         
         plt.plot([1, 2], [bfr, afr], color=color, zorder=10)
         plt.scatter([1], [bfr], s=16, marker="o", color="#000000", zorder=20)
@@ -87,7 +88,7 @@ def plot_paired(before, after, title=None, ylabel=None,
     return None
 
 
-def color_pick(before, after, down_color=None, up_color=None, neutral_color=None):
+def _color_pick(before, after, down_color=None, up_color=None, neutral_color=None):
     """
 
 
@@ -116,4 +117,3 @@ def color_pick(before, after, down_color=None, up_color=None, neutral_color=None
 
     return color 
     
-     
