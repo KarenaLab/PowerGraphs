@@ -16,11 +16,12 @@ import matplotlib.pyplot as plt
 
 
 # -----------------------------------------------------------------------
-
 def plot_paired(before, after, title=None, ylabel=None,
+                down_color=None, up_color=None, neutral_color=None,
                 savefig=False, verbose=True):
 
     """
+    Returns a plot comparing **before** and **after**.
 
 
     """
@@ -28,11 +29,9 @@ def plot_paired(before, after, title=None, ylabel=None,
     before = np.array(before)
     after = np.array(after)
 
-
     # Title
     if(title == None):
         title = "T-Test paired plot"
-
 
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
@@ -50,14 +49,14 @@ def plot_paired(before, after, title=None, ylabel=None,
     ax = plt.axes()
 
     for [bfr, afr] in zip(before, after):
-        color = color_pick(bfr, afr)
+        color = color_pick(bfr, afr, down_color, up_color, neutral_color)
         
         plt.plot([1, 2], [bfr, afr], color=color, zorder=10)
         plt.scatter([1], [bfr], s=16, marker="o", color="#000000", zorder=20)
         plt.scatter([2], [afr], s=16, marker="o", color=color, zorder=20)
 
 
-    plt.xticks([1, 2], ["before", "after"])
+    plt.xticks([1, 2], ["before", "after"], fontsize=10)
     plt.grid(axis="y", linestyle="--", color="#D3D3D3", zorder=22)
              
     if(ylabel != None):
