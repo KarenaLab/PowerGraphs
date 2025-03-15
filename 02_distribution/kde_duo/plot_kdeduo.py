@@ -52,6 +52,7 @@ def plot_kdeduo(sample1, sample2, name1=None, name2=None, title=None,
     if(name2 == None):
         name2 = "sample 2"
 
+
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
     plt.rcParams["font.size"] = 8
@@ -61,6 +62,7 @@ def plot_kdeduo(sample1, sample2, name1=None, name2=None, title=None,
     plt.rcParams["ytick.direction"] = "inout"
     plt.rcParams["xtick.major.size"] = 3.5
     plt.rcParams["ytick.major.size"] = 3.5
+
 
     # Plot
     fig = plt.figure(figsize=[6, 3.375])    # 16:9 [Widescreen]
@@ -73,13 +75,14 @@ def plot_kdeduo(sample1, sample2, name1=None, name2=None, title=None,
     zorder = 20
     for (color, name, array) in zip(color_list, name_list, sample_list):
         array = np.array(array)
-        x, y = kde_line(array)
+        x, y = _kde_line(array)
         
         plt.plot(x, y, color=color, linewidth=1.5, label=name, zorder=zorder+1)
         plt.fill_between(x, y, 0, color=color, alpha=alpha, zorder=zorder)
 
         if(mean_line == True):
-            plt.axvline(x=np.mean(array), color=color, linewidth=1, zorder=zorder-1)
+            plt.axvline(x=np.mean(array), color=color, linewidth=1,
+                        linestyle="--", label=f"{name} median", zorder=zorder-1)
 
         zorder = zorder + 10
 
@@ -106,7 +109,7 @@ def plot_kdeduo(sample1, sample2, name1=None, name2=None, title=None,
     return None
     
 
-def kde_line(array, tail=20):
+def _kde_line(array, tail=20):
     """
     Calculates the Kernel-density gaussian estimation
 
@@ -129,6 +132,3 @@ def kde_line(array, tail=20):
     y = density(x)
 
     return x, y
-
-    
-# end
