@@ -1,7 +1,7 @@
-# [P272] QQ Plot
+# [P272] QQ Plot -------------------------------------------------------
 
 # Versions
-# 01 - Feb 03rd - Starter *
+# 01 - Feb 03rd - Starter
 # 02 -
 
 
@@ -54,7 +54,6 @@ def plot_qqplot(data, title=None, xlabel=None, ylabel=None,
     plt.rcParams["lines.linewidth"] = 1
 
     
-
     # Plot (Figure)
     fig = plt.figure(figsize=[6, 3.375])    # Widescreen 16:9
     (osm, osr), (slope, intercept, r) = st.probplot(data, dist="norm", plot=plt)
