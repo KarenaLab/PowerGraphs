@@ -159,18 +159,22 @@ def plot_histbox(data, title=None, xlabel=None, bins="sqrt",
     
     else: 
         zorder = 21
-    
+
+    # Mean Lines
     if(meanline == True):
         ax0.axvline(x=np.mean(data), color=colors["green"], linewidth=1.0, label="mean", zorder=zorder)
 
     if(medianline == True):
         ax0.axvline(x=np.median(data), color=colors["orange"], linewidth=1.0, label="median", zorder=zorder)
 
+
+    # Labels
     if(xlabel != None):
         ax0.set_xlabel(xlabel, loc="right")
 
     if(ylabel != None):
         ax0.set_ylabel(ylabel, loc="top")
+
 
     if(kde == True or meanline == True or medianline == True):
         ax0.legend(fontsize=9, loc="upper right", framealpha=1).set_zorder(99)
@@ -185,8 +189,9 @@ def plot_histbox(data, title=None, xlabel=None, bins="sqrt",
     flierprops = dict(markerfacecolor="darkred", markeredgecolor="black", marker="o", markersize=6)
 
     ax1.boxplot(data, vert=False, widths=[0.6], notch=notch, boxprops=boxprops, whiskerprops=whiskerprops,
-                medianprops=medianprops, capprops=capprops, flierprops=flierprops, zorder=20)
+                     medianprops=medianprops, capprops=capprops, flierprops=flierprops, zorder=20)
 
+        
     ax1.grid(axis="x", color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
 
     ax1.set_yticks([])
