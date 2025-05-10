@@ -24,7 +24,6 @@ import matplotlib.gridspec as gridspec
 
 
 # -----------------------------------------------------------------------
-
 def plot_identityline(y_true, y_pred, title=None, xlabel=None,
                       ylabel=None, alpha=0.7, identity_line=True,
                       legend_loc="lower right", grid="both",
