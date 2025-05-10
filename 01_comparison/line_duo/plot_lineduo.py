@@ -1,10 +1,10 @@
 # Plot Line [P391] -----------------------------------------------------
 
 # Versions
-# 01 - Jan 04th, 2024 - Starter,
-#      Feb 07th, 2024 - Add grid default validation,
-#      Feb 17th, 2024 - Improve x2 axis and avoid repetition of data if
-#                           both (x1 and x2) uses the same range,
+# Jan 04th, 2024 - Starter,
+# Feb 07th, 2024 - Add grid default validation,
+# Feb 17th, 2024 - Improve x2 axis and avoid repetition of data if
+#                  both (x1 and x2) uses the same range,
 # 
 
 
@@ -20,7 +20,6 @@ import matplotlib.pyplot as plt
 
 
 # -----------------------------------------------------------------------
-
 def plot_lineduo(x1, y1, y2, x2=None, title=None, label1=None, label2=None,
                  xlabel=None, ylabel=None, color1="navy", color2="darkred",
                  linewidth=1.5, grid="both", remove_axis=False, legend_loc="best",
