@@ -8,7 +8,8 @@
 # Feb 06th, 2024 - Add grid default selection
 # Feb 26th, 2024 - Add hline and vline option
 # Jan 27th, 2025 - Add hline and vline color option
-
+# Mai 10th, 2025 - Add ymin and ymax options
+#
 
 # Insights, improvements and bugfix
 # 
@@ -22,9 +23,8 @@ import matplotlib.pyplot as plt
 
 
 # -----------------------------------------------------------------------
-
 def plot_line(x, y, title=None, xlabel=None, ylabel=None, color="navy",
-              linewidth=1.5, grid="both", vline=None, hline=None,
+              linewidth=1.5, grid="both", vline=None, hline=None, ymin=None, ymax=None,
               remove_axis=False, vline_color="black", hline_color="darkred",
               x_rotation=0, savefig=False, verbose=True):
 
@@ -89,6 +89,12 @@ def plot_line(x, y, title=None, xlabel=None, ylabel=None, color="navy",
 
     if(ylabel != None):
         plt.ylabel(ylabel, loc="top")
+
+    if(ymin != None):
+        plt.ylim(bottom=ymin)
+
+    if(ymax != None):
+        plt.ylim(top=ymax)
 
     if(remove_axis == True):
         plt.tick_params(length=0, labelleft="on", labelbottom="on")
