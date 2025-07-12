@@ -1,17 +1,4 @@
-# Bar Horizontal [P353] -------------------------------------------------
-
-# Versions
-# 01 - Jan 06th, 2024 - Starter
-#      Mar 29th, 2024 - Add `upside_down` variable
-#      May 13rd, 2024 - xticks rotation
-#
-
-
-# Insights, improvements and bugfix
-# 01 - Add labels to the bars (Excel style)
-# 02 - Add rotation for x axis labels [Solved]
-# 03 - 
-
+# PCA Explainability [P521] ---------------------------------------------
 
 # Libraries
 import numpy as np
@@ -22,27 +9,22 @@ import matplotlib.pyplot as plt
 
 # -----------------------------------------------------------------------
 
-def plot_barv(x, height, title=None, ylabel=None, color="navy",
-              upside_down=True, grid="y", remove_axis=False, xrotation=False,
-              savefig=False, verbose=True):
+def plot_pca_explain(array, title=None, ylabel=None, color="navy",
+                     grid="y", remove_axis=False, xrotation=False,
+                     savefig=False, verbose=True):
     """
-    height = y
-    upside-down sequence
+
 
     """
     # Data preparation
-    if(upside_down == True):
-        x = np.flip(x, axis=0)          # np.flip to make plot upside-down
-        height = np.flip(height, axis=0)
-        
-    else:
-        x = np.array(x)
-        height = np.array(height)
-        
+    array = np.array(array)
+    cumulative = np.cumsum(array)
+    labels = [f"PC{i}" for i in range(1, (array.size + 1))]
+
 
     # Title
     if(title == None):
-        title = "Bar vertical"
+        title = "PCA Explainability"
 
 
     # Grid Axis
@@ -69,7 +51,8 @@ def plot_barv(x, height, title=None, ylabel=None, color="navy",
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
     ax = plt.axes()
 
-    plt.bar(x, height=height, color=color, edgecolor="black", zorder=20)
+    plt.bar(labels, height=array, color=color, edgecolor="black", zorder=20)
+    plt.plot(labels, cumulative, color="darkred", zorder=21)
 
     plt.grid(axis=grid, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
 
