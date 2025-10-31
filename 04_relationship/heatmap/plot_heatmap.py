@@ -9,28 +9,13 @@ from pandas.api.types import is_numeric_dtype
 import matplotlib.pyplot as plt
 
 
-# Versions 
-# 01 - Jan 31st, 2021 - Starter
-# 02 - Jan 31st, 2021 - Removing Duplicated Info
-# 03 - Feb 03rd, 2021 - Adjusting size for printing (A4 Ratio)
-# 04 - Feb 16th, 2021 - Adding **kwargs
-# 05 - Apr 21th, 2021 - Simplifying Data entry for just Data, removing
-#                       Columns (Labels) info
-# 06 - Sep 01st, 2021 - Adjusting (small corrections)
-# 07 - Apr 21st, 2022 - Adding Spearman and adjusting kwargs
-#                       Added correlation method to the title/filename
-# 08 - Jan 26th, 2023 - Adjusting new strategies
-# 09 - Jul 20th, 2023 - New standards and setup
-# 10 - Jan 13th, 2024 - Refactoring
-#
-
 # Insights, improvements and bugfix
 # Add rotation to x_axis labels (need to check anchor),
 #
 
 
 def plot_heatmap(DataFrame, columns="all", title=None, decimals=2,
-                 method="pearson", colormap="Blues", textsize=7,
+                 method="pearson", colormap="Blues", fontsize=7,
                  savefig=False, verbose=True):
     """
     Plots a triangular **Heatmap** for **correlations** between variables,
@@ -88,16 +73,8 @@ def plot_heatmap(DataFrame, columns="all", title=None, decimals=2,
 
 
     # RC Params
-    plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["font.size"] = 8
-    plt.rcParams["figure.dpi"] = 120
-    plt.rcParams["ps.papersize"] = "A4"
-    plt.rcParams["xtick.major.size"] = 0
-    plt.rcParams["ytick.major.size"] = 0
-    plt.rcParams["xtick.major.size"] = 3.5
-    plt.rcParams["ytick.major.size"] = 3.5
+    load_rcparams(fontsize=fontsize)
    
-
     # Plot   
     fig = plt.figure(figsize=[size_hor, size_ver])
     fig.suptitle(title, fontsize=9, fontweight="bold", x=0.98, ha="right")
@@ -105,10 +82,8 @@ def plot_heatmap(DataFrame, columns="all", title=None, decimals=2,
     ax = fig.add_subplot()
     im = ax.imshow(corr, cmap=colormap, aspect=(size_ver / size_hor))
 
-    ax.set_yticks(np.arange(start=0, stop=n_cols))
-    ax.set_yticklabels(columns, rotation=0, fontsize=9)
-    ax.set_xticks(np.arange(start=0, stop=n_cols))
-    ax.set_xticklabels(columns, rotation=90, fontsize=9)
+    ax.set_yticks(np.arange(start=0, stop=n_cols), labels=columns, rotation=0, fontsize=fontsize)
+    ax.set_xticks(np.arange(start=0, stop=n_cols), labels=columns, rotation=90, fontsize=fontsize)
 
 
     # Text Annotations
@@ -122,7 +97,7 @@ def plot_heatmap(DataFrame, columns="all", title=None, decimals=2,
                 else: textcolor = "black"
 
                 text = ax.text(j, i, value, ha="center", va="center",
-                               color=textcolor, fontsize=textsize)
+                               color=textcolor, fontsize=fontsize)
 
 
     # Printing 
@@ -140,6 +115,20 @@ def plot_heatmap(DataFrame, columns="all", title=None, decimals=2,
 
 
     plt.close(fig)
+
+    return None
+
+
+def load_rcparams(fontsize):
+    # RC Params
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = fontsize
+    plt.rcParams["figure.dpi"] = 120
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.major.size"] = 0
+    plt.rcParams["ytick.major.size"] = 0
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 3.5
 
     return None
 
