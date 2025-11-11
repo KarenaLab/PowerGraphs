@@ -1,12 +1,5 @@
 # Bar Horizontal [P354] -------------------------------------------------
 
-# Versions
-# 01 - Jan 06th, 2024 - Starter
-#      Jan 30th, 2024 - Add ´upside_down´ variable
-#      Feb 23rd, 2024 - Bugfix: grid and grid_default
-#
-
-
 # Insights, improvements and bugfix
 # 01 - Add labels to the bars (Excel style)
 # 02 - Create an ascendant sequence
@@ -67,14 +60,7 @@ def plot_barh(x, width, title=None, xlabel=None, color="navy", left=0,
 
 
     # RC Params
-    plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["font.size"] = 8
-    plt.rcParams["figure.dpi"] = 120
-    plt.rcParams["ps.papersize"] = "A4"
-    plt.rcParams["xtick.direction"] = "inout"
-    plt.rcParams["ytick.direction"] = "inout"
-    plt.rcParams["xtick.major.size"] = 3.5
-    plt.rcParams["ytick.major.size"] = 0
+    set_rcparams()
     
 
     # Plot
@@ -109,6 +95,19 @@ def plot_barh(x, width, title=None, xlabel=None, color="navy", left=0,
         
 
     plt.close(fig)   
+
+    return None
+
+
+def set_rcparams():
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
+    plt.rcParams["figure.dpi"] = 120
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 0
 
     return None
 
