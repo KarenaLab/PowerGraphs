@@ -1,12 +1,5 @@
 # Bar Horizontal [P353] -------------------------------------------------
 
-# Versions
-# 01 - Jan 06th, 2024 - Starter
-#      Mar 29th, 2024 - Add `upside_down` variable
-#      May 13rd, 2024 - xticks rotation
-#
-
-
 # Insights, improvements and bugfix
 # 01 - Add labels to the bars (Excel style)
 # 02 - Add rotation for x axis labels [Solved]
@@ -54,14 +47,7 @@ def plot_barv(x, height, title=None, ylabel=None, color="navy",
 
 
     # RC Params
-    plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["font.size"] = 8
-    plt.rcParams["figure.dpi"] = 120
-    plt.rcParams["ps.papersize"] = "A4"
-    plt.rcParams["xtick.direction"] = "inout"
-    plt.rcParams["ytick.direction"] = "inout"
-    plt.rcParams["xtick.major.size"] = 0
-    plt.rcParams["ytick.major.size"] = 3.5
+    set_rcparams()
 
 
     # Plot
@@ -98,5 +84,18 @@ def plot_barv(x, height, title=None, ylabel=None, color="navy",
 
 
     plt.close(fig)   
+
+    return None
+
+
+def set_rcparams():
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
+    plt.rcParams["figure.dpi"] = 120
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+    plt.rcParams["xtick.major.size"] = 0
+    plt.rcParams["ytick.major.size"] = 3.5
 
     return None
