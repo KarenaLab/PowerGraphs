@@ -1,16 +1,5 @@
 # Plot Line [P264] -----------------------------------------------------
 
-# Versions
-# Jan 21st, 2023 - Starter
-# Jun 12th, 2023 - Adjust params
-# Jan 03rd, 2024 - Set legend over all items
-# Jan 04th, 2024 - (( refactoring ))
-# Feb 06th, 2024 - Add grid default selection
-# Feb 26th, 2024 - Add hline and vline option
-# Jan 27th, 2025 - Add hline and vline color option
-# Mai 10th, 2025 - Add ymin and ymax options
-#
-
 # Insights, improvements and bugfix
 # 
 
@@ -51,14 +40,8 @@ def plot_line(x, y, title=None, xlabel=None, ylabel=None, color="navy",
 
 
     # RC Params
-    plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["font.size"] = 8
-    plt.rcParams["figure.dpi"] = 120
-    plt.rcParams["ps.papersize"] = "A4"
-    plt.rcParams["xtick.direction"] = "inout"
-    plt.rcParams["ytick.direction"] = "inout"
-    plt.rcParams["xtick.major.size"] = 3.5
-    plt.rcParams["ytick.major.size"] = 3.5
+    set_rcparams()
+    
 
     # Plot
     fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
@@ -116,6 +99,19 @@ def plot_line(x, y, title=None, xlabel=None, ylabel=None, color="navy",
 
 
     plt.close(fig)   
+
+    return None
+
+
+def set_rcparams():
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
+    plt.rcParams["figure.dpi"] = 120
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 0
 
     return None
 
