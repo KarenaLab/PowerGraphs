@@ -15,7 +15,6 @@ import matplotlib.pyplot as plt
 
 
 # ----------------------------------------------------------------------
-
 def plot_histogramduo(serie1, serie2, name1=None, name2=None,
                       serie3=None, name3=None, title=None, bins="sqrt",
                       bins_alpha=0.3, savefig=False, verbose=True):
@@ -55,14 +54,8 @@ def plot_histogramduo(serie1, serie2, name1=None, name2=None,
         title = "Histogram Duo"
 
     # RC Params
-    plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["font.size"] = 8
-    plt.rcParams["figure.dpi"] = 120
-    plt.rcParams["ps.papersize"] = "A4"
-    plt.rcParams["xtick.direction"] = "inout"
-    plt.rcParams["ytick.direction"] = "inout"
-    plt.rcParams["xtick.major.size"] = 3.5
-    plt.rcParams["ytick.major.size"] = 3.5
+    set_rcparams()
+    
 
     # Plot
     fig = plt.figure(figsize=[6, 3.375])
@@ -134,4 +127,16 @@ def plot_histogramduo(serie1, serie2, name1=None, name2=None,
     return None
 
 
-# end
+def set_rcparams():
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
+    plt.rcParams["figure.dpi"] = 120
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 0
+
+    return None
+
+
