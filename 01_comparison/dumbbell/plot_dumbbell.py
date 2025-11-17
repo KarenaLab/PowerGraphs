@@ -48,14 +48,7 @@ def plot_dumbbell(labels, minimum, maximum, title=None,
 
 
     # RC Params
-    plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["font.size"] = 8
-    plt.rcParams["figure.dpi"] = 120
-    plt.rcParams["ps.papersize"] = "A4"
-    plt.rcParams["xtick.direction"] = "inout"
-    plt.rcParams["ytick.direction"] = "inout"
-    plt.rcParams["xtick.major.size"] = 3.5
-    plt.rcParams["ytick.major.size"] = 3.5
+    set_rcparams()
             
 
     # Plot
@@ -88,6 +81,19 @@ def plot_dumbbell(labels, minimum, maximum, title=None,
 
 
     plt.close(fig)
+
+    return None
+
+
+def set_rcparams():
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
+    plt.rcParams["figure.dpi"] = 120
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 0
 
     return None
 
