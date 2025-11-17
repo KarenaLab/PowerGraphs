@@ -1,14 +1,5 @@
 # Identity Line [P315] -------------------------------------------------
 
-# Version
-# 01 - Jun 13th, 2023 - Starter
-#    - Jan 03rd, 2024 - Set legend over all items,
-#    - Jan 04th, 2024 - Adjust variables names
-#    - Jan 30th, 2024 - Adjust linear regression
-#    - Fev 07th, 2024 - Add grid validation
-#
-
-
 # Insights and bugfix
 # 01 - Add a color adjust
 # 02 - Add remove ticks from axis
@@ -65,14 +56,8 @@ def plot_identityline(y_true, y_pred, title=None, xlabel=None,
 
 
     # RC Params
-    plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["font.size"] = 8
-    plt.rcParams["figure.dpi"] = 120
-    plt.rcParams["ps.papersize"] = "A4"
-    plt.rcParams["xtick.direction"] = "inout"
-    plt.rcParams["ytick.direction"] = "inout"
-    plt.rcParams["xtick.major.size"] = 3.5
-    plt.rcParams["ytick.major.size"] = 3.5
+    set_rcparams()
+    
 
     # Plot
     fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
@@ -108,4 +93,17 @@ def plot_identityline(y_true, y_pred, title=None, xlabel=None,
 
     return None
 
-# end
+
+def set_rcparams():
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
+    plt.rcParams["figure.dpi"] = 120
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 0
+
+    return None
+
+
