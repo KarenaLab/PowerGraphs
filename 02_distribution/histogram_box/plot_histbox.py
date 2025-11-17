@@ -1,15 +1,5 @@
 # Histogram with Box Plot [P292]
 
-# Versions
-# 11 - Jan 09th, 2024 - Refactoring and using Histogram simple as base,
-#      Oct 24th, 2024 - Text adjustments,
-#
-
-# Insights, improvements and bugfix
-# Extend kde line up to zero (left and right margins),
-#
-
-
 # Libraries
 import numpy as np
 import pandas as pd
@@ -25,11 +15,11 @@ from scipy.stats import gaussian_kde
 # 02 - Remove labels from boxplot and move xticks for upper part, to use
 #          the same labels for boh plots,
 # 03 - Create a vertical version for plot (better usage if paper),
+# 04 - Extend kde line up to zero (left and right margins),
 #
 
 
 # ----------------------------------------------------------------------
-
 def plot_histbox(data, title=None, xlabel=None, bins="sqrt",
                  kde=True, meanline=True, medianline=True, notch=True,
                  grid_axes="y", linebehind=True, tail_size=15,
@@ -125,14 +115,8 @@ def plot_histbox(data, title=None, xlabel=None, bins="sqrt",
 
 
     # RC Params
-    plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["font.size"] = 8
-    plt.rcParams["figure.dpi"] = 120
-    plt.rcParams["ps.papersize"] = "A4"
-    plt.rcParams["xtick.direction"] = "inout"
-    plt.rcParams["ytick.direction"] = "inout"
-    plt.rcParams["xtick.major.size"] = 3.5
-    plt.rcParams["ytick.major.size"] = 3.5
+    set_rcparams()
+    
 
     # Plot
     fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
@@ -214,3 +198,16 @@ def plot_histbox(data, title=None, xlabel=None, bins="sqrt",
 
     return None
         
+
+def set_rcparams():
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
+    plt.rcParams["figure.dpi"] = 120
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 0
+
+    return None
+
