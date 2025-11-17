@@ -1,13 +1,5 @@
 # Plot Line [P391] -----------------------------------------------------
 
-# Versions
-# Jan 04th, 2024 - Starter,
-# Feb 07th, 2024 - Add grid default validation,
-# Feb 17th, 2024 - Improve x2 axis and avoid repetition of data if
-#                  both (x1 and x2) uses the same range,
-# 
-
-
 # Insights, improvements and bugfix
 # 
 
@@ -56,14 +48,8 @@ def plot_lineduo(x1, y1, y2, x2=None, title=None, label1=None, label2=None,
 
 
     # RC Params
-    plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["font.size"] = 8
-    plt.rcParams["figure.dpi"] = 120
-    plt.rcParams["ps.papersize"] = "A4"
-    plt.rcParams["xtick.direction"] = "inout"
-    plt.rcParams["ytick.direction"] = "inout"
-    plt.rcParams["xtick.major.size"] = 3.5
-    plt.rcParams["ytick.major.size"] = 3.5
+    set_rcparams()
+    
 
     # Plot
     fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
@@ -104,6 +90,19 @@ def plot_lineduo(x1, y1, y2, x2=None, title=None, label1=None, label2=None,
 
 
     plt.close(fig)   
+
+    return None
+
+
+def set_rcparams():
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
+    plt.rcParams["figure.dpi"] = 120
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 0
 
     return None
 
