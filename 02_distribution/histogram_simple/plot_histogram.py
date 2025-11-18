@@ -1,16 +1,5 @@
 # Histogram Simple [P290]
 
-# Versions
-# 01 - Jan 31st, 2023 - Starter
-# 02 - Feb 14th, 2023 - Using python_modules source,
-#                       Add linebehind option,
-# 03 - Jun 07th, 2023 - Remove binning function and using a numpy func,
-#    - Jan 03rd, 2024 - Set legend over all items,
-#    - Jan 04th, 2024 - Set smaller window size (for 13")
-#    - Jan 06th, 2024 - Add tail_size control
-#  
-
-
 # Insights, improvements and bugfix
 # Extend kde line up to zero (left and right margins),
 #
@@ -26,7 +15,6 @@ from scipy.stats import gaussian_kde
 
 
 # ----------------------------------------------------------------------
-
 def plot_histogram(data, title=None, xlabel=None, bins="sqrt",
                    kde=True, meanline=True, medianline=True, grid_axes="y",
                    linebehind=True, tail_size=15,
@@ -122,14 +110,8 @@ def plot_histogram(data, title=None, xlabel=None, bins="sqrt",
 
 
     # RC Params
-    plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["font.size"] = 8
-    plt.rcParams["figure.dpi"] = 120
-    plt.rcParams["ps.papersize"] = "A4"
-    plt.rcParams["xtick.direction"] = "inout"
-    plt.rcParams["ytick.direction"] = "inout"
-    plt.rcParams["xtick.major.size"] = 3.5
-    plt.rcParams["ytick.major.size"] = 3.5
+    set_rcparams()
+    
 
     # Plot
     fig = plt.figure(figsize=[6, 3.375])        # Widescreen [16:9]
@@ -180,3 +162,16 @@ def plot_histogram(data, title=None, xlabel=None, bins="sqrt",
 
     return None
     
+
+def set_rcparams():
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
+    plt.rcParams["figure.dpi"] = 120
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 0
+
+    return None
+
