@@ -1,11 +1,5 @@
 # Name [P381] KDE Plot Duo
 
-# Versions
-# 01 - Nov 22nd, 2023 - Starter
-#    - Jan 03rd, 2024 - Set legend over all items
-# 
-
-
 # Insights, improvements and bugfix
 #
 
@@ -54,14 +48,7 @@ def plot_kdeduo(sample1, sample2, name1=None, name2=None, title=None,
 
 
     # RC Params
-    plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["font.size"] = 8
-    plt.rcParams["figure.dpi"] = 120
-    plt.rcParams["ps.papersize"] = "A4"
-    plt.rcParams["xtick.direction"] = "inout"
-    plt.rcParams["ytick.direction"] = "inout"
-    plt.rcParams["xtick.major.size"] = 3.5
-    plt.rcParams["ytick.major.size"] = 3.5
+    set_rcparams()
 
 
     # Plot
@@ -132,3 +119,17 @@ def _kde_line(array, tail=20):
     y = density(x)
 
     return x, y
+
+
+def set_rcparams():
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
+    plt.rcParams["figure.dpi"] = 120
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 0
+
+    return None
+
