@@ -3,11 +3,13 @@
 # Libraries
 import numpy as np
 import pandas as pd
+import scipy.stats as stats
 
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
 from scipy.stats import gaussian_kde
+
 
 
 # Insights, improvements and bugfix
@@ -21,7 +23,7 @@ from scipy.stats import gaussian_kde
 
 # ----------------------------------------------------------------------
 def plot_histbox(data, title=None, xlabel=None, bins="sqrt",
-                 kde=True, meanline=True, medianline=True, notch=True,
+                 kde=True, meanline=True, medianline=True, notch="auto",
                  grid_axes="y", linebehind=True, tail_size=15,
                  savefig=False, verbose=True):
     """
@@ -90,7 +92,29 @@ def plot_histbox(data, title=None, xlabel=None, bins="sqrt",
         grid_axes = "y"
         print(f' >>> Error: "grid_axes" oprtion not valid. Using "y" as forced option.')
 
-    
+
+    # Define Auto-Notch
+    if(notch == True or notch == False or notch == "auto"):
+        pass
+
+    else:
+        notch == "auto"
+
+
+    if(notch == "auto"):
+        std_error = np.std(data) / np.sqrt(np.size(data))
+        ci = stats.norm.interval(confidence=0.95, loc=np.median(data), scale=std_error)
+        ci_lower, ci_upper = ci[0], ci[1]
+
+        q1 = np.percentile(data, q=25)
+        q3 = np.percentile(data, q=75)
+
+        if(ci_lower <= q1 or ci_upper >= q3):
+            notch = False
+
+        else:
+            notch = True
+           
     # Histogram settings 
     # KDE: Kernel-density estimate for gaussian distribution
     if(kde == True):
