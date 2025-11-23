@@ -1,10 +1,5 @@
 # [P272] QQ Plot -------------------------------------------------------
 
-# Versions
-# 01 - Feb 03rd - Starter
-# 02 -
-
-
 # Insights, improvements and bugfix
 #
 
@@ -21,7 +16,6 @@ import matplotlib.pyplot as plt
 def plot_qqplot(data, title=None, xlabel=None, ylabel=None,
                 savefig=False, verbose=True):
     """
-
     The formula used for the theoretical quantiles (horizontal axis
     of the probability plot) is Filliben’s estimate
 
@@ -35,20 +29,9 @@ def plot_qqplot(data, title=None, xlabel=None, ylabel=None,
     data = data.flatten()
 
     # RC Params
-    plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["font.size"] = 8
-    plt.rcParams["figure.dpi"] = 120
-    plt.rcParams["ps.papersize"] = "A4"
-    plt.rcParams["xtick.direction"] = "inout"
-    plt.rcParams["ytick.direction"] = "inout"
-    plt.rcParams["xtick.major.size"] = 3.5
-    plt.rcParams["ytick.major.size"] = 3.5
+    set_rcparams()
+    set_markerparams()
 
-    # Marker Config
-    plt.rcParams["lines.marker"] = "o"
-    plt.rcParams["lines.markerfacecolor"] = "white"
-    plt.rcParams["lines.markeredgecolor"] = "black"
-    plt.rcParams["lines.markersize"] = 4
 
     # Line Config
     plt.rcParams["lines.linewidth"] = 1
@@ -93,6 +76,29 @@ def plot_qqplot(data, title=None, xlabel=None, ylabel=None,
         plt.show()
 
     plt.close(fig)
+
+    return None
+
+
+def set_rcparams():
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
+    plt.rcParams["figure.dpi"] = 120
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 0
+
+    return None
+
+
+def set_markerparams():
+    # Marker Config
+    plt.rcParams["lines.marker"] = "o"
+    plt.rcParams["lines.markerfacecolor"] = "white"
+    plt.rcParams["lines.markeredgecolor"] = "black"
+    plt.rcParams["lines.markersize"] = 4
 
     return None
 
