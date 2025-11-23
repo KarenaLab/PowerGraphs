@@ -8,13 +8,6 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
 
-# Versions
-# 01 - Jan 28th, 2023 - Starter
-#    - Fev 14th, 2024 - Refactoring
-#    - Fev 15th, 2024 - Add `column_select` function
-# 
-
-
 # Insights, improvements and bugfix:
 # Add option to print only high or low part
 #
@@ -63,12 +56,7 @@ def plot_correlationmap(DataFrame, columns="all", title=None, color="darkblue",
 
 
     # RC Params
-    plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["font.size"] = 8
-    plt.rcParams["figure.dpi"] = 180
-    plt.rcParams["ps.papersize"] = "A4"
-    plt.rcParams["xtick.major.size"] = 0
-    plt.rcParams["ytick.major.size"] = 0
+    set_rcparams()
 
   
     # Removing Duplicated Data (Right Triangle Figure)
@@ -190,4 +178,15 @@ def col_select(DataFrame, columns):
     return col_select
 
 
-# end
+def set_rcparams():
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
+    plt.rcParams["figure.dpi"] = 120
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 0
+
+    return None
+
