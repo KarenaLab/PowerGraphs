@@ -11,23 +11,6 @@ from sklearn.linear_model import LinearRegression
 import sklearn.metrics as metrics
 
 
-# Versions ---------------------------------------------------------
-# 01 - Feb 01st, 2021 - Starter
-# 02 - Feb 03rd, 2021 - Adjusting print size for A4 Ratio, Adjusting
-#      Error Graph Position and adding MSE Error
-# 03 - Feb 23rd, 2021 - Adding **kwargs
-# 04 - Jun 06th, 2021 - Adjusting features
-# 05 - Jul 30th, 2021 - (( Adding QQ Plot ))
-# 06 - Sep 02nd, 2021 - Adding edge and alpha control
-# 07 - May 27th, 2022 - PEP-008 and adjusts
-# 08 - 
-
-# Insights, improvements and bugfix
-# Improve Linear Regression Line calc (make it easier)
-# add Pandas Series and Numpy options of imputation
-#
-
-
 def ScatterHistLinReg(title, data_x, data_y, decimals=4, **kwargs):
     """
     Module to plot a Scatter Plot with respective Histograms, Error
@@ -121,6 +104,10 @@ def ScatterHistLinReg(title, data_x, data_y, decimals=4, **kwargs):
     Corr_Text = f"Correlation: {corr}"
     NaN_Text = f"Lines Removed: {lines_removed} (NaN= x: {x_nan}; y: {y_nan})" 
 
+
+    # RC Params
+    set_rcparams()
+    
 
     # Plotting
     x_size, y_size = 11.28, 8
@@ -232,3 +219,18 @@ def ScatterHistLinReg(title, data_x, data_y, decimals=4, **kwargs):
     else:
         plt.show()
 
+
+    return None
+
+
+def set_rcparams():
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
+    plt.rcParams["figure.dpi"] = 120
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 0
+
+    return None
