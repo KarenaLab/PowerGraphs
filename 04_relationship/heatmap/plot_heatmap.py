@@ -73,7 +73,7 @@ def plot_heatmap(DataFrame, columns="all", title=None, decimals=2,
 
 
     # RC Params
-    load_rcparams(fontsize=fontsize)
+    set_rcparams(fontsize=fontsize)
    
     # Plot   
     fig = plt.figure(figsize=[size_hor, size_ver])
@@ -119,7 +119,7 @@ def plot_heatmap(DataFrame, columns="all", title=None, decimals=2,
     return None
 
 
-def load_rcparams(fontsize):
+def set_rcparams(fontsize):
     # RC Params
     plt.rcParams["font.family"] = "Helvetica"
     plt.rcParams["font.size"] = fontsize
