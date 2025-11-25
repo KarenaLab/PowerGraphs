@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 
 def plot_heatmap(DataFrame, columns="all", title=None, decimals=2,
                  method="pearson", colormap="Blues", fontsize=7,
-                 savefig=False, verbose=True):
+                 remove_axis=True, savefig=False, verbose=True):
     """
     Plots a triangular **Heatmap** for **correlations** between variables,
     using Pearson, Spearman or Kendall methods.
@@ -28,7 +28,8 @@ def plot_heatmap(DataFrame, columns="all", title=None, decimals=2,
     * decimals = Number of decimals to display (default=2),
     * method = Method for correlation: Pearson*, spearman or kendall,
       https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html
-    * colormap = Blues*, Greys, Reds or Oranges (suggestion in reason of text match), 
+    * colormap = Blues*, Greys, Reds or Oranges (suggestion in reason of text match),
+    * remove_axis = Remove top and right axis (cleaner viz),
     * savefig = True or False for saving the plot as a figure using title as name,
     * verbose = True* or False for messages.    
 
@@ -51,7 +52,7 @@ def plot_heatmap(DataFrame, columns="all", title=None, decimals=2,
         if(is_numeric_dtype(data[col]) == True):
            cols.append(col)
 
-    columns = cols[:]   # To avoid problems with duplicated variables
+    columns = cols[:]           # To avoid problems with duplicated variables
     data = data[columns]
     
 
@@ -68,8 +69,8 @@ def plot_heatmap(DataFrame, columns="all", title=None, decimals=2,
                 corr[i, j] = 0
 
     # Figure size
-    size_hor = 6
-    size_ver = 3.375
+    size_hor = 8
+    size_ver = (size_hor * 9) / 16      # [16:9] Widescreen ratio (aspect)
 
 
     # RC Params
@@ -98,6 +99,12 @@ def plot_heatmap(DataFrame, columns="all", title=None, decimals=2,
 
                 text = ax.text(j, i, value, ha="center", va="center",
                                color=textcolor, fontsize=fontsize)
+
+    # Cleaner viz
+    if(remove_axis == True):
+        plt.tick_params(length=0, labelleft="on", labelbottom="on")
+        ax.spines.right.set_visible(False)
+        ax.spines.top.set_visible(False)
 
 
     # Printing 
