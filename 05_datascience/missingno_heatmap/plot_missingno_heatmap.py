@@ -1,10 +1,5 @@
 # [P498] PowerGraphs - MissingNo Heatmap
 
-# Versions
-# 01 - Mar 07th, 2025 - Starter
-# 02 -
-
-
 # Insights, improvements and bugfix
 #
 
