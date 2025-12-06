@@ -8,20 +8,7 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
 
-# Versions
-# 01 - Jan 01st, 2021 - Starter
-# 02 - Jan 30th, 2021 - Add labels into axis
-# 03 - Feb 03rd, 2021 - Adjust figsize for best print (A4 Ratio)
-# 04 - Jan 11th, 2024 - Refactoring
-#
-
-# Insights, improvements and bugfix
-# 01 - Add bins_select for better vizualization
-# 02 -
-
-
 # -----------------------------------------------------------------------
-
 def plot_scatterhist(x, y, title=None, xlabel=None, ylabel=None, color="navy",
                        alpha=0.8, mark_size=20, bins="sqrt",
                        savefig=False, verbose=True):
@@ -70,16 +57,10 @@ def plot_scatterhist(x, y, title=None, xlabel=None, ylabel=None, color="navy",
         bins_y = np.histogram_bin_edges(y, bins=bins).size
 
     # RC Params
-    plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["figure.dpi"] = 120
-    plt.rcParams["ps.papersize"] = "A4"
-    plt.rcParams["xtick.direction"] = "inout"
-    plt.rcParams["ytick.direction"] = "inout"
-    plt.rcParams["xtick.major.size"] = 3.5
-    plt.rcParams["ytick.major.size"] = 3.5
+    set_rcparams()
+    
 
     # Plot
-    # Figure
     fig = plt.figure(figsize=[6, 3.375])    # Widescreen 16:9
     grd = fig.add_gridspec(ncols=2, width_ratios=[3, 1],
                            nrows=2, height_ratios=[1, 3])
@@ -131,4 +112,16 @@ def plot_scatterhist(x, y, title=None, xlabel=None, ylabel=None, color="navy",
     return None    
 
 
-# end
+def set_rcparams():
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
+    plt.rcParams["figure.dpi"] = 120
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 0
+
+    return None
+
+
