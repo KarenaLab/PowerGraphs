@@ -1,12 +1,5 @@
 # Scatter plot - Simple [P286] ------------------------------------------
 
-# Versions
-# 01 - Fev 14th, 2023 - Starter
-# 02 - Jan 03rd, 2024 - Rafactoring code (new code style)
-# 
-
-
-
 # Insights, improvements and bugfix
 # 01 - Automatic selector for the x higher groups
 # 
@@ -19,9 +12,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-
 # -----------------------------------------------------------------------
-
 def plot_scattermultiple(DataFrame, x, y, target, title=None, xlabel=None,
                          ylabel=None, alpha=0.8, mark_size=20, legend_loc="best",
                          savefig=False, verbose=True):
@@ -47,13 +38,8 @@ def plot_scattermultiple(DataFrame, x, y, target, title=None, xlabel=None,
     colors = colors[0: len(groups)]
 
     # RC Params
-    plt.rcParams["font.family"] = "Helvetica"
-    plt.rcParams["figure.dpi"] = 120
-    plt.rcParams["ps.papersize"] = "A4"
-    plt.rcParams["xtick.direction"] = "inout"
-    plt.rcParams["ytick.direction"] = "inout"
-    plt.rcParams["xtick.major.size"] = 3.5
-    plt.rcParams["ytick.major.size"] = 3.5
+    set_rcparams()
+    
     
     # Plot
     fig = plt.figure(figsize=[6, 3.375])    # Widescreen 16:9
@@ -115,7 +101,6 @@ def col_select(DataFrame, columns):
 
         return col_select
 
-
     # Columns preparation
     if(columns == "all"):
         # Default: takes **all** columns from DataFrame.
@@ -137,4 +122,15 @@ def col_select(DataFrame, columns):
     return col_select
 
 
-# end
+def set_rcparams():
+    plt.rcParams["font.family"] = "Helvetica"
+    plt.rcParams["font.size"] = 8
+    plt.rcParams["figure.dpi"] = 120
+    plt.rcParams["ps.papersize"] = "A4"
+    plt.rcParams["xtick.direction"] = "inout"
+    plt.rcParams["ytick.direction"] = "inout"
+    plt.rcParams["xtick.major.size"] = 3.5
+    plt.rcParams["ytick.major.size"] = 0
+
+    return None
+
