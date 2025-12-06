@@ -1,11 +1,6 @@
 # Name [Pxxx]
 # (optional) Short description
 
-# Versions
-# 01 - Date - Starter
-# 02 -
-
-
 # Insights, improvements and bugfix
 #
 
