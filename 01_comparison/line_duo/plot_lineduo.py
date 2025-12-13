@@ -14,7 +14,8 @@ import matplotlib.pyplot as plt
 # -----------------------------------------------------------------------
 def plot_lineduo(x1, y1, y2, x2=None, title=None, label1=None, label2=None,
                  xlabel=None, ylabel=None, color1="navy", color2="darkred",
-                 linewidth=1.5, grid="both", remove_axis=False, legend_loc="best",
+                 alpha1=1, alpha2=1, linewidth1=1.5, linewidth2=1.5, set_over=1,
+                 grid="both", remove_axis=False, legend_loc="best",
                  savefig=False, verbose=True):
 
     """
@@ -46,6 +47,14 @@ def plot_lineduo(x1, y1, y2, x2=None, title=None, label1=None, label2=None,
         print(f' >>> Error: "grid" option not valid. Using "{grid_default}" as forced option.')
         grid = grid_default[:]
 
+    # Line order
+    # Choose what line will be over the other (default=line1)
+    if(set_over == 1):
+        zorder1, zorder2 = 20, 19
+
+    else:
+        zorder1, zorder2 = 19, 20
+
 
     # RC Params
     set_rcparams()
@@ -56,8 +65,8 @@ def plot_lineduo(x1, y1, y2, x2=None, title=None, label1=None, label2=None,
     fig.suptitle(title, fontsize=10, fontweight="bold", x=0.98, ha="right")
     ax = plt.axes()
 
-    plt.plot(x1, y1, color=color1, linewidth=linewidth, label=label1, zorder=20)
-    plt.plot(x2, y2, color=color2, linewidth=linewidth, label=label2, zorder=19)
+    plt.plot(x1, y1, color=color1, alpha=alpha1, linewidth=linewidth1, label=label1, zorder=zorder1)
+    plt.plot(x2, y2, color=color2, alpha=alpha2, linewidth=linewidth2, label=label2, zorder=zorder2)
 
     plt.grid(axis=grid, color="lightgrey", linestyle="--", linewidth=0.5, zorder=10)
 
