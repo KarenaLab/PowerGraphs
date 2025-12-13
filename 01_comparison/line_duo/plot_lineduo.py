@@ -50,10 +50,10 @@ def plot_lineduo(x1, y1, y2, x2=None, title=None, label1=None, label2=None,
     # Line order
     # Choose what line will be over the other (default=line1)
     if(set_over == 1):
-        zorder1, zorder2 = 20, 19
+        zorder1, zorder2 = 21, 20
 
     else:
-        zorder1, zorder2 = 19, 20
+        zorder1, zorder2 = 20, 21
 
 
     # RC Params
@@ -80,7 +80,7 @@ def plot_lineduo(x1, y1, y2, x2=None, title=None, label1=None, label2=None,
         plt.legend(loc=legend_loc, framealpha=1).set_zorder(99)
 
     if(remove_axis == True):
-        plt.tick_params(length=0,labelleft="on", labelbottom="on")
+        plt.tick_params(length=0, labelleft="on", labelbottom="on")
         ax.spines.right.set_visible(False)
         ax.spines.top.set_visible(False)
         ax.spines.left.set_visible(False)
