@@ -1,9 +1,5 @@
 # Countour 2D [P426]
 
-# Versions
-# 01 - May 12th, 2024 - Starter
-# 02 -
-
 
 # Insights, improvements and bugfix
 #
